@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Actualités - Mouhamadou Lamine NDAO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/stylses.css">
+    <style>
+        body { background: #0d1331; color: #f2f5ff; }
+        .card { background: rgba(8, 12, 30, 0.8); }
+        .form-section { max-width: 780px; margin: 0 auto; }
+        .btn-return { position: fixed; top: 20px; left: 20px; z-index: 999; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="btn btn-outline-light btn-sm btn-return"><i class="fas fa-arrow-left"></i> Retour</a>
+    <section class="py-5">
+        <div class="container form-section">
+            <div class="card p-4 shadow-lg">
+                <h2 class="mb-3">Espace de gestion des actualités</h2>
+                <div id="loginPanel">
+                    <p>Authentifiez-vous pour gérer les actualités.</p>
+                    <form id="loginForm" class="row g-3">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" value="admin@example.com" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-gradient" type="submit">Se connecter</button>
+                        </div>
+                    </form>
+                    <small class="text-muted">Identifiants de démo : admin@example.com / password123</small>
+                </div>
+
+                <div id="adminPanel" style="display:none;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3>Gérer les actualités</h3>
+                        <button id="logoutBtn" class="btn btn-outline-light btn-sm">Déconnexion</button>
+                    </div>
+
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-4">
+                            <label class="form-label" for="githubOwner">GitHub Owner</label>
+                            <input id="githubOwner" class="form-control" placeholder="utilisateur" value="YOUR_GITHUB_USER" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="githubRepo">GitHub Repo</label>
+                            <input id="githubRepo" class="form-control" placeholder="repo" value="YOUR_REPO_NAME" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="githubToken">GitHub Token</label>
+                            <input type="password" id="githubToken" class="form-control" placeholder="PAT (ghp_...)" required>
+                        </div>
+                    </div>
+                    <form id="newsForm" class="row g-3 mt-3">
+                        <div class="col-md-12">
+                            <label class="form-label" for="newsTitle">Titre</label>
+                            <input id="newsTitle" class="form-control" required maxlength="120">
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for="newsContent">Contenu</label>
+                            <textarea id="newsContent" class="form-control" rows="3" required maxlength="250"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="newsDate">Date</label>
+                            <input type="date" id="newsDate" class="form-control" value="" required>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button class="btn btn-gradient w-100" type="submit">Ajouter / Mettre à jour</button>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button id="pushGithubBtn" class="btn btn-outline-light w-100" type="button">Synchroniser sur GitHub</button>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button id="pullGithubBtn" class="btn btn-outline-light w-100" type="button">Importer depuis GitHub</button>
+                        </div>
+                    </form>
+
+                    <div class="mt-4" id="newsList"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const adminKey = 'newsAdminLogged';
+        const storageKey = 'newsItems';
+        const credentials = { email: 'admin@example.com', password: 'password123' };
+
+        const loginPanel = document.getElementById('loginPanel');
+        const adminPanel = document.getElementById('adminPanel');
+        const loginForm = document.getElementById('loginForm');
+        const newsForm = document.getElementById('newsForm');
+        const newsList = document.getElementById('newsList');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        let editingId = null;
+
+        function setPanelState() {
+            const isLogged = sessionStorage.getItem(adminKey) === '1';
+            loginPanel.style.display = isLogged ? 'none' : 'block';
+            adminPanel.style.display = isLogged ? 'block' : 'none';
+            if (isLogged) renderNews();
+        }
+
+        function getNews() {
+            try {
+                const raw = localStorage.getItem(storageKey);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) { return []; }
+        }
+
+        function saveNews(items) {
+            localStorage.setItem(storageKey, JSON.stringify(items));
+            renderNews();
+        }
+
+        function renderNews() {
+            const items = getNews().sort((a, b) => new Date(b.date) - new Date(a.date));
+            if (items.length === 0) {
+                newsList.innerHTML = '<p class="text-muted">Pas d’actualité pour le moment.</p>';
+                return;
+            }
+
+            newsList.innerHTML = items.map(item => `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h5 class="card-title">${item.title}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">${new Date(item.date).toLocaleDateString('fr-FR')}</h6>
+                            </div>
+                            <div>
+                                <button data-id="${item.id}" class="btn btn-sm btn-outline-light me-2 edit-news">Éditer</button>
+                                <button data-id="${item.id}" class="btn btn-sm btn-danger delete-news">Supprimer</button>
+                            </div>
+                        </div>
+                        <p class="card-text">${item.content}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.edit-news').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.dataset.id;
+                    const item = getNews().find(n => n.id === id);
+                    if (!item) return;
+                    editingId = id;
+                    document.getElementById('newsTitle').value = item.title;
+                    document.getElementById('newsContent').value = item.content;
+                    document.getElementById('newsDate').value = item.date;
+                });
+            });
+
+            document.querySelectorAll('.delete-news').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.dataset.id;
+                    const updated = getNews().filter(n => n.id !== id);
+                    saveNews(updated);
+                });
+            });
+        }
+
+        loginForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            if (email === credentials.email && password === credentials.password) {
+                sessionStorage.setItem(adminKey, '1');
+                setPanelState();
+            } else {
+                alert('Identifiants incorrects.');
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem(adminKey);
+            setPanelState();
+        });
+
+        newsForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const title = document.getElementById('newsTitle').value.trim();
+            const content = document.getElementById('newsContent').value.trim();
+            const date = document.getElementById('newsDate').value;
+            if (!title || !content || !date) return;
+
+            const items = getNews();
+            if (editingId) {
+                const idx = items.findIndex(n => n.id === editingId);
+                if (idx >= 0) {
+                    items[idx] = { id: editingId, title, content, date };
+                }
+                editingId = null;
+            } else {
+                items.push({ id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(), title, content, date });
+            }
+
+            saveNews(items);
+            newsForm.reset();
+            document.getElementById('newsDate').value = new Date().toISOString().split('T')[0];
+        });
+
+        // initial state 
+        document.getElementById('newsDate').value = new Date().toISOString().split('T')[0];
+        setPanelState();
+
+        async function getGitHubNewsJson() {
+            const owner = document.getElementById('githubOwner').value.trim();
+            const repo = document.getElementById('githubRepo').value.trim();
+            const token = document.getElementById('githubToken').value.trim();
+            if (!owner || !repo || !token) return null;
+
+            const url = `https://api.github.com/repos/${owner}/${repo}/contents/news.json`;
+            const res = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/vnd.github.v3+json'
+                }
+            });
+
+            if (!res.ok) {
+                throw new Error(`Impossible de charger news.json: ${res.status}`);
+            }
+
+            const data = await res.json();
+            return data;
+        }
+
+        async function pushNewsToGitHub() {
+            try {
+                const owner = document.getElementById('githubOwner').value.trim();
+                const repo = document.getElementById('githubRepo').value.trim();
+                const token = document.getElementById('githubToken').value.trim();
+                if (!owner || !repo || !token) {
+                    alert('Veuillez renseigner owner/repo/token GitHub.');
+                    return;
+                }
+
+                const items = getNews();
+                const bodyString = JSON.stringify(items, null, 2);
+                const base64Content = btoa(unescape(encodeURIComponent(bodyString)));
+
+                const remote = await getGitHubNewsJson();
+                const sha = remote ? remote.sha : null;
+
+                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/news.json`, {
+                    method: 'PUT',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        Accept: 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Mise à jour de news.json via interface d’administration',
+                        content: base64Content,
+                        sha: sha || undefined
+                    })
+                });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error((err && err.message) || 'Erreur lors du push à GitHub');
+                }
+
+                alert('news.json synchronisé sur GitHub ✅');
+            } catch (err) {
+                alert('Échec synchronisation GitHub : ' + err.message);
+            }
+        }
+
+        document.getElementById('pushGithubBtn').addEventListener('click', pushNewsToGitHub);
+
+        async function pullNewsFromGithub() {
+            try {
+                const remote = await getGitHubNewsJson();
+                if (!remote || !remote.content) {
+                    alert('news.json introuvable sur GitHub.');
+                    return;
+                }
+                const parsed = JSON.parse(decodeURIComponent(escape(atob(remote.content))));
+                if (!Array.isArray(parsed)) throw new Error('news.json invalide');
+                localStorage.setItem(storageKey, JSON.stringify(parsed));
+                renderNews();
+                alert('Actualités importées depuis GitHub ✅');
+            } catch (err) {
+                alert('Échec import GitHub : ' + err.message);
+            }
+        }
+
+        document.getElementById('pullGithubBtn').addEventListener('click', pullNewsFromGithub);
+    </script>
+</body>
+</html>

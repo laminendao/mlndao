@@ -1,14 +1,65 @@
 :root {
-    --primary:    #610707;
-    --secondary:  #c3d1e2;
-    --dark:       #6f7b93;
-    --darker:     #c5c9d8;
-    --light:      #030d40;
-    --gray:       #cf1313;
-    --success:    #781004;
-    --warning:    #0a4fa9;
-    --danger:     #ebdfdf;
-    --card-bg:    rgba(242, 245, 247, 0.8);
+    --primary:    #1f4fc7; /* bleu principal */
+    --secondary:  #3c67c9; /* bleu secondaire */
+    --dark:       #0b2a64; /* bleu foncé */
+    --darker:     #e7f0ff; /* bleu très clair */
+    --light:      #ffffff; /* blanc */
+    --gray:       #7a8fb8; /* gris bleuté */
+    --success:    #1f7ad7;
+    --warning:    #2d5abf;
+    --danger:     #dbe8ff;
+    --card-bg:    rgba(255, 255, 255, 0.9);
+
+    --btn-bg-from: var(--secondary);
+    --btn-bg-to: var(--primary);
+    --navbar-bg-from: var(--light);
+    --navbar-bg-to: var(--darker);
+}
+
+body[data-theme="light"] {
+    --dark:       #0b2a64; /* bleu foncé lisible */
+    --darker:     #e7f0ff;
+    --light:      #ffffff;
+    --card-bg:    rgba(255, 255, 255, 0.95);
+    --navbar-bg-from: #ffffff;
+    --navbar-bg-to: #e7f0ff;
+    --btn-bg-from: #3c67c9;
+    --btn-bg-to: #1f4fc7;
+    background: linear-gradient(135deg, var(--darker), #ffffff);
+    color: var(--dark);
+}
+
+body[data-theme="light"] .text-light,
+body[data-theme="light"] .text-white,
+body[data-theme="light"] .text-primary,
+body[data-theme="light"] .text-secondary,
+body[data-theme="light"] .text-muted,
+body[data-theme="light"] .nav-link,
+body[data-theme="light"] .navbar-brand,
+body[data-theme="light"] .section-title,
+body[data-theme="light"] .section-subtitle,
+body[data-theme="light"] h1,
+body[data-theme="light"] h2,
+body[data-theme="light"] h3,
+body[data-theme="light"] h4,
+body[data-theme="light"] h5,
+body[data-theme="light"] h6,
+body[data-theme="light"] p {
+    color: var(--dark) !important;
+}
+
+
+body[data-theme="dark"] {
+    --dark:       #0d2346;
+    --darker:     #cbe3fc;
+    --light:      #ffffff;
+    --card-bg:    rgba(255, 255, 255, 0.22);
+    --navbar-bg-from: #0d2346;
+    --navbar-bg-to: #5f0f2d;
+    --btn-bg-from: #1f73b7;
+    --btn-bg-to: #5f0f2d;
+    background: linear-gradient(135deg, var(--darker), var(--dark));
+    color: var(--light);
 }
 
 * {
@@ -20,10 +71,35 @@
 body {
     background: linear-gradient(135deg, var(--darker), var(--dark));
     color: var(--light);
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
     overflow-x: hidden;
     line-height: 1.6;
 }
+
+h1, h2, h3, h4, h5, h6,
+p,
+.nav-link,
+.navbar-brand,
+.section-title,
+.section-subtitle,
+.timeline-item,
+.publication-list,
+.publication-category,
+.publication-content {
+    font-family: inherit;
+}
+
+.text-light,
+.text-primary,
+.text-white {
+    color: var(--light) !important;
+}
+
+.text-dark,
+.text-black {
+    color: var(--dark) !important;
+}
+
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
@@ -36,9 +112,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navbar Customization */
 .navbar {
-    background: rgba(18, 18, 18, 0.95);
+    background: linear-gradient(135deg, var(--navbar-bg-from), var(--navbar-bg-to));
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(106, 17, 203, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     padding: 15px 0;
     transition: all 0.4s;
 }
@@ -53,7 +129,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-link {
-    color: var(black) !important;
+    color: var(--light) !important;
     font-weight: 500;
     margin: 0 10px;
     position: relative;
@@ -92,7 +168,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 10% 20%, rgba(169, 109, 233, 0.15) 0%, rgba(75, 133, 234, 0.05) 100%);
+    background: radial-gradient(circle at 10% 20%, rgba(31, 115, 183, 0.2) 0%, rgba(95, 15, 45, 0.08) 100%);
     z-index: -2;
 }
 
@@ -130,7 +206,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Buttons */
 .btn-gradient {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(135deg, var(--btn-bg-from), var(--btn-bg-to));
     color: white !important;
     border: none;
     border-radius: 50px;
@@ -156,6 +232,108 @@ h1, h2, h3, h4, h5, h6 {
 section {
     padding: 100px 0;
     position: relative;
+}
+
+#news .news-card {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 12px;
+    padding: 1.15rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#news .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+#news .news-card .news-date {
+    color: #a8c4ff;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+}
+
+#news .news-card .news-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.55rem;
+}
+
+#news .news-card .news-text {
+    font-size: 1rem;
+    color: #d2dfff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 70px 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 40px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.3rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    .btn-gradient,
+    .btn-outline-light {
+        padding: 12px 20px;
+        min-height: 48px;
+    }
+}
+
+@media (max-width: 576px) {
+    section {
+        padding: 50px 0;
+    }
+
+    .section-title {
+        font-size: 1.7rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .btn-gradient,
+    .btn-outline-light {
+        padding: 10px 16px;
+        min-height: 44px;
+    }
 }
 
 .section-title {
@@ -421,8 +599,47 @@ footer {
     color: white !important;
 }
 
-.accordion-button {
+.publication-category {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.publication-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
+.publication-header:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+}
+
+.publication-title {
+    color: white;
+    margin: 0;
+    font-size: 1.2rem;
     font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.publication-content {
+    display: none;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .publication-list li {
@@ -490,6 +707,21 @@ footer {
     color: var(--primary);
 }
 
+/* Force teaching section color in light theme */
+body[data-theme="light"] #teaching,
+body[data-theme="light"] #teaching .timeline-item,
+body[data-theme="light"] #teaching .timeline-item p,
+body[data-theme="light"] #teaching .timeline-item ul,
+body[data-theme="light"] #teaching .timeline-item ul li,
+body[data-theme="light"] #teaching .timeline-item h4,
+body[data-theme="light"] #teaching .timeline-item h5,
+body[data-theme="light"] #teaching .section-title,
+body[data-theme="light"] #teaching .section-subtitle,
+body[data-theme="light"] #teaching .text-light,
+body[data-theme="light"] #teaching .text-white {
+    color: var(--dark) !important;
+}
+
 /* Option light mode if you want to switch later */
 #teaching.light-mode {
     background: linear-gradient(135deg, #f8fafc, #e2e8f0);
@@ -500,8 +732,10 @@ footer {
 #teaching.light-mode .section-subtitle,
 #teaching.light-mode .timeline-item p,
 #teaching.light-mode .timeline-item ul,
-#teaching.light-mode .timeline-item ul li {
-    color: var(--dark);
+#teaching.light-mode .timeline-item ul li,
+#teaching.light-mode .text-light,
+#teaching.light-mode .text-white {
+    color: var(--dark) !important;
 }
 
 #teaching.light-mode .timeline-item h4 {
@@ -510,4 +744,197 @@ footer {
 
 #teaching.light-mode .timeline-item h5 {
     color: var(--primary);
+}
+
+/* Light theme overrides */
+body[data-theme="light"] .btn-gradient,
+body[data-theme="light"] .social-link:hover,
+body[data-theme="light"] .navbar,
+body[data-theme="light"] .custom-card {
+    box-shadow: 0 8px 20px rgba(15, 21, 60, 0.25);
+}
+
+body[data-theme="light"] .text-light,
+body[data-theme="light"] .text-white {
+    color: var(--dark) !important;
+}
+
+body[data-theme="light"] .section-title,
+body[data-theme="light"] .section-subtitle,
+body[data-theme="light"] h1,
+body[data-theme="light"] h2,
+body[data-theme="light"] h3,
+body[data-theme="light"] h4,
+body[data-theme="light"] h5,
+body[data-theme="light"] h6,
+body[data-theme="light"] p,
+body[data-theme="light"] .navbar-brand,
+body[data-theme="light"] .nav-link,
+body[data-theme="light"] .text-light,
+body[data-theme="light"] .text-white,
+body[data-theme="light"] .text-primary,
+body[data-theme="light"] .text-muted,
+body[data-theme="light"] .text-secondary,
+body[data-theme="light"] .text-dark,
+body[data-theme="light"] .skill-info span,
+body[data-theme="light"] .timeline-item span,
+body[data-theme="light"] .portfolio-overlay h4,
+body[data-theme="light"] .portfolio-overlay p {
+    color: var(--dark) !important;
+}
+
+body[data-theme="light"] .custom-card,
+body[data-theme="light"] section.bg-dark,
+body[data-theme="light"] section.bg-darker,
+body[data-theme="light"] footer,
+body[data-theme="light"] .contact-info-card,
+body[data-theme="light"] .timeline-item,
+body[data-theme="light"] .accordion-button,
+body[data-theme="light"] .portfolio-overlay {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(145, 165, 195, 0.35) !important;
+    color: var(--dark) !important;
+}
+
+body[data-theme="light"] .publication-category {
+    border-color: rgba(145, 165, 195, 0.3);
+}
+
+body[data-theme="light"] #teaching .timeline-date {
+    color: var(--dark) !important;
+    background: rgba(31, 115, 183, 0.1) !important;
+    border: 1px solid rgba(28, 63, 149, 0.25);
+}
+
+/* Experience timeline date visibility */
+body[data-theme="light"] #experience .timeline-date,
+body[data-theme="dark"] #experience .timeline-date {
+    color: var(--dark) !important;
+    background: rgba(155, 178, 216, 0.25) !important;
+    border: 1px solid rgba(31, 115, 183, 0.55) !important;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.15) inset;
+}
+
+body[data-theme="light"] #experience .timeline-item span,
+body[data-theme="dark"] #experience .timeline-item span,
+body[data-theme="light"] #experience .timeline-item,
+body[data-theme="dark"] #experience .timeline-item {
+    color: var(--dark) !important;
+}
+
+body[data-theme="light"] {
+    background: #ffffff;
+    color: var(--dark);
+}
+
+body[data-theme="light"] .btn-gradient {
+    background: linear-gradient(120deg, var(--btn-bg-from), var(--btn-bg-to));
+    color: #ffffff !important;
+}
+
+body[data-theme="light"] .btn-gradient:hover {
+    filter: brightness(1.05);
+}
+
+body[data-theme="light"] .publication-content,
+body[data-theme="light"] .custom-card,
+body[data-theme="light"] section.bg-darker,
+body[data-theme="light"] section.bg-dark,
+body[data-theme="light"] footer {
+    background-color: #ffffff !important;
+    color: var(--dark) !important;
+}
+
+footer {
+    border-top: 2px solid rgba(255,255,255,0.2);
+    padding-top: 1.5rem;
+}
+
+body[data-theme="light"] footer {
+    border-top: 2px solid rgba(31, 63, 110, 0.35);
+}
+
+body[data-theme="dark"] footer {
+    border-top: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+body[data-theme="light"] .text-light,
+body[data-theme="light"] .text-white,
+body[data-theme="light"] .text-primary,
+body[data-theme="light"] .text-secondary,
+body[data-theme="light"] .text-muted,
+body[data-theme="light"] .nav-link,
+body[data-theme="light"] .navbar-brand,
+body[data-theme="light"] .section-title,
+body[data-theme="light"] .section-subtitle {
+    color: var(--dark) !important;
+}
+}
+
+body[data-theme="light"] .publication-content {
+    background-color: rgba(255, 255, 255, 0.98);
+    color: var(--dark) !important;
+    opacity: 1 !important;
+}
+
+body[data-theme="light"] .publication-content .text-muted {
+    color: #475777 !important;
+    opacity: 1 !important;
+}
+
+body[data-theme="light"] .publication-content a,
+body[data-theme="light"] .publication-content strong,
+body[data-theme="light"] .publication-content em,
+body[data-theme="light"] .publication-content li {
+    opacity: 1 !important;
+}
+
+/* Auteurs plus visibles */
+body[data-theme="light"] .publication-content em {
+    color: #0d2c6a !important;
+    font-weight: 700;
+    opacity: 1 !important;
+}
+
+body[data-theme="light"] .publication-content .text-muted {
+    color: #4b5f94 !important;
+    font-size: 0.95rem;
+}
+
+
+
+body[data-theme="light"] .publication-content a {
+    color: var(--primary);
+}
+
+body[data-theme="light"] .publication-content a:hover {
+    color: var(--primary-dark);
+}
+
+body[data-theme="light"] .hero-bg {
+    background: radial-gradient(circle at 10% 20%, rgba(31, 115, 183, 0.4) 0%, rgba(95, 15, 45, 0.15) 100%) !important;
+}
+
+body[data-theme="light"] .btn-gradient,
+body[data-theme="light"] .navbar,
+body[data-theme="light"] .social-link,
+body[data-theme="light"] .info-icon {
+    color: #0d2346 !important;
+}
+
+body[data-theme="light"] .hero-bg {
+    background: radial-gradient(circle at 10% 20%, rgba(31, 115, 183, 0.4) 0%, rgba(95, 15, 45, 0.15) 100%) !important;
+}
+
+body[data-theme="light"] .text-white,
+body[data-theme="light"] .text-light,
+body[data-theme="light"] .text-primary,
+body[data-theme="light"] .text-muted,
+body[data-theme="light"] .text-secondary,
+body[data-theme="light"] .text-dark {
+    color: var(--dark) !important;
+}
+
+body[data-theme="light"] .hero-bg {
+    background: radial-gradient(circle at 10% 20%, rgba(31, 115, 183, 0.4) 0%, rgba(95, 15, 45, 0.15) 100%) !important;
 }
