@@ -261,3 +261,22 @@ footer a { color: #fff; }
   .nav a { padding: 5px 11px; font-size: .88rem; }
 }
 sup { line-height: 0; }
+
+/* ---------- Langue FR / EN ---------- */
+html[data-lang="fr"] .en,
+html[data-lang="en"] .fr { display: none !important; }
+
+.lang-toggle {
+  margin-left: 6px;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font: inherit;
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  cursor: pointer;
+}
+.lang-toggle:hover { background: var(--blue); }

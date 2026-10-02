@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" data-lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mouhamadou Lamine NDAO</title>
   <meta name="author" content="Mouhamadou Lamine NDAO">
-  <meta name="description" content="Mouhamadou Lamine NDAO, PhD in Applied Mathematics, ATER at CNAM (Paris). Explainable AI, multivariate time series, predictive maintenance and RUL prediction.">
-  <meta name="keywords" content="Mouhamadou Lamine NDAO, explainable AI, XAI, multivariate time series, predictive maintenance, remaining useful life, RUL, feature clustering, dimensionality reduction, CNAM">
+  <meta name="description" content="Mouhamadou Lamine NDAO, docteur en mathématiques appliquées, ATER au CNAM (Paris). IA explicable, séries temporelles multivariées, maintenance prédictive et prédiction de la RUL.">
+  <meta name="keywords" content="Mouhamadou Lamine NDAO, IA explicable, explainable AI, XAI, séries temporelles multivariées, maintenance prédictive, remaining useful life, RUL, clustering de variables, réduction de dimension, CNAM">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,20 +15,36 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="assets/css/site.css">
+  <script>
+    // Choix de langue appliqué avant l'affichage : ?lang=en, sinon dernier choix, sinon français
+    (function () {
+      var lang = 'fr';
+      try {
+        var q = new URLSearchParams(location.search).get('lang');
+        var saved = localStorage.getItem('lang');
+        lang = (q === 'en' || q === 'fr') ? q : (saved === 'en' ? 'en' : 'fr');
+      } catch (e) {}
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang;
+    })();
+  </script>
 </head>
 <body>
 
-<!-- ============ Header ============ -->
+<!-- ============ En-tête ============ -->
 <header class="site-header" id="top">
   <img class="photo" src="images/photo_cv.jpg" alt="Mouhamadou Lamine NDAO">
   <h1>Mouhamadou Lamine NDAO</h1>
-  <p class="role">PhD in Applied Mathematics &middot; ATER at CNAM</p>
+  <p class="role">
+    <span class="fr">Docteur en mathématiques appliquées &middot; ATER au CNAM</span>
+    <span class="en">PhD in Applied Mathematics &middot; ATER at CNAM</span>
+  </p>
   <p class="affil">Conservatoire National des Arts et Métiers, Paris</p>
   <ul class="themes">
-    <li>Explainable AI</li>
-    <li>Multivariate time series</li>
-    <li>Predictive maintenance &amp; RUL</li>
-    <li>Dimensionality reduction</li>
+    <li><span class="fr">IA explicable</span><span class="en">Explainable AI</span></li>
+    <li><span class="fr">Séries temporelles multivariées</span><span class="en">Multivariate time series</span></li>
+    <li><span class="fr">Maintenance prédictive &amp; RUL</span><span class="en">Predictive maintenance &amp; RUL</span></li>
+    <li><span class="fr">Réduction de dimension</span><span class="en">Dimensionality reduction</span></li>
   </ul>
   <ul class="icons">
     <li><a class="cv" href="doc/CV_Mouhamadou_Lamine_NDAO.pdf" target="_blank"><i class="fa-solid fa-file-arrow-down"></i> CV</a></li>
@@ -41,15 +57,18 @@
   </ul>
 </header>
 
-<!-- ============ Nav ============ -->
+<!-- ============ Menu ============ -->
 <nav class="nav" aria-label="Sections">
   <ul>
-    <li><a href="#bio">Bio</a></li>
-    <li><a href="#research">Research</a></li>
+    <li><a href="#bio"><span class="fr">Bio</span><span class="en">Bio</span></a></li>
+    <li><a href="#research"><span class="fr">Recherche</span><span class="en">Research</span></a></li>
     <li><a href="#publications">Publications</a></li>
-    <li><a href="#teaching">Teaching</a></li>
-    <li><a href="#experience">Experience</a></li>
+    <li><a href="#teaching"><span class="fr">Enseignement</span><span class="en">Teaching</span></a></li>
+    <li><a href="#experience"><span class="fr">Parcours</span><span class="en">Experience</span></a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><button type="button" class="lang-toggle" id="langToggle" aria-label="Changer de langue / Switch language">
+      <span class="fr">EN</span><span class="en">FR</span>
+    </button></li>
   </ul>
 </nav>
 
@@ -57,27 +76,59 @@
 
   <!-- ============ Bio ============ -->
   <section id="bio">
-    <h2>Short bio</h2>
+    <h2><span class="fr">Biographie</span><span class="en">Short bio</span></h2>
     <div class="bio">
       <div>
-        <p>Since October 2025, I have been a Temporary Teaching and Research Assistant (ATER) at the
-          <a href="https://www.cnam.fr" target="_blank">Conservatoire National des Arts et Métiers</a> (CNAM) in Paris.
-          I received my PhD in Applied Mathematics from CNAM in December 2025, and I am qualified for
-          <em>Maître de Conférences</em> positions (CNU sections 26 and 27).</p>
-        <p>My doctoral research, carried out at <a href="https://lineact.cesi.fr" target="_blank">CESI LINEACT</a>
-          and the <a href="https://cedric.cnam.fr" target="_blank">CEDRIC</a> laboratory, focused on explainable
-          artificial intelligence for multivariate, multi-sensor time series, with applications to Remaining Useful Life
-          (RUL) prediction in predictive maintenance. I worked under the supervision of
-          Ndèye Niang (CNAM), Genane Youness (CESI LINEACT) and Gilbert Saporta (CNAM).</p>
-        <p>My research is about how preprocessing, model complexity and feature structure affect what post-hoc
-          explanations (SHAP, LIME, L2X) actually reveal, and about interpretable dimensionality reduction methods,
-          such as divisive feature clustering, that make deep models easier to read.</p>
-        <p class="keywords"><b>Keywords:</b> explainable AI, multivariate time series, predictive maintenance,
-          remaining useful life, feature clustering, dimensionality reduction, unsupervised and self-supervised
-          representation learning, multi-view clustering.</p>
+        <div class="fr">
+          <p>Depuis octobre 2025, je suis Attaché Temporaire d'Enseignement et de Recherche (ATER) au
+            <a href="https://www.cnam.fr" target="_blank">Conservatoire National des Arts et Métiers</a> (CNAM), à Paris.
+            J'ai obtenu mon doctorat en mathématiques appliquées au CNAM en décembre 2025 et je suis qualifié aux fonctions
+            de Maître de Conférences (sections CNU 26 et 27).</p>
+          <p>Ma thèse, préparée au <a href="https://lineact.cesi.fr" target="_blank">CESI LINEACT</a> et au laboratoire
+            <a href="https://cedric.cnam.fr" target="_blank">CEDRIC</a>, porte sur l'intelligence artificielle explicable
+            pour les séries temporelles multivariées multi-capteurs, appliquée à la prédiction de la durée de vie résiduelle
+            (RUL) en maintenance prédictive. Elle a été encadrée par Ndèye Niang (CNAM), Genane Youness (CESI LINEACT)
+            et Gilbert Saporta (CNAM).</p>
+          <p>Mes travaux étudient comment le prétraitement, la complexité des modèles et la structure des variables
+            influencent ce que révèlent réellement les explications post-hoc (SHAP, LIME, L2X). Je développe aussi des
+            méthodes de réduction de dimension interprétables, comme le clustering divisif de variables, qui rendent les
+            modèles profonds plus lisibles.</p>
+          <p class="keywords"><b>Mots-clés :</b> IA explicable, séries temporelles multivariées, maintenance prédictive,
+            durée de vie résiduelle, clustering de variables, réduction de dimension, apprentissage de représentations
+            non supervisé et auto-supervisé, clustering multi-vues.</p>
+        </div>
+        <div class="en">
+          <p>Since October 2025, I have been a Temporary Teaching and Research Assistant (ATER) at the
+            <a href="https://www.cnam.fr" target="_blank">Conservatoire National des Arts et Métiers</a> (CNAM) in Paris.
+            I received my PhD in Applied Mathematics from CNAM in December 2025, and I am qualified for
+            <em>Maître de Conférences</em> positions (CNU sections 26 and 27).</p>
+          <p>My doctoral research, carried out at <a href="https://lineact.cesi.fr" target="_blank">CESI LINEACT</a>
+            and the <a href="https://cedric.cnam.fr" target="_blank">CEDRIC</a> laboratory, focused on explainable
+            artificial intelligence for multivariate, multi-sensor time series, with applications to Remaining Useful Life
+            (RUL) prediction in predictive maintenance. I worked under the supervision of
+            Ndèye Niang (CNAM), Genane Youness (CESI LINEACT) and Gilbert Saporta (CNAM).</p>
+          <p>My research is about how preprocessing, model complexity and feature structure affect what post-hoc
+            explanations (SHAP, LIME, L2X) actually reveal, and about interpretable dimensionality reduction methods,
+            such as divisive feature clustering, that make deep models easier to read.</p>
+          <p class="keywords"><b>Keywords:</b> explainable AI, multivariate time series, predictive maintenance,
+            remaining useful life, feature clustering, dimensionality reduction, unsupervised and self-supervised
+            representation learning, multi-view clustering.</p>
+        </div>
       </div>
       <aside class="facts">
-        <dl>
+        <dl class="fr">
+          <dt>Poste actuel</dt>
+          <dd>ATER, CNAM Paris (EPN 6), depuis 2025</dd>
+          <dt>Doctorat en mathématiques appliquées</dt>
+          <dd>CNAM, Paris, 2022–2025 (soutenu en décembre 2025)</dd>
+          <dt>Qualification</dt>
+          <dd>Maître de Conférences, CNU 26 &amp; 27</dd>
+          <dt>Master 2 TRIED</dt>
+          <dd>Université Paris-Saclay / Télécom Paris, 2021 (mention Bien)</dd>
+          <dt>Ingénieur statisticien</dt>
+          <dd>ENSAE Dakar, 2020 (mention Bien)</dd>
+        </dl>
+        <dl class="en">
           <dt>Current position</dt>
           <dd>ATER, CNAM Paris (EPN 6), since 2025</dd>
           <dt>PhD in Applied Mathematics</dt>
@@ -93,26 +144,33 @@
     </div>
   </section>
 
-  <!-- ============ Research ============ -->
+  <!-- ============ Recherche ============ -->
   <section id="research">
-    <h2>Research</h2>
-    <p class="lead">Machine learning for multivariate, multi-sensor data from industrial systems, with a focus on making models interpretable and robust.</p>
+    <h2><span class="fr">Recherche</span><span class="en">Research</span></h2>
+    <p class="lead">
+      <span class="fr">Apprentissage automatique pour les données multivariées et multi-capteurs issues de systèmes industriels, avec l'objectif de rendre les modèles interprétables et robustes.</span>
+      <span class="en">Machine learning for multivariate, multi-sensor data from industrial systems, with a focus on making models interpretable and robust.</span>
+    </p>
     <div class="cards">
       <div class="card">
-        <h4>Evaluating XAI methods</h4>
-        <p>Quantitative evaluation of post-hoc explanations (SHAP, LIME, L2X) and of how preprocessing and model complexity change them.</p>
+        <h4><span class="fr">Évaluation des méthodes d'XAI</span><span class="en">Evaluating XAI methods</span></h4>
+        <p class="fr">Évaluation quantitative des explications post-hoc (SHAP, LIME, L2X) et de l'effet du prétraitement et de la complexité des modèles.</p>
+        <p class="en">Quantitative evaluation of post-hoc explanations (SHAP, LIME, L2X) and of how preprocessing and model complexity change them.</p>
       </div>
       <div class="card">
-        <h4>Interpretable dimension reduction</h4>
-        <p>Divisive feature clustering and clustering of variables around latent components, used to build readable inputs for RUL models.</p>
+        <h4><span class="fr">Réduction de dimension interprétable</span><span class="en">Interpretable dimension reduction</span></h4>
+        <p class="fr">Clustering divisif de variables et clustering autour de composantes latentes, pour construire des entrées lisibles pour les modèles de RUL.</p>
+        <p class="en">Divisive feature clustering and clustering of variables around latent components, used to build readable inputs for RUL models.</p>
       </div>
       <div class="card">
-        <h4>Predictive maintenance</h4>
-        <p>RUL prediction from multi-sensor time series (C-MAPSS turbofans, PRONOSTIA / FEMTO-ST bearings) with deep models such as LSTMs.</p>
+        <h4><span class="fr">Maintenance prédictive</span><span class="en">Predictive maintenance</span></h4>
+        <p class="fr">Prédiction de la RUL à partir de séries temporelles multi-capteurs (turboréacteurs C-MAPSS, roulements PRONOSTIA / FEMTO-ST) avec des modèles profonds (LSTM).</p>
+        <p class="en">RUL prediction from multi-sensor time series (C-MAPSS turbofans, PRONOSTIA / FEMTO-ST bearings) with deep models such as LSTMs.</p>
       </div>
       <div class="card">
-        <h4>Heterogeneous data</h4>
-        <p>Multi-block and multi-view clustering, consensus clustering and missing data.</p>
+        <h4><span class="fr">Données hétérogènes</span><span class="en">Heterogeneous data</span></h4>
+        <p class="fr">Clustering multi-blocs et multi-vues, consensus de partitions et données manquantes.</p>
+        <p class="en">Multi-block and multi-view clustering, consensus clustering and missing data.</p>
       </div>
     </div>
   </section>
@@ -121,7 +179,7 @@
   <section id="publications">
     <h2>Publications</h2>
 
-    <h3>International journals</h3>
+    <h3><span class="fr">Revues internationales</span><span class="en">International journals</span></h3>
     <ul class="pubs">
       <li>
         <span class="year">2026</span>
@@ -146,7 +204,7 @@
       </li>
     </ul>
 
-    <h3>International conferences</h3>
+    <h3><span class="fr">Conférences internationales</span><span class="en">International conferences</span></h3>
     <ul class="pubs">
       <li>
         <span class="year">2026</span>
@@ -193,7 +251,7 @@
       </li>
     </ul>
 
-    <h3>National conferences</h3>
+    <h3><span class="fr">Conférences nationales</span><span class="en">National conferences</span></h3>
     <ul class="pubs">
       <li>
         <span class="year">2025</span>
@@ -233,37 +291,53 @@
       </li>
     </ul>
 
-    <h3>Seminars</h3>
+    <h3><span class="fr">Séminaires</span><span class="en">Seminars</span></h3>
     <ul class="pubs">
       <li>
         <span class="year">2021</span>
         <div>
           <span class="title">Gestion des données manquantes en clustering.</span><br>
-          <span class="venue">Séminaire, CNAM</span>, Paris, 29 October 2021.
+          <span class="venue"><span class="fr">Séminaire, CNAM</span><span class="en">Seminar, CNAM</span></span>, Paris,
+          <span class="fr">29 octobre 2021.</span><span class="en">29 October 2021.</span>
           <div class="links"><a href="https://maths.cnam.fr/IMG/pdf/seminaire_fadela.pdf" target="_blank">PDF</a></div>
         </div>
       </li>
     </ul>
 
-    <h3>Reviewing</h3>
-    <p>Reviewer for <em>Reliability Engineering &amp; System Safety</em> (Elsevier).</p>
+    <h3><span class="fr">Expertise</span><span class="en">Reviewing</span></h3>
+    <p>
+      <span class="fr">Relecteur pour la revue <em>Reliability Engineering &amp; System Safety</em> (Elsevier).</span>
+      <span class="en">Reviewer for <em>Reliability Engineering &amp; System Safety</em> (Elsevier).</span>
+    </p>
 
-    <p class="note">The complete, up-to-date list is on
-      <a href="https://scholar.google.com/citations?user=hPwY_dUAAAAJ" target="_blank">Google Scholar</a> and
-      <a href="https://hal.science/search/index/?q=ndao+mouhamadou+lamine" target="_blank">HAL</a>.</p>
+    <p class="note">
+      <span class="fr">La liste complète et à jour est disponible sur</span>
+      <span class="en">The complete, up-to-date list is on</span>
+      <a href="https://scholar.google.com/citations?user=hPwY_dUAAAAJ" target="_blank">Google Scholar</a>
+      <span class="fr">et</span><span class="en">and</span>
+      <a href="https://hal.science/search/index/?q=ndao+mouhamadou+lamine" target="_blank">HAL</a>.
+    </p>
   </section>
 
-  <!-- ============ Teaching ============ -->
+  <!-- ============ Enseignement ============ -->
   <section id="teaching">
-    <h2>Teaching</h2>
+    <h2><span class="fr">Enseignement</span><span class="en">Teaching</span></h2>
 
     <ul class="timeline" style="margin-top:24px">
       <li>
-        <span class="when">2025 – present</span>
+        <span class="when"><span class="fr">Depuis 2025</span><span class="en">2025 – present</span></span>
         <div class="what">
-          <h4>ATER, Temporary Teaching and Research Assistant</h4>
+          <h4><span class="fr">ATER, Attaché Temporaire d'Enseignement et de Recherche</span><span class="en">ATER, Temporary Teaching and Research Assistant</span></h4>
           <span class="where">CNAM, EPN 5 &amp; EPN 6, Paris · CNAM Nouvelle-Aquitaine</span>
-          <ul>
+          <ul class="fr">
+            <li><span class="code">STA101</span> Analyse des données : méthodes descriptives (ACP, AFC, ACM, AFDM, classification)</li>
+            <li><span class="code">MVA113</span> Méthodes mathématiques pour la finance et l'économie</li>
+            <li><span class="code">STA211</span> Entreposage et fouille de données</li>
+            <li><span class="code">USSI6A</span> Inférence statistique : estimation et tests d'hypothèses</li>
+            <li><span class="code">USSI6G</span> Initiation à la programmation R</li>
+            <li><span class="code">NFE212</span> Informatique décisionnelle : visualisation et valorisation des données</li>
+          </ul>
+          <ul class="en">
             <li><span class="code">STA101</span> Data analysis, descriptive methods (PCA, CA, MCA, FAMD, clustering)</li>
             <li><span class="code">MVA113</span> Mathematical methods for finance and economics</li>
             <li><span class="code">STA211</span> Data warehousing and data mining</li>
@@ -276,9 +350,13 @@
       <li>
         <span class="when">2026 – 2027</span>
         <div class="what">
-          <h4>Guest lecturer</h4>
+          <h4><span class="fr">Intervenant extérieur</span><span class="en">Guest lecturer</span></h4>
           <span class="where">Sup de Vinci · ITIS</span>
-          <ul>
+          <ul class="fr">
+            <li>Projet technique Big Data &amp; IA : valorisation et lancement d'un projet IA/Data sur le marché (M2 Big Data, Sup de Vinci)</li>
+            <li>IA générative &amp; LLMs (M2, ITIS)</li>
+          </ul>
+          <ul class="en">
             <li>Big Data &amp; AI technical project: bringing an AI/data project to market (M2 Big Data, Sup de Vinci)</li>
             <li>Generative AI &amp; LLMs (M2, ITIS)</li>
           </ul>
@@ -287,9 +365,14 @@
       <li>
         <span class="when">2023 – 2025</span>
         <div class="what">
-          <h4>Teaching assistant (vacataire)</h4>
+          <h4><span class="fr">Chargé de TD (vacataire)</span><span class="en">Teaching assistant (vacataire)</span></h4>
           <span class="where">CNAM, CEDRIC</span>
-          <ul>
+          <ul class="fr">
+            <li><span class="code">STA101</span> Analyse des données, statistique exploratoire multivariée (35 h/an)</li>
+            <li><span class="code">STA211</span> Entreposage et fouille de données : encadrement de projets de data mining (FOAD)</li>
+            <li><span class="code">NFE212</span> Apprentissage supervisé (FOAD)</li>
+          </ul>
+          <ul class="en">
             <li><span class="code">STA101</span> Data analysis, multivariate exploratory statistics (35 h/year)</li>
             <li><span class="code">STA211</span> Data warehousing and data mining, supervision of data-mining projects (distance learning)</li>
             <li><span class="code">NFE212</span> Supervised learning (distance learning)</li>
@@ -299,65 +382,73 @@
       <li>
         <span class="when">2022 – 2025</span>
         <div class="what">
-          <h4>Deep learning workshops</h4>
-          <span class="where">CESI, apprenticeship engineering programme (FISA)</span>
-          <p>Workshops and tutored projects on CNNs, RNNs, autoencoders and transfer learning.</p>
+          <h4><span class="fr">Ateliers de deep learning</span><span class="en">Deep learning workshops</span></h4>
+          <span class="where"><span class="fr">CESI, formation d'ingénieurs en alternance (FISA)</span><span class="en">CESI, apprenticeship engineering programme (FISA)</span></span>
+          <p class="fr">Ateliers et projets tutorés : CNN, RNN, autoencodeurs, transfer learning.</p>
+          <p class="en">Workshops and tutored projects on CNNs, RNNs, autoencoders and transfer learning.</p>
         </div>
       </li>
       <li>
         <span class="when">2025</span>
         <div class="what">
-          <h4>Supervision, M2 research internship (6 months)</h4>
+          <h4><span class="fr">Encadrement d'un stage de recherche de M2 (6 mois)</span><span class="en">Supervision, M2 research internship (6 months)</span></h4>
           <span class="where">CESI LINEACT, Nanterre</span>
-          <p>Hyperparameter optimization for RUL prediction from multivariate time series (LSTM, Bayesian optimization, block bootstrap).</p>
+          <p class="fr">Optimisation des hyperparamètres pour la prédiction de la RUL à partir de séries temporelles multivariées (LSTM, optimisation bayésienne, bootstrap par blocs).</p>
+          <p class="en">Hyperparameter optimization for RUL prediction from multivariate time series (LSTM, Bayesian optimization, block bootstrap).</p>
         </div>
       </li>
     </ul>
   </section>
 
-  <!-- ============ Experience ============ -->
+  <!-- ============ Parcours ============ -->
   <section id="experience">
-    <h2>Experience</h2>
+    <h2><span class="fr">Parcours</span><span class="en">Experience</span></h2>
     <ul class="timeline" style="margin-top:24px">
       <li>
-        <span class="when">Oct 2025 – present</span>
+        <span class="when"><span class="fr">Depuis oct. 2025</span><span class="en">Oct 2025 – present</span></span>
         <div class="what">
-          <h4>ATER, teaching and research</h4>
+          <h4><span class="fr">ATER, enseignement et recherche</span><span class="en">ATER, teaching and research</span></h4>
           <span class="where">CNAM, EPN 6, Paris</span>
-          <p>Research on dimensionality reduction, robust feature selection and explainable AI for multivariate time series.</p>
+          <p class="fr">Recherche en réduction de dimension, sélection robuste de variables et IA explicable pour les séries temporelles multivariées.</p>
+          <p class="en">Research on dimensionality reduction, robust feature selection and explainable AI for multivariate time series.</p>
         </div>
       </li>
       <li>
-        <span class="when">Oct 2022 – Oct 2025</span>
+        <span class="when"><span class="fr">Oct. 2022 – oct. 2025</span><span class="en">Oct 2022 – Oct 2025</span></span>
         <div class="what">
-          <h4>Doctoral researcher, data scientist</h4>
+          <h4><span class="fr">Doctorant, data scientist</span><span class="en">Doctoral researcher, data scientist</span></h4>
           <span class="where">CESI LINEACT, Nanterre</span>
-          <p>RUL prediction from multi-sensor data (C-MAPSS, PRONOSTIA) with LSTMs; explainability with LIME, SHAP and L2X;
+          <p class="fr">Prédiction de la RUL à partir de données multi-capteurs (C-MAPSS, PRONOSTIA) avec des LSTM ; explicabilité avec LIME, SHAP et L2X ;
+            sélection non supervisée de variables par clustering divisif ; analyse bibliométrique de la littérature XAI (web scraping, LDA).</p>
+          <p class="en">RUL prediction from multi-sensor data (C-MAPSS, PRONOSTIA) with LSTMs; explainability with LIME, SHAP and L2X;
             unsupervised feature selection by divisive clustering; bibliometric analysis of XAI literature (web scraping, LDA).</p>
         </div>
       </li>
       <li>
-        <span class="when">Oct 2021 – Oct 2022</span>
+        <span class="when"><span class="fr">Oct. 2021 – oct. 2022</span><span class="en">Oct 2021 – Oct 2022</span></span>
         <div class="what">
-          <h4>Research engineer, e-Privacy project</h4>
-          <span class="where">CNAM, ROC team, Paris</span>
-          <p>Privacy-preserving distributed learning on IoT data (PySpark, Google Cloud Platform).</p>
+          <h4><span class="fr">Ingénieur de recherche, projet e-Privacy</span><span class="en">Research engineer, e-Privacy project</span></h4>
+          <span class="where"><span class="fr">CNAM, équipe ROC, Paris</span><span class="en">CNAM, ROC team, Paris</span></span>
+          <p class="fr">Apprentissage distribué préservant la confidentialité sur données IoT (PySpark, Google Cloud Platform).</p>
+          <p class="en">Privacy-preserving distributed learning on IoT data (PySpark, Google Cloud Platform).</p>
         </div>
       </li>
       <li>
-        <span class="when">Apr – Sep 2021</span>
+        <span class="when"><span class="fr">Avr. – sept. 2021</span><span class="en">Apr – Sep 2021</span></span>
         <div class="what">
-          <h4>Research intern, data scientist</h4>
+          <h4><span class="fr">Stagiaire de recherche, data scientist</span><span class="en">Research intern, data scientist</span></h4>
           <span class="where">CNAM, CEDRIC, Paris</span>
-          <p>Multi-block clustering of incomplete heterogeneous data: ensemble and consensus clustering with multiple imputation; R and Python packages.</p>
+          <p class="fr">Clustering multi-blocs de données hétérogènes incomplètes : clustering ensembliste et consensus de partitions avec imputation multiple ; packages R et Python.</p>
+          <p class="en">Multi-block clustering of incomplete heterogeneous data: ensemble and consensus clustering with multiple imputation; R and Python packages.</p>
         </div>
       </li>
       <li>
         <span class="when">2018 – 2020</span>
         <div class="what">
-          <h4>Statistician, data analyst</h4>
-          <span class="where">STATINFO · IRD UMR VITROME · ANSD, Dakar, Senegal</span>
-          <p>Survey data analysis and dashboards, Afrobarometer data (MCA composite scores, multilevel models), production price indices.</p>
+          <h4><span class="fr">Statisticien, data analyst</span><span class="en">Statistician, data analyst</span></h4>
+          <span class="where"><span class="fr">STATINFO · IRD UMR VITROME · ANSD, Dakar, Sénégal</span><span class="en">STATINFO · IRD UMR VITROME · ANSD, Dakar, Senegal</span></span>
+          <p class="fr">Analyse de données d'enquêtes et tableaux de bord, données Afrobarometer (scores composites par ACM, modèles multiniveaux), indices des prix à la production.</p>
+          <p class="en">Survey data analysis and dashboards, Afrobarometer data (MCA composite scores, multilevel models), production price indices.</p>
         </div>
       </li>
     </ul>
@@ -369,7 +460,7 @@
     <div class="contact">
       <div><b>Email</b><a href="mailto:mlndao@outlook.com">mlndao@outlook.com</a></div>
       <div><b>Affiliation</b>Conservatoire National des Arts et Métiers<br>292 rue Saint-Martin, 75003 Paris</div>
-      <div><b>Profiles</b>
+      <div><b><span class="fr">Profils</span><span class="en">Profiles</span></b>
         <a href="https://scholar.google.com/citations?user=hPwY_dUAAAAJ" target="_blank">Google Scholar</a> ·
         <a href="https://orcid.org/0009-0009-9507-1955" target="_blank">ORCID</a> ·
         <a href="https://cedric.cnam.fr/author/ndaom" target="_blank">CEDRIC</a>
@@ -380,11 +471,22 @@
 </main>
 
 <footer>
-  © 2026 Mouhamadou Lamine NDAO · <a href="#top">Back to top</a>
+  © 2026 Mouhamadou Lamine NDAO · <a href="#top"><span class="fr">Haut de page</span><span class="en">Back to top</span></a>
 </footer>
 
 <script>
-  // Highlight the current section in the nav
+  // Bouton FR / EN
+  (function () {
+    var html = document.documentElement;
+    document.getElementById('langToggle').addEventListener('click', function () {
+      var lang = html.getAttribute('data-lang') === 'en' ? 'fr' : 'en';
+      html.setAttribute('data-lang', lang);
+      html.lang = lang;
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    });
+  })();
+
+  // Section courante surlignée dans le menu
   (function () {
     var links = document.querySelectorAll('.nav a');
     var sections = Array.prototype.map.call(links, function (a) {
