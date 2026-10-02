@@ -1,98 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mouhamadou Lamine NDAO</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mouhamadou Lamine NDAO</title>
+  <meta name="author" content="Mouhamadou Lamine NDAO">
+  <meta name="description" content="Mouhamadou Lamine NDAO, PhD in Applied Mathematics, ATER at CNAM (Paris). Explainable AI, multivariate time series, predictive maintenance and RUL prediction.">
+  <meta name="keywords" content="Mouhamadou Lamine NDAO, explainable AI, XAI, multivariate time series, predictive maintenance, remaining useful life, RUL, feature clustering, dimensionality reduction, CNAM">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-    <div id="app">
-        <div data-include="head.html"></div>
-        <div data-include="nav.html"></div>
-        <div data-include="sections.html"></div>
-        <div data-include="footer.html"></div>
+
+<!-- ============ Header ============ -->
+<header class="site-header" id="top">
+  <img class="photo" src="images/photo_cv.jpg" alt="Mouhamadou Lamine NDAO">
+  <h1>Mouhamadou Lamine NDAO</h1>
+  <p class="role">PhD in Applied Mathematics &middot; ATER at CNAM</p>
+  <p class="affil">Conservatoire National des Arts et Métiers, Paris</p>
+  <ul class="themes">
+    <li>Explainable AI</li>
+    <li>Multivariate time series</li>
+    <li>Predictive maintenance &amp; RUL</li>
+    <li>Dimensionality reduction</li>
+  </ul>
+  <ul class="icons">
+    <li><a class="cv" href="doc/CV_Mouhamadou_Lamine_NDAO.pdf" target="_blank"><i class="fa-solid fa-file-arrow-down"></i> CV</a></li>
+    <li><a href="mailto:mlndao@outlook.com"><i class="fa-solid fa-envelope"></i> Email</a></li>
+    <li><a href="https://scholar.google.com/citations?user=hPwY_dUAAAAJ" target="_blank"><i class="ai ai-google-scholar"></i> Scholar</a></li>
+    <li><a href="https://orcid.org/0009-0009-9507-1955" target="_blank"><i class="ai ai-orcid"></i> ORCID</a></li>
+    <li><a href="https://hal.science/search/index/?q=ndao+mouhamadou+lamine" target="_blank"><i class="ai ai-hal"></i> HAL</a></li>
+    <li><a href="https://github.com/laminendao" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/mlndao/" target="_blank"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a></li>
+  </ul>
+</header>
+
+<!-- ============ Nav ============ -->
+<nav class="nav" aria-label="Sections">
+  <ul>
+    <li><a href="#bio">Bio</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- ============ Bio ============ -->
+  <section id="bio">
+    <h2>Short bio</h2>
+    <div class="bio">
+      <div>
+        <p>Since October 2025, I have been a Temporary Teaching and Research Assistant (ATER) at the
+          <a href="https://www.cnam.fr" target="_blank">Conservatoire National des Arts et Métiers</a> (CNAM) in Paris.
+          I received my PhD in Applied Mathematics from CNAM in December 2025, and I am qualified for
+          <em>Maître de Conférences</em> positions (CNU sections 26 and 27).</p>
+        <p>My doctoral research, carried out at <a href="https://lineact.cesi.fr" target="_blank">CESI LINEACT</a>
+          and the <a href="https://cedric.cnam.fr" target="_blank">CEDRIC</a> laboratory, focused on explainable
+          artificial intelligence for multivariate, multi-sensor time series, with applications to Remaining Useful Life
+          (RUL) prediction in predictive maintenance. I worked under the supervision of
+          Ndèye Niang (CNAM), Genane Youness (CESI LINEACT) and Gilbert Saporta (CNAM).</p>
+        <p>My research is about how preprocessing, model complexity and feature structure affect what post-hoc
+          explanations (SHAP, LIME, L2X) actually reveal, and about interpretable dimensionality reduction methods,
+          such as divisive feature clustering, that make deep models easier to read.</p>
+        <p class="keywords"><b>Keywords:</b> explainable AI, multivariate time series, predictive maintenance,
+          remaining useful life, feature clustering, dimensionality reduction, unsupervised and self-supervised
+          representation learning, multi-view clustering.</p>
+      </div>
+      <aside class="facts">
+        <dl>
+          <dt>Current position</dt>
+          <dd>ATER, CNAM Paris (EPN 6), since 2025</dd>
+          <dt>PhD in Applied Mathematics</dt>
+          <dd>CNAM, Paris, 2022–2025 (defended December 2025)</dd>
+          <dt>Qualification</dt>
+          <dd>Maître de Conférences, CNU 26 &amp; 27</dd>
+          <dt>MSc TRIED</dt>
+          <dd>Université Paris-Saclay / Télécom Paris, 2021 (with honours)</dd>
+          <dt>Statistical Engineer</dt>
+          <dd>ENSAE Dakar, 2020 (with honours)</dd>
+        </dl>
+      </aside>
     </div>
+  </section>
 
-    <script>
-        async function includeHTML() {
-            const includeElements = document.querySelectorAll('[data-include]');
-            for (const elem of includeElements) {
-                const fileName = elem.getAttribute('data-include');
-                try {
-                    const res = await fetch('partials/' + fileName);
-                    if (res.ok) {
-                        const template = await res.text();
-                        const container = document.createElement('div');
-                        container.innerHTML = template;
+  <!-- ============ Research ============ -->
+  <section id="research">
+    <h2>Research</h2>
+    <p class="lead">Machine learning for multivariate, multi-sensor data from industrial systems, with a focus on making models interpretable and robust.</p>
+    <div class="cards">
+      <div class="card">
+        <h4>Evaluating XAI methods</h4>
+        <p>Quantitative evaluation of post-hoc explanations (SHAP, LIME, L2X) and of how preprocessing and model complexity change them.</p>
+      </div>
+      <div class="card">
+        <h4>Interpretable dimension reduction</h4>
+        <p>Divisive feature clustering and clustering of variables around latent components, used to build readable inputs for RUL models.</p>
+      </div>
+      <div class="card">
+        <h4>Predictive maintenance</h4>
+        <p>RUL prediction from multi-sensor time series (C-MAPSS turbofans, PRONOSTIA / FEMTO-ST bearings) with deep models such as LSTMs.</p>
+      </div>
+      <div class="card">
+        <h4>Heterogeneous data</h4>
+        <p>Multi-block and multi-view clustering, consensus clustering and missing data.</p>
+      </div>
+    </div>
+  </section>
 
-                        elem.replaceWith(...Array.from(container.childNodes));
+  <!-- ============ Publications ============ -->
+  <section id="publications">
+    <h2>Publications</h2>
 
-                        // Exécuter scripts inclus
-                        container.querySelectorAll('script').forEach(script => {
-                            const newScript = document.createElement('script');
-                            if (script.src) {
-                                newScript.src = script.src;
-                            } else {
-                                newScript.textContent = script.textContent;
-                            }
-                            document.body.appendChild(newScript);
-                        });
-                    } else {
-                        console.error('Impossible de charger', fileName, res.status);
-                        elem.innerHTML = '<p style="color:red">Erreur chargement ' + fileName + '</p>';
-                    }
-                } catch (e) {
-                    console.error('Erreur fetch', fileName, e);
-                    elem.innerHTML = '<p style="color:red">Erreur fetch ' + fileName + '</p>';
-                }
-            }
-        }
+    <h3>International journals</h3>
+    <ul class="pubs">
+      <li>
+        <span class="year">2026</span>
+        <div>
+          <span class="title">Explainable Remaining Useful Life Prediction Using Interpretable Divisive Feature Clustering.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b>, Youness, G., Niang, N., &amp; Saporta, G.</span>
+          <span class="venue">Applied Stochastic Models in Business and Industry</span>, 42(2), e70084. Wiley.
+          <div class="links"><a href="https://doi.org/10.1002/asmb.70084" target="_blank">DOI</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="year">2025</span>
+        <div>
+          <span class="title">Improving predictive maintenance: Evaluating the impact of preprocessing and model complexity on the effectiveness of eXplainable Artificial Intelligence methods.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b>, Youness, G., Niang, N., &amp; Saporta, G.</span>
+          <span class="venue">Engineering Applications of Artificial Intelligence</span>, 144, 110144. Elsevier.
+          <div class="links">
+            <a href="https://doi.org/10.1016/j.engappai.2025.110144" target="_blank">DOI</a>
+            <a href="https://www.sciencedirect.com/science/article/pii/S0952197625001447" target="_blank">ScienceDirect</a>
+          </div>
+        </div>
+      </li>
+    </ul>
 
-        function setTheme(theme) {
-            document.body.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            const toggle = document.getElementById('themeToggle');
-            if (toggle) {
-                toggle.innerText = theme === 'dark' ? '☀️' : '🌙';
-            }
-        }
+    <h3>International conferences</h3>
+    <ul class="pubs">
+      <li>
+        <span class="year">2026</span>
+        <div>
+          <span class="title">Robust Feature Clustering around Latent Components.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b> et al.</span>
+          <span class="venue">ICORS 2026, International Conference on Robust Statistics</span>.
+        </div>
+      </li>
+      <li>
+        <span class="year">2025</span>
+        <div>
+          <span class="title">A Divisive Unsupervised Feature Selection Approach for Explainable Remaining Useful Life Prediction.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b>, Niang, N., Youness, G., &amp; Saporta, G.</span>
+          <span class="venue">36th International Conference on Database and Expert Systems Applications (DEXA 2025)</span>, Bangkok, Thailand, pp. 270–286. Springer.
+          <div class="links"><a href="https://link.springer.com/chapter/10.1007/978-3-032-02088-8_19" target="_blank">Springer</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="year">2025</span>
+        <div>
+          <span class="title">Sparse Weighted Multi-View Clustering.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b> et al.</span>
+          <span class="venue">9th Conference of Data Science, Statistics, and Visualisation (DSSV 2025)</span>.
+        </div>
+      </li>
+      <li>
+        <span class="year">2025</span>
+        <div>
+          <span class="title">Enhancing Fuzzy Forests with Consensus Clustering for Unbiased and Robust Feature Selection.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b>, Niang, N., Youness, G., &amp; Saporta, G.</span>
+          <span class="venue">JOCLAD 2025</span>.
+          <div class="links"><a href="https://hal.science/hal-05024554v1/file/JOCLAD2025.pdf" target="_blank">PDF</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="year">2024</span>
+        <div>
+          <span class="title">Enhancing Explainability in Predictive Maintenance: Investigating the Impact of Data Preprocessing Techniques on XAI Effectiveness.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b>, Youness, G., Niang, N., &amp; Saporta, G.</span>
+          <span class="venue">37th International FLAIRS Conference</span>, Florida, USA.
+          <div class="links"><a href="https://journals.flvc.org/FLAIRS/article/view/135526" target="_blank">Paper</a></div>
+        </div>
+      </li>
+    </ul>
 
-        function setupThemeToggle() {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            setTheme(savedTheme);
+    <h3>National conferences</h3>
+    <ul class="pubs">
+      <li>
+        <span class="year">2025</span>
+        <div>
+          <span class="title">Une approche divisive et interprétable de réduction de dimension pour la prédiction de la RUL.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b>, Youness, G., Niang, N., &amp; Saporta, G.</span>
+          <span class="venue">56<sup>es</sup> Journées de Statistique (JdS 2025), SFdS</span>, Marseille.
+          <div class="links"><a href="https://cnam.hal.science/hal-05123350/file/JdS2025.pdf" target="_blank">PDF</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="year">2024</span>
+        <div>
+          <span class="title">Effect of LSTM Network Complexity on Explainability in Predictive Maintenance.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b>, Youness, G., Niang, N., &amp; Saporta, G.</span>
+          <span class="venue">55<sup>es</sup> Journées de Statistique (JdS 2024), SFdS</span>, Bordeaux.
+          <div class="links"><a href="https://hal.science/hal-04612045v1/file/ndao_sfds_1562.pdf" target="_blank">PDF</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="year">2023</span>
+        <div>
+          <span class="title">A Systematic Literature Review on Bias, Fairness, and Explainability.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b>, Youness, G., Niang, N., &amp; Saporta, G.</span>
+          <span class="venue">Conférence Nationale en Intelligence Artificielle (CNIA 2023), AFIA</span>, Strasbourg, pp. 87–98.
+          <div class="links"><a href="https://cnam.hal.science/hal-04158443/file/NdaoNiangYounessSaportaCNIA-2023.pdf" target="_blank">PDF</a></div>
+        </div>
+      </li>
+      <li>
+        <span class="year">2023</span>
+        <div>
+          <span class="title">Consensus de partitions en NLP pour une revue systématique de la littérature autour de l'XAI, du biais et de l'équité.</span><br>
+          <span class="authors"><b>Ndao, M. L.</b>, Niang, N., Youness, G., &amp; Saporta, G.</span>
+          <span class="venue">Rencontres de la Société Francophone de Classification (SFC 2023)</span>, pp. 43–48.
+          <div class="links"><a href="https://cnam.hal.science/hal-04158417/file/NdaoNiangYounessSaportaSFC-2023.pdf" target="_blank">PDF</a></div>
+        </div>
+      </li>
+    </ul>
 
-            const themeToggleBtn = document.getElementById('themeToggle');
-            if (themeToggleBtn) {
-                themeToggleBtn.addEventListener('click', () => {
-                    const currentTheme = document.body.getAttribute('data-theme') || 'dark';
-                    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-                });
-            }
-        }
+    <h3>Seminars</h3>
+    <ul class="pubs">
+      <li>
+        <span class="year">2021</span>
+        <div>
+          <span class="title">Gestion des données manquantes en clustering.</span><br>
+          <span class="venue">Séminaire, CNAM</span>, Paris, 29 October 2021.
+          <div class="links"><a href="https://maths.cnam.fr/IMG/pdf/seminaire_fadela.pdf" target="_blank">PDF</a></div>
+        </div>
+      </li>
+    </ul>
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            console.log('DOM loaded, starting includeHTML...');
-            await includeHTML();
-            console.log('HTML included, setting up...');
+    <h3>Reviewing</h3>
+    <p>Reviewer for <em>Reliability Engineering &amp; System Safety</em> (Elsevier).</p>
 
-            setupThemeToggle();
+    <p class="note">The complete, up-to-date list is on
+      <a href="https://scholar.google.com/citations?user=hPwY_dUAAAAJ" target="_blank">Google Scholar</a> and
+      <a href="https://hal.science/search/index/?q=ndao+mouhamadou+lamine" target="_blank">HAL</a>.</p>
+  </section>
 
-            console.log('Setup complete');
-        });
+  <!-- ============ Teaching ============ -->
+  <section id="teaching">
+    <h2>Teaching</h2>
 
-        // Fonction pour gérer les publications accordéon
-        function togglePublications(category) {
-            const content = document.getElementById(category + '-content');
-            const icon = content.previousElementSibling.querySelector('.toggle-icon');
+    <ul class="timeline" style="margin-top:24px">
+      <li>
+        <span class="when">2025 – present</span>
+        <div class="what">
+          <h4>ATER, Temporary Teaching and Research Assistant</h4>
+          <span class="where">CNAM, EPN 5 &amp; EPN 6, Paris · CNAM Nouvelle-Aquitaine</span>
+          <ul>
+            <li><span class="code">STA101</span> Data analysis, descriptive methods (PCA, CA, MCA, FAMD, clustering)</li>
+            <li><span class="code">MVA113</span> Mathematical methods for finance and economics</li>
+            <li><span class="code">STA211</span> Data warehousing and data mining</li>
+            <li><span class="code">USSI6A</span> Statistical inference: estimation and hypothesis testing</li>
+            <li><span class="code">USSI6G</span> Introduction to R programming</li>
+            <li><span class="code">NFE212</span> Business intelligence: data visualization and valorization</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <span class="when">2026 – 2027</span>
+        <div class="what">
+          <h4>Guest lecturer</h4>
+          <span class="where">Sup de Vinci · ITIS</span>
+          <ul>
+            <li>Big Data &amp; AI technical project: bringing an AI/data project to market (M2 Big Data, Sup de Vinci)</li>
+            <li>Generative AI &amp; LLMs (M2, ITIS)</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <span class="when">2023 – 2025</span>
+        <div class="what">
+          <h4>Teaching assistant (vacataire)</h4>
+          <span class="where">CNAM, CEDRIC</span>
+          <ul>
+            <li><span class="code">STA101</span> Data analysis, multivariate exploratory statistics (35 h/year)</li>
+            <li><span class="code">STA211</span> Data warehousing and data mining, supervision of data-mining projects (distance learning)</li>
+            <li><span class="code">NFE212</span> Supervised learning (distance learning)</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <span class="when">2022 – 2025</span>
+        <div class="what">
+          <h4>Deep learning workshops</h4>
+          <span class="where">CESI, apprenticeship engineering programme (FISA)</span>
+          <p>Workshops and tutored projects on CNNs, RNNs, autoencoders and transfer learning.</p>
+        </div>
+      </li>
+      <li>
+        <span class="when">2025</span>
+        <div class="what">
+          <h4>Supervision, M2 research internship (6 months)</h4>
+          <span class="where">CESI LINEACT, Nanterre</span>
+          <p>Hyperparameter optimization for RUL prediction from multivariate time series (LSTM, Bayesian optimization, block bootstrap).</p>
+        </div>
+      </li>
+    </ul>
+  </section>
 
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
-                icon.textContent = '▼';
-            } else {
-                content.style.display = 'block';
-                icon.textContent = '▲';
-            }
-        }
-    </script>
+  <!-- ============ Experience ============ -->
+  <section id="experience">
+    <h2>Experience</h2>
+    <ul class="timeline" style="margin-top:24px">
+      <li>
+        <span class="when">Oct 2025 – present</span>
+        <div class="what">
+          <h4>ATER, teaching and research</h4>
+          <span class="where">CNAM, EPN 6, Paris</span>
+          <p>Research on dimensionality reduction, robust feature selection and explainable AI for multivariate time series.</p>
+        </div>
+      </li>
+      <li>
+        <span class="when">Oct 2022 – Oct 2025</span>
+        <div class="what">
+          <h4>Doctoral researcher, data scientist</h4>
+          <span class="where">CESI LINEACT, Nanterre</span>
+          <p>RUL prediction from multi-sensor data (C-MAPSS, PRONOSTIA) with LSTMs; explainability with LIME, SHAP and L2X;
+            unsupervised feature selection by divisive clustering; bibliometric analysis of XAI literature (web scraping, LDA).</p>
+        </div>
+      </li>
+      <li>
+        <span class="when">Oct 2021 – Oct 2022</span>
+        <div class="what">
+          <h4>Research engineer, e-Privacy project</h4>
+          <span class="where">CNAM, ROC team, Paris</span>
+          <p>Privacy-preserving distributed learning on IoT data (PySpark, Google Cloud Platform).</p>
+        </div>
+      </li>
+      <li>
+        <span class="when">Apr – Sep 2021</span>
+        <div class="what">
+          <h4>Research intern, data scientist</h4>
+          <span class="where">CNAM, CEDRIC, Paris</span>
+          <p>Multi-block clustering of incomplete heterogeneous data: ensemble and consensus clustering with multiple imputation; R and Python packages.</p>
+        </div>
+      </li>
+      <li>
+        <span class="when">2018 – 2020</span>
+        <div class="what">
+          <h4>Statistician, data analyst</h4>
+          <span class="where">STATINFO · IRD UMR VITROME · ANSD, Dakar, Senegal</span>
+          <p>Survey data analysis and dashboards, Afrobarometer data (MCA composite scores, multilevel models), production price indices.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ Contact ============ -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      <div><b>Email</b><a href="mailto:mlndao@outlook.com">mlndao@outlook.com</a></div>
+      <div><b>Affiliation</b>Conservatoire National des Arts et Métiers<br>292 rue Saint-Martin, 75003 Paris</div>
+      <div><b>Profiles</b>
+        <a href="https://scholar.google.com/citations?user=hPwY_dUAAAAJ" target="_blank">Google Scholar</a> ·
+        <a href="https://orcid.org/0009-0009-9507-1955" target="_blank">ORCID</a> ·
+        <a href="https://cedric.cnam.fr/author/ndaom" target="_blank">CEDRIC</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Mouhamadou Lamine NDAO · <a href="#top">Back to top</a>
+</footer>
+
+<script>
+  // Highlight the current section in the nav
+  (function () {
+    var links = document.querySelectorAll('.nav a');
+    var sections = Array.prototype.map.call(links, function (a) {
+      return document.querySelector(a.getAttribute('href'));
+    });
+    function update() {
+      var y = window.scrollY + 120, current = -1;
+      sections.forEach(function (s, i) { if (s && s.offsetTop <= y) current = i; });
+      links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
 </body>
 </html>

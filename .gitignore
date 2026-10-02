@@ -25,3 +25,5 @@ TestResults.xml
 # News management files (sensitive data and tokens)
 news
 news.json
+# Site de référence (ne pas publier)
+erwanscornet.github.io-master/
