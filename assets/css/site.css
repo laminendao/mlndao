@@ -280,3 +280,6 @@ html[data-lang="en"] .fr { display: none !important; }
   cursor: pointer;
 }
 .lang-toggle:hover { background: var(--blue); }
+
+.timeline .what .tools { color: var(--muted); font-size: .92rem; }
+.timeline .what ul li { margin: 8px 0; }
