@@ -3,7 +3,19 @@
    Blue background, white content card, navy + near-black text
 ------------------------------------------------------------------- */
 
+/* Computer Modern (police de LaTeX), sous-ensemble latin + grec + maths.
+   Licence SIL OFL : assets/fonts/OFL-CMU.txt */
+@font-face {
+  font-family: "CMU Serif";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/cmu-serif-700-roman.woff2") format("woff2");
+}
+
 :root {
+  --serif: "CMU Serif", "Latin Modern Roman", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --navy: #003189;          /* CNAM navy */
   --blue: #1452c8;          /* links, accents */
   --blue-soft: #e8eefb;     /* tags, hover backgrounds */
@@ -36,6 +48,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Fond animé (assets/js/data-bg.js), derrière tout le contenu */
+#data-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  display: block;
+}
+
 a { color: var(--blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
@@ -56,9 +77,9 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 10px 30px rgba(0,0,0,.25);
 }
 .site-header h1 {
-  font-family: "Source Serif 4", Georgia, serif;
-  font-weight: 600;
-  font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
   letter-spacing: .01em;
   margin: 22px 0 4px;
 }
@@ -139,10 +160,10 @@ section {
 section:first-child { border-top: 0; }
 
 h2 {
-  font-family: "Source Serif 4", Georgia, serif;
+  font-family: var(--serif);
   color: var(--navy);
-  font-size: 1.9rem;
-  font-weight: 600;
+  font-size: 2.05rem;
+  font-weight: 700;
   margin: 0 0 6px;
 }
 h2::after {
@@ -199,7 +220,7 @@ h3 {
   border-bottom: 1px dashed var(--line);
 }
 .pubs li:last-child { border-bottom: 0; }
-.pubs .year { color: var(--navy); font-weight: 700; }
+.pubs .year { color: var(--navy); font-family: var(--mono); font-weight: 600; font-size: .95em; }
 .pubs .title { font-weight: 600; color: var(--ink); }
 .pubs .authors { color: var(--muted); }
 .pubs .authors b { color: var(--ink); font-weight: 600; }
@@ -296,7 +317,8 @@ html[data-lang="en"] .fr { display: none !important; }
 .pub-group > summary::-webkit-details-marker { display: none; }
 .pub-group > summary h3 { margin: 0; }
 .pub-group > summary .count {
-  font-size: .8rem; font-weight: 700;
+  font-family: var(--mono);
+  font-size: .78rem; font-weight: 600;
   color: var(--navy); background: var(--blue-soft);
   padding: 1px 9px; border-radius: 999px;
 }
@@ -347,3 +369,40 @@ html[data-lang="en"] .fr { display: none !important; }
   .nav li:last-child { position: sticky; right: 0; background: rgba(255,255,255,.96); padding-left: 4px; border-radius: 999px; }
   html { scroll-padding-top: 64px; }
 }
+
+/* ---------- Animations d'ouverture (assets/js/reveal.js) ---------- */
+/* Avant le lancement : en-tête et premières sections masqués (évite un flash) */
+html.js-anim:not(.anim-start) .site-header > *,
+html.js-anim:not(.anim-start) .site-header li,
+html.js-anim:not(.anim-start) .nav,
+html.js-anim:not(.anim-start) main section > * { opacity: 0; }
+
+/* Empilement : chaque élément monte, se précise et apparaît */
+html.js-anim .rv {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(4px);
+  transition:
+    opacity .6s ease,
+    transform .7s cubic-bezier(.2, .7, .2, 1),
+    filter .6s ease;
+  transition-delay: var(--d, 0ms);
+}
+html.js-anim.anim-start .site-header .rv,
+html.js-anim.anim-start .nav.rv,
+html.js-anim .rv-sec.in .rv {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Nom « décodé » : symboles en cours de tirage */
+.site-header h1 .sym { color: #9fdcff; opacity: .85; }
+
+/* Trait sous les titres de section tracé comme un axe */
+html.js-anim .rv-sec h2::after {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .9s cubic-bezier(.2, .7, .2, 1) .3s;
+}
+html.js-anim .rv-sec.in h2::after { transform: scaleX(1); }

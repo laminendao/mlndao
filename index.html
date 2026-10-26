@@ -11,9 +11,10 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="preload" href="assets/fonts/cmu-serif-700-roman.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/site.css">
   <script>
     // Choix de langue appliqué avant l'affichage : ?lang=en, sinon dernier choix, sinon français
@@ -28,8 +29,19 @@
       document.documentElement.lang = lang;
     })();
   </script>
+  <script>
+    // Animations d'ouverture (désactivées si « réduire les animations »)
+    (function () {
+      var h = document.documentElement;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      h.classList.add('js-anim');
+      // filet de sécurité : si le script ne se charge pas, on affiche tout
+      setTimeout(function () { if (!window.__revealReady) h.classList.remove('js-anim'); }, 3000);
+    })();
+  </script>
 </head>
 <body>
+<canvas id="data-bg" aria-hidden="true"></canvas>
 
 <!-- ============ En-tête ============ -->
 <header class="site-header" id="top">
@@ -557,5 +569,7 @@
     update();
   })();
 </script>
+<script src="assets/js/data-bg.js" defer></script>
+<script src="assets/js/reveal.js" defer></script>
 </body>
 </html>
