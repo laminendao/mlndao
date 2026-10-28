@@ -1,0 +1,9 @@
+order: 2
+when_fr: Oct. 2022 – oct. 2025
+when_en: Oct 2022 – Oct 2025
+title_fr: Doctorant, data scientist
+title_en: Doctoral researcher, data scientist
+place_fr: CESI LINEACT, Nanterre
+place_en: ''
+text_fr: Prédiction de la RUL à partir de données multi-capteurs (C-MAPSS, PRONOSTIA) avec des LSTM ; explicabilité avec LIME, SHAP et L2X ; sélection non supervisée de variables par clustering divisif ; analyse bibliométrique de la littérature XAI (web scraping, LDA).
+text_en: RUL prediction from multi-sensor data (C-MAPSS, PRONOSTIA) with LSTMs; explainability with LIME, SHAP and L2X; unsupervised feature selection by divisive clustering; bibliometric analysis of XAI literature (web scraping, LDA).

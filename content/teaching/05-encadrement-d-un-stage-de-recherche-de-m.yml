@@ -1,0 +1,10 @@
+order: 5
+when_fr: '2025'
+when_en: ''
+title_fr: Encadrement d'un stage de recherche de M2 (6 mois)
+title_en: Supervision, M2 research internship (6 months)
+place_fr: CESI LINEACT, Nanterre
+place_en: ''
+text_fr: Optimisation des hyperparamètres pour la prédiction de la RUL à partir de séries temporelles multivariées (LSTM, optimisation bayésienne, bootstrap par blocs).
+text_en: Hyperparameter optimization for RUL prediction from multivariate time series (LSTM, Bayesian optimization, block bootstrap).
+courses: []

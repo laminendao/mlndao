@@ -1,0 +1,69 @@
+order: 2
+when_fr: 2026 – 2027
+when_en: ''
+title_fr: Intervenant extérieur
+title_en: Guest lecturer
+place_fr: Établissements d'enseignement supérieur privés, niveau Master
+place_en: Private higher-education institutions, Master's level
+text_fr: ''
+text_en: ''
+courses:
+- code: ''
+  text_fr: '**Visualisation de données** (M1 Big Data & IA) : architectures data lake / lakehouse, préparation à l''échelle, web sémantique, perception visuelle, storytelling, BI décisionnelle et tableaux de bord temps réel.'
+  text_en: '**Data visualization** (M1 Big Data & AI): data lake / lakehouse architectures, data preparation at scale, semantic web, visual perception, storytelling, business intelligence and real-time dashboards.'
+  tools_fr:
+  - PySpark
+  - PostgreSQL
+  - RDF / OWL / SPARQL (Apache Jena Fuseki, Protégé)
+  - Plotly
+  - Altair
+  - Streamlit
+  - Apache Superset
+  - Grafana
+  - Docker
+  - JupyterLab
+  tools_en: []
+- code: ''
+  text_fr: '**IA générative & LLMs** (M2) : fondamentaux (tokens, embeddings, Transformers), prompt engineering, RAG, agents et function calling, fine-tuning, mise en production et automatisation.'
+  text_en: '**Generative AI & LLMs** (M2): foundations (tokens, embeddings, Transformers), prompt engineering, RAG, agents and function calling, fine-tuning, deployment and automation.'
+  tools_fr:
+  - Hugging Face
+  - Ollama
+  - LangChain
+  - LlamaIndex
+  - MCP
+  - bases vectorielles (Chroma, FAISS, Qdrant, pgvector)
+  - LoRA / QLoRA (PEFT)
+  - n8n
+  tools_en:
+  - Hugging Face
+  - Ollama
+  - LangChain
+  - LlamaIndex
+  - MCP
+  - vector databases (Chroma, FAISS, Qdrant, pgvector)
+  - LoRA / QLoRA (PEFT)
+  - n8n
+- code: ''
+  text_fr: '**Projet technique Big Data & IA** (M2 Big Data) : valorisation et lancement d''un projet IA/Data sur le marché.'
+  text_en: '**Big Data & AI technical project** (M2 Big Data): bringing an AI/data project to market.'
+  tools_fr:
+  - étude de marché
+  - SWOT
+  - Business Model Canvas
+  - pitch deck
+  tools_en:
+  - market study
+  - SWOT
+  - Business Model Canvas
+  - pitch deck
+- code: ''
+  text_fr: '**Formation pratique à Docker** : conteneurisation d''une application frontend + backend.'
+  text_en: '**Hands-on Docker training**: containerizing a frontend + backend application.'
+  tools_fr:
+  - Docker
+  - Docker Compose
+  - Nginx
+  - React
+  - FastAPI
+  tools_en: []

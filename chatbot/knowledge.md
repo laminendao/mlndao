@@ -37,6 +37,12 @@ Université Paris-Saclay / Télécom Paris, 2021 (mention Bien)
 **Ingénieur statisticien** :
 ENSAE Dakar, 2020 (mention Bien)
 
+## Actualités
+Décembre 2025
+
+### Soutenance de thèse
+J'ai soutenu ma thèse de doctorat en mathématiques appliquées au CNAM : Vers une intelligence artificielle explicable en maintenance prédictive.
+
 ## Recherche
 Apprentissage automatique pour les données multivariées et multi-capteurs issues de systèmes industriels, avec l'objectif de rendre les modèles interprétables et robustes.
 

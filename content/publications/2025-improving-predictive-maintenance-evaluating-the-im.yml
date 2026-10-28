@@ -1,0 +1,14 @@
+type: journal
+year: 2025
+title: 'Improving predictive maintenance: Evaluating the impact of preprocessing and model complexity on the effectiveness of eXplainable Artificial Intelligence methods'
+authors: Ndao, M. L., Youness, G., Niang, N., & Saporta, G.
+venue: Engineering Applications of Artificial Intelligence
+venue_en: ''
+details: 144, 110144. Elsevier.
+details_en: ''
+links:
+- label: DOI
+  url: https://doi.org/10.1016/j.engappai.2025.110144
+- label: ScienceDirect
+  url: https://www.sciencedirect.com/science/article/pii/S0952197625001447
+rank: 1

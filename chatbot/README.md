@@ -51,16 +51,17 @@ ajoute `data-avatar="chemin/vers/image.png"` à la balise.
 
 ## 3. Mettre à jour ce que sait le chatbot
 
-Après chaque modification du site :
-
-```bash
-python3 chatbot/build_knowledge.py
-cd chatbot && npx wrangler deploy
-```
+C'est automatique : à chaque publication (depuis `/admin` ou un `git push`), le site
+régénère `chatbot/knowledge.md`, et le Worker relit cette version en ligne
+(https://lamine.mlndao.fr/chatbot/knowledge.md) au plus toutes les 5 minutes.
+Aucun redéploiement du Worker n'est nécessaire.
 
 Pour lui apprendre des choses absentes du site (sujets de collaboration,
 encadrement de stages, disponibilités…), écris-les dans `chatbot/knowledge_extra.md`
-puis relance les deux commandes ci-dessus.
+puis publie (commit + push).
+
+Redéploie le Worker (`npx wrangler deploy`) seulement si tu modifies
+`src/worker.js` ou `wrangler.toml`.
 
 ## Tester en local
 

@@ -1,0 +1,276 @@
+# Page d'administration du site (Sveltia CMS) — https://lamine.mlndao.fr/admin/
+# Chaque enregistrement crée un commit sur GitHub ; le site et l'assistant se
+# mettent à jour automatiquement en 1 à 2 minutes (.github/workflows/pages.yml).
+# Un champ anglais laissé vide reprend le texte français.
+
+backend:
+  name: github
+  repo: laminendao/mlndao
+  branch: main
+  # connexion par jeton d'accès GitHub (pas de serveur OAuth à héberger)
+  auth_methods: [token]
+  commit_messages:
+    create: "Admin : ajout « {{slug}} » ({{collection}})"
+    update: "Admin : mise à jour « {{slug}} » ({{collection}})"
+    delete: "Admin : suppression « {{slug}} » ({{collection}})"
+    uploadMedia: "Admin : ajout du fichier {{path}}"
+    deleteMedia: "Admin : suppression du fichier {{path}}"
+
+app_title: Admin · Lamine NDAO
+site_url: https://lamine.mlndao.fr
+display_url: https://lamine.mlndao.fr
+logo:
+  src: /assets/favicon.svg
+
+media_folder: images/uploads
+public_folder: /images/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+  maxlength: 60
+
+editor:
+  preview: false
+
+# ------------------------------------------------------------------ pages uniques
+singletons:
+  - name: profile
+    label: Profil & bio
+    icon: person
+    file: content/profile.yml
+    fields:
+      - { label: Nom affiché, name: name, widget: string }
+      - { label: Photo de profil, name: photo, widget: image, hint: "Photo carrée de préférence (au moins 400 × 400 px)." }
+      - { label: Titre (FR), name: role_fr, widget: string, hint: "Ex. Docteur en mathématiques appliquées · ATER au CNAM" }
+      - { label: Titre (EN), name: role_en, widget: string, required: false }
+      - { label: Établissement, name: affiliation, widget: string }
+      - label: Thèmes (pastilles sous le nom)
+        name: themes
+        widget: list
+        label_singular: thème
+        summary: "{{fr}}"
+        collapsed: true
+        fields:
+          - { label: Français, name: fr, widget: string }
+          - { label: Anglais, name: en, widget: string, required: false }
+      - label: CV (PDF)
+        name: cv
+        widget: file
+        required: false
+        accept: application/pdf
+        media_folder: /doc
+        public_folder: /doc
+      - { label: E-mail, name: email, widget: string }
+      - { label: Google Scholar (URL), name: scholar, widget: string, required: false }
+      - { label: ORCID (URL), name: orcid, widget: string, required: false }
+      - { label: HAL (URL), name: hal, widget: string, required: false }
+      - { label: GitHub (URL), name: github, widget: string, required: false }
+      - { label: LinkedIn (URL), name: linkedin, widget: string, required: false }
+      - label: Biographie (FR)
+        name: bio_fr
+        widget: markdown
+        buttons: [bold, italic, link, bulleted-list]
+        editor_components: []
+      - label: Biographie (EN)
+        name: bio_en
+        widget: markdown
+        required: false
+        buttons: [bold, italic, link, bulleted-list]
+        editor_components: []
+      - { label: Mots-clés (FR), name: keywords_fr, widget: text, required: false }
+      - { label: Mots-clés (EN), name: keywords_en, widget: text, required: false }
+      - label: Encadré (poste actuel, diplômes…)
+        name: facts
+        widget: list
+        label_singular: ligne
+        summary: "{{title_fr}}"
+        collapsed: true
+        fields:
+          - { label: Intitulé (FR), name: title_fr, widget: string }
+          - { label: Intitulé (EN), name: title_en, widget: string, required: false }
+          - { label: Détail (FR), name: text_fr, widget: string }
+          - { label: Détail (EN), name: text_en, widget: string, required: false }
+      - { label: Expertise / relecture (FR), name: reviewing_fr, widget: string, required: false, hint: "Affiché sous les publications. *italique* autorisé." }
+      - { label: Expertise / relecture (EN), name: reviewing_en, widget: string, required: false }
+      - { label: Adresse (section Contact), name: address, widget: text, required: false }
+      - label: Profils (section Contact)
+        name: profiles
+        widget: list
+        label_singular: profil
+        summary: "{{label}}"
+        collapsed: true
+        fields:
+          - { label: Nom, name: label, widget: string }
+          - { label: Lien, name: url, widget: string }
+
+  - name: research
+    label: Thèmes de recherche
+    icon: science
+    file: content/research.yml
+    fields:
+      - { label: Introduction (FR), name: lead_fr, widget: text }
+      - { label: Introduction (EN), name: lead_en, widget: text, required: false }
+      - label: Axes de recherche (cartes)
+        name: topics
+        widget: list
+        label_singular: axe
+        summary: "{{title_fr}}"
+        collapsed: true
+        fields:
+          - { label: Titre (FR), name: title_fr, widget: string }
+          - { label: Titre (EN), name: title_en, widget: string, required: false }
+          - { label: Texte (FR), name: text_fr, widget: text }
+          - { label: Texte (EN), name: text_en, widget: text, required: false }
+
+# ------------------------------------------------------------------ listes
+collections:
+  - name: news
+    label: Actualités
+    label_singular: actualité
+    icon: campaign
+    description: "Les 4 plus récentes s'affichent sur le site, les autres derrière « Voir toutes les actualités »."
+    folder: content/news
+    extension: yml
+    format: yaml
+    create: true
+    identifier_field: title_fr
+    slug: "{{fields.date}}-{{title_fr}}"
+    summary: "{{date | date('DD/MM/YYYY')}} · {{title_fr}}"
+    sortable_fields:
+      fields: [date, title_fr]
+      default: { field: date, direction: descending }
+    fields:
+      - { label: Date, name: date, widget: datetime, time_format: false, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", hint: "Le site affiche le mois et l'année." }
+      - { label: Titre (FR), name: title_fr, widget: string }
+      - { label: Titre (EN), name: title_en, widget: string, required: false, hint: "Laisser vide pour reprendre le français." }
+      - label: Texte (FR)
+        name: text_fr
+        widget: markdown
+        buttons: [bold, italic, link, bulleted-list]
+        editor_components: []
+      - label: Texte (EN)
+        name: text_en
+        widget: markdown
+        required: false
+        buttons: [bold, italic, link, bulleted-list]
+        editor_components: []
+      - { label: Photo (facultative), name: image, widget: image, required: false, hint: "Format paysage conseillé. La plus récente actualité avec photo s'affiche en grand." }
+      - { label: Description de la photo, name: image_alt, widget: string, required: false, hint: "Pour les lecteurs d'écran, ex. « Présentation à IFCS 2026 »." }
+      - { label: Lien « En savoir plus » (facultatif), name: link, widget: string, required: false }
+      - { label: Masquer du site (brouillon), name: draft, widget: boolean, required: false, default: false }
+
+  - name: publications
+    label: Publications
+    label_singular: publication
+    icon: article
+    folder: content/publications
+    extension: yml
+    format: yaml
+    create: true
+    identifier_field: title
+    slug: "{{fields.year}}-{{title}}"
+    summary: "{{fields.year}} · {{title}}"
+    sortable_fields:
+      fields: [year, title, type]
+      default: { field: year, direction: descending }
+    view_groups:
+      groups:
+        - { name: journal, label: Revues, field: type, pattern: "^journal$" }
+        - { name: international, label: Conférences internationales, field: type, pattern: "^international$" }
+        - { name: national, label: Conférences nationales, field: type, pattern: "^national$" }
+        - { name: other, label: "Thèse, séminaires, autres", field: type, pattern: "^(thesis|seminar|chapter|other)$" }
+    fields:
+      - label: Type
+        name: type
+        widget: select
+        default: journal
+        options:
+          - { label: Revue internationale, value: journal }
+          - { label: Conférence internationale, value: international }
+          - { label: Conférence nationale, value: national }
+          - { label: Chapitre d'ouvrage, value: chapter }
+          - { label: Thèse, value: thesis }
+          - { label: Séminaire, value: seminar }
+          - { label: Autre, value: other }
+      - { label: Année, name: year, widget: number, value_type: int, min: 1990, max: 2100 }
+      - { label: Titre, name: title, widget: string, hint: "Sans point final." }
+      - { label: Auteurs, name: authors, widget: string, required: false, hint: "Ex. Ndao, M. L., Niang, N., & Saporta, G. — votre nom est mis en gras automatiquement." }
+      - { label: Revue / conférence, name: venue, widget: string, hint: "Ex. Engineering Applications of Artificial Intelligence" }
+      - { label: Revue / conférence (EN), name: venue_en, widget: string, required: false, hint: "Seulement si différent (ex. « PhD thesis »)." }
+      - { label: Détails, name: details, widget: string, required: false, hint: "Volume, pages, lieu, éditeur… ex. 144, 110144. Elsevier." }
+      - { label: Détails (EN), name: details_en, widget: string, required: false }
+      - label: Liens
+        name: links
+        widget: list
+        required: false
+        label_singular: lien
+        summary: "{{label}}"
+        fields:
+          - { label: Libellé, name: label, widget: string, hint: "DOI, PDF, HAL, Slides…" }
+          - { label: Adresse, name: url, widget: string }
+      - { label: Ordre dans l'année, name: rank, widget: number, value_type: int, required: false, hint: "Facultatif. Plus le nombre est grand, plus la publication est haute parmi celles de la même année. Vide = tout en haut." }
+
+  - name: teaching
+    label: Enseignement
+    label_singular: enseignement
+    icon: school
+    folder: content/teaching
+    extension: yml
+    format: yaml
+    create: true
+    identifier_field: title_fr
+    slug: "{{title_fr}}"
+    summary: "{{fields.order}}. {{title_fr}} ({{when_fr}})"
+    sortable_fields:
+      fields: [order, title_fr]
+      default: { field: order, direction: ascending }
+    fields:
+      - { label: Position (1 = en haut), name: order, widget: number, value_type: int, min: 1 }
+      - { label: Période (FR), name: when_fr, widget: string, hint: "Ex. Depuis 2025, 2023 – 2025" }
+      - { label: Période (EN), name: when_en, widget: string, required: false }
+      - { label: Intitulé (FR), name: title_fr, widget: string }
+      - { label: Intitulé (EN), name: title_en, widget: string, required: false }
+      - { label: "Établissement, lieu (FR)", name: place_fr, widget: string, required: false }
+      - { label: "Établissement, lieu (EN)", name: place_en, widget: string, required: false }
+      - { label: Description (FR), name: text_fr, widget: text, required: false }
+      - { label: Description (EN), name: text_en, widget: text, required: false }
+      - label: Cours
+        name: courses
+        widget: list
+        required: false
+        label_singular: cours
+        summary: "{{code}} {{text_fr}}"
+        collapsed: true
+        fields:
+          - { label: Code (facultatif), name: code, widget: string, required: false, hint: "Ex. STA101" }
+          - { label: Intitulé (FR), name: text_fr, widget: string, hint: "**gras** autorisé" }
+          - { label: Intitulé (EN), name: text_en, widget: string, required: false }
+          - { label: Outils (FR), name: tools_fr, widget: list, required: false, hint: "Séparés par des virgules." }
+          - { label: Outils (EN), name: tools_en, widget: list, required: false, hint: "Seulement si différents." }
+
+  - name: experience
+    label: Parcours
+    label_singular: expérience
+    icon: work
+    folder: content/experience
+    extension: yml
+    format: yaml
+    create: true
+    identifier_field: title_fr
+    slug: "{{title_fr}}"
+    summary: "{{fields.order}}. {{title_fr}} ({{when_fr}})"
+    sortable_fields:
+      fields: [order, title_fr]
+      default: { field: order, direction: ascending }
+    fields:
+      - { label: Position (1 = en haut), name: order, widget: number, value_type: int, min: 1 }
+      - { label: Période (FR), name: when_fr, widget: string, hint: "Ex. Oct. 2022 – oct. 2025" }
+      - { label: Période (EN), name: when_en, widget: string, required: false }
+      - { label: Intitulé (FR), name: title_fr, widget: string }
+      - { label: Intitulé (EN), name: title_en, widget: string, required: false }
+      - { label: "Établissement, lieu (FR)", name: place_fr, widget: string, required: false }
+      - { label: "Établissement, lieu (EN)", name: place_en, widget: string, required: false }
+      - { label: Description (FR), name: text_fr, widget: text, required: false }
+      - { label: Description (EN), name: text_en, widget: text, required: false }

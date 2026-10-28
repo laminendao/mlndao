@@ -1,0 +1,10 @@
+order: 4
+when_fr: 2022 – 2025
+when_en: ''
+title_fr: Ateliers de deep learning
+title_en: Deep learning workshops
+place_fr: CESI, formation d'ingénieurs en alternance (FISA)
+place_en: CESI, apprenticeship engineering programme (FISA)
+text_fr: 'Ateliers et projets tutorés : CNN, RNN, autoencodeurs, transfer learning.'
+text_en: Workshops and tutored projects on CNNs, RNNs, autoencoders and transfer learning.
+courses: []

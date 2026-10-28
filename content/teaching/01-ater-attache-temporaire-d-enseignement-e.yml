@@ -1,0 +1,40 @@
+order: 1
+when_fr: Depuis 2025
+when_en: 2025 – present
+title_fr: ATER, Attaché Temporaire d'Enseignement et de Recherche
+title_en: ATER, Temporary Teaching and Research Assistant
+place_fr: CNAM, EPN 5 & EPN 6, Paris · CNAM Nouvelle-Aquitaine
+place_en: ''
+text_fr: ''
+text_en: ''
+courses:
+- code: STA101
+  text_fr: 'Analyse des données : méthodes descriptives (ACP, AFC, ACM, AFDM, classification)'
+  text_en: Data analysis, descriptive methods (PCA, CA, MCA, FAMD, clustering)
+  tools_fr: []
+  tools_en: []
+- code: MVA113
+  text_fr: Méthodes mathématiques pour la finance et l'économie
+  text_en: Mathematical methods for finance and economics
+  tools_fr: []
+  tools_en: []
+- code: STA211
+  text_fr: Entreposage et fouille de données
+  text_en: Data warehousing and data mining
+  tools_fr: []
+  tools_en: []
+- code: USSI6A
+  text_fr: 'Inférence statistique : estimation et tests d''hypothèses'
+  text_en: 'Statistical inference: estimation and hypothesis testing'
+  tools_fr: []
+  tools_en: []
+- code: USSI6G
+  text_fr: Initiation à la programmation R
+  text_en: Introduction to R programming
+  tools_fr: []
+  tools_en: []
+- code: NFE212
+  text_fr: 'Informatique décisionnelle : visualisation et valorisation des données'
+  text_en: 'Business intelligence: data visualization and valorization'
+  tools_fr: []
+  tools_en: []

@@ -1,0 +1,68 @@
+name: Mouhamadou Lamine NDAO
+photo: /images/photo_cv.jpg
+role_fr: Docteur en mathématiques appliquées · ATER au CNAM
+role_en: PhD in Applied Mathematics · ATER at CNAM
+affiliation: Conservatoire National des Arts et Métiers, Paris
+themes:
+- fr: IA explicable
+  en: Explainable AI
+- fr: Séries temporelles multivariées
+  en: Multivariate time series
+- fr: Maintenance prédictive & RUL
+  en: Predictive maintenance & RUL
+- fr: Réduction de dimension
+  en: Dimensionality reduction
+cv: /doc/CV_Mouhamadou_Lamine_NDAO.pdf
+email: mlndao@outlook.com
+scholar: https://scholar.google.com/citations?user=hPwY_dUAAAAJ
+orcid: https://orcid.org/0009-0009-9507-1955
+hal: https://hal.science/search/index/?q=ndao+mouhamadou+lamine
+github: https://github.com/laminendao
+linkedin: https://www.linkedin.com/in/mlndao/
+bio_fr: |-
+  Depuis octobre 2025, je suis Attaché Temporaire d'Enseignement et de Recherche (ATER) au [Conservatoire National des Arts et Métiers](https://www.cnam.fr) (CNAM), à Paris. J'ai obtenu mon doctorat en mathématiques appliquées au CNAM en décembre 2025 et je suis qualifié aux fonctions de Maître de Conférences (sections CNU 26 et 27).
+
+  Ma thèse, préparée au [CESI LINEACT](https://lineact.cesi.fr) et au laboratoire [CEDRIC](https://cedric.cnam.fr), porte sur l'intelligence artificielle explicable pour les séries temporelles multivariées multi-capteurs, appliquée à la prédiction de la durée de vie résiduelle (RUL) en maintenance prédictive. Elle a été encadrée par Ndèye Niang (CNAM), Genane Youness (CESI LINEACT) et Gilbert Saporta (CNAM).
+
+  Mes travaux étudient comment le prétraitement, la complexité des modèles et la structure des variables influencent ce que révèlent réellement les explications post-hoc (SHAP, LIME, L2X). Je développe aussi des méthodes de réduction de dimension interprétables, comme le clustering divisif de variables, qui rendent les modèles profonds plus lisibles.
+keywords_fr: IA explicable, séries temporelles multivariées, maintenance prédictive, durée de vie résiduelle, clustering de variables, réduction de dimension, apprentissage de représentations non supervisé et auto-supervisé, clustering multi-vues.
+bio_en: |-
+  Since October 2025, I have been a Temporary Teaching and Research Assistant (ATER) at the [Conservatoire National des Arts et Métiers](https://www.cnam.fr) (CNAM) in Paris. I received my PhD in Applied Mathematics from CNAM in December 2025, and I am qualified for *Maître de Conférences* positions (CNU sections 26 and 27).
+
+  My doctoral research, carried out at [CESI LINEACT](https://lineact.cesi.fr) and the [CEDRIC](https://cedric.cnam.fr) laboratory, focused on explainable artificial intelligence for multivariate, multi-sensor time series, with applications to Remaining Useful Life (RUL) prediction in predictive maintenance. I worked under the supervision of Ndèye Niang (CNAM), Genane Youness (CESI LINEACT) and Gilbert Saporta (CNAM).
+
+  My research is about how preprocessing, model complexity and feature structure affect what post-hoc explanations (SHAP, LIME, L2X) actually reveal, and about interpretable dimensionality reduction methods, such as divisive feature clustering, that make deep models easier to read.
+keywords_en: explainable AI, multivariate time series, predictive maintenance, remaining useful life, feature clustering, dimensionality reduction, unsupervised and self-supervised representation learning, multi-view clustering.
+facts:
+- title_fr: Poste actuel
+  title_en: Current position
+  text_fr: ATER, CNAM Paris (EPN 6), depuis 2025
+  text_en: ATER, CNAM Paris (EPN 6), since 2025
+- title_fr: Doctorat en mathématiques appliquées
+  title_en: PhD in Applied Mathematics
+  text_fr: CNAM, Paris, 2022–2025 (soutenu en décembre 2025)
+  text_en: CNAM, Paris, 2022–2025 (defended December 2025)
+- title_fr: Qualification
+  title_en: ''
+  text_fr: Maître de Conférences, CNU 26 & 27
+  text_en: ''
+- title_fr: Master 2 TRIED
+  title_en: MSc TRIED
+  text_fr: Université Paris-Saclay / Télécom Paris, 2021 (mention Bien)
+  text_en: Université Paris-Saclay / Télécom Paris, 2021 (with honours)
+- title_fr: Ingénieur statisticien
+  title_en: Statistical Engineer
+  text_fr: ENSAE Dakar, 2020 (mention Bien)
+  text_en: ENSAE Dakar, 2020 (with honours)
+reviewing_fr: Relecteur pour la revue *Reliability Engineering & System Safety* (Elsevier).
+reviewing_en: Reviewer for *Reliability Engineering & System Safety* (Elsevier).
+address: |-
+  Conservatoire National des Arts et Métiers
+  292 rue Saint-Martin, 75003 Paris
+profiles:
+- label: Google Scholar
+  url: https://scholar.google.com/citations?user=hPwY_dUAAAAJ
+- label: ORCID
+  url: https://orcid.org/0009-0009-9507-1955
+- label: CEDRIC
+  url: https://cedric.cnam.fr/author/ndaom

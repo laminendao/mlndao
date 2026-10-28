@@ -1,0 +1,9 @@
+order: 4
+when_fr: Avr. – sept. 2021
+when_en: Apr – Sep 2021
+title_fr: Stagiaire de recherche, data scientist
+title_en: Research intern, data scientist
+place_fr: CNAM, CEDRIC, Paris
+place_en: ''
+text_fr: 'Clustering multi-blocs de données hétérogènes incomplètes : clustering ensembliste et consensus de partitions avec imputation multiple ; packages R et Python.'
+text_en: 'Multi-block clustering of incomplete heterogeneous data: ensemble and consensus clustering with multiple imputation; R and Python packages.'

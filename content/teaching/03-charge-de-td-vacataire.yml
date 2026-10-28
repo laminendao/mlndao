@@ -1,0 +1,25 @@
+order: 3
+when_fr: 2023 – 2025
+when_en: ''
+title_fr: Chargé de TD (vacataire)
+title_en: Teaching assistant (vacataire)
+place_fr: CNAM, CEDRIC
+place_en: ''
+text_fr: ''
+text_en: ''
+courses:
+- code: STA101
+  text_fr: Analyse des données, statistique exploratoire multivariée (35 h/an)
+  text_en: Data analysis, multivariate exploratory statistics (35 h/year)
+  tools_fr: []
+  tools_en: []
+- code: STA211
+  text_fr: 'Entreposage et fouille de données : encadrement de projets de data mining (FOAD)'
+  text_en: Data warehousing and data mining, supervision of data-mining projects (distance learning)
+  tools_fr: []
+  tools_en: []
+- code: NFE212
+  text_fr: Apprentissage supervisé (FOAD)
+  text_en: Supervised learning (distance learning)
+  tools_fr: []
+  tools_en: []

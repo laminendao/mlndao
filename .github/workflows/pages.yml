@@ -1,0 +1,62 @@
+# Publie le site à chaque modification (depuis /admin ou un git push).
+# 1. build.py reconstruit index.html et la base de connaissances de l'assistant
+# 2. le site est publié sur GitHub Pages (lamine.mlndao.fr)
+# Prérequis (une seule fois) : Settings > Pages > Source = « GitHub Actions ».
+name: Publier le site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Construire la page
+        run: python build.py
+
+      - name: Préparer les fichiers publiés
+        run: |
+          mkdir _site
+          rsync -a ./ _site/ \
+            --exclude '.git' --exclude '.github' --exclude '_site' \
+            --exclude 'content' --exclude 'templates' \
+            --exclude 'build.py' --exclude 'requirements.txt' \
+            --exclude 'chatbot/node_modules' --exclude 'chatbot/.wrangler' --exclude 'chatbot/.dev.vars' \
+            --exclude 'erwanscornet.github.io-master' --exclude '.DS_Store'
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

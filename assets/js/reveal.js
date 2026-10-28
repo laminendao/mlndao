@@ -83,7 +83,7 @@
   sections.forEach(function (sec) {
     var items = [];
     Array.prototype.forEach.call(sec.children, function (c) {
-      if (c.classList.contains('cards') || c.classList.contains('bio')) {
+      if (c.classList.contains('cards') || c.classList.contains('bio') || c.classList.contains('news-grid')) {
         Array.prototype.forEach.call(c.children, function (cc) { items.push(cc); });
       } else items.push(c);
     });

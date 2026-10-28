@@ -1,0 +1,12 @@
+type: seminar
+year: 2021
+title: Gestion des données manquantes en clustering
+authors: ''
+venue: Séminaire, CNAM
+venue_en: Seminar, CNAM
+details: Paris, 29 octobre 2021.
+details_en: Paris, 29 October 2021.
+links:
+- label: PDF
+  url: https://maths.cnam.fr/IMG/pdf/seminaire_fadela.pdf
+rank: 1

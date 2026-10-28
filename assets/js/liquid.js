@@ -197,7 +197,7 @@
   // ================================================================ 3. reflet sur les cartes
   (function sheen() {
     if (!window.matchMedia || !window.matchMedia('(hover: hover)').matches) return;
-    var els = document.querySelectorAll('.card, .facts, .contact > div');
+    var els = document.querySelectorAll('.card, .facts, .contact > div, .news-item');
     Array.prototype.forEach.call(els, function (el) {
       el.classList.add('sheen');
       el.addEventListener('pointermove', function (e) {

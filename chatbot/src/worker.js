@@ -4,26 +4,30 @@
  * POST /chat  { "messages": [ { "role": "user" | "assistant", "content": "…" }, … ] }
  *   → réponse en streaming, texte brut (lu par assets/js/profile-chat.js)
  *
- * Toute la base de connaissances (knowledge.md, ~1 600 mots, générée depuis
- * index.html) est envoyée au modèle à chaque question : pas de recherche
- * intermédiaire, donc pas d'information manquée.
+ * Toute la base de connaissances (knowledge.md, générée depuis le site) est
+ * envoyée au modèle à chaque question. Elle est relue en ligne sur le site
+ * (KNOWLEDGE_URL, mise à jour à chaque publication depuis /admin) au plus
+ * toutes les 5 minutes ; en cas d'échec, la copie embarquée dans le Worker sert.
  *
  * Configuration (wrangler.toml / secrets Cloudflare) :
  *   OPENAI_API_KEY    secret : npx wrangler secret put OPENAI_API_KEY
  *   MODEL             défaut gpt-4.1-mini
  *   OPENAI_BASE_URL   défaut https://api.openai.com/v1
  *   ALLOWED_ORIGINS   sites autorisés à utiliser l'API, séparés par des virgules
+ *   KNOWLEDGE_URL     défaut https://lamine.mlndao.fr/chatbot/knowledge.md
  *   LIMITER           (optionnel) binding Rate Limiting de Cloudflare, par adresse IP
  */
-import KNOWLEDGE from '../knowledge.md';
+import BUNDLED_KNOWLEDGE from '../knowledge.md';
 
 const MAX_HISTORY = 10; // derniers messages transmis au modèle
 const MAX_MSG_CHARS = 1000; // taille max d'un message visiteur
 const MAX_BODY_BYTES = 32 * 1024;
 const MAX_TOKENS = 500; // plafonne la longueur (et le coût) d'une réponse
 const CONTACT_EMAIL = 'mlndao@outlook.com';
+const KNOWLEDGE_TTL_MS = 5 * 60 * 1000;
+const DEFAULT_KNOWLEDGE_URL = 'https://lamine.mlndao.fr/chatbot/knowledge.md';
 
-const SYSTEM_PROMPT = `Tu es l'assistant virtuel du site personnel de Mouhamadou Lamine NDAO (il se présente sous le prénom Lamine), docteur en mathématiques appliquées et ATER au CNAM à Paris. Tu accueilles les visiteurs du site (chercheurs, étudiants, recruteurs, partenaires) et tu les renseignes sur lui.
+const buildPrompt = (KNOWLEDGE) => `Tu es l'assistant virtuel du site personnel de Mouhamadou Lamine NDAO (il se présente sous le prénom Lamine), docteur en mathématiques appliquées et ATER au CNAM à Paris. Tu accueilles les visiteurs du site (chercheurs, étudiants, recruteurs, partenaires) et tu les renseignes sur lui.
 
 TON ET POLITESSE
 - Sois toujours courtois, chaleureux et professionnel. Vouvoie le visiteur.
@@ -47,6 +51,32 @@ RÈGLES
 
 INFORMATIONS (contenu du site https://lamine.mlndao.fr) :
 ${KNOWLEDGE}`;
+
+// --------------------------------------------------------------------------
+// Base de connaissances : relue sur le site, copie embarquée en secours
+// --------------------------------------------------------------------------
+let kbCache = { text: '', at: 0 };
+
+async function getKnowledge(env) {
+  if (kbCache.text && Date.now() - kbCache.at < KNOWLEDGE_TTL_MS) return kbCache.text;
+  try {
+    const res = await fetch(env.KNOWLEDGE_URL || DEFAULT_KNOWLEDGE_URL, {
+      cf: { cacheTtl: 300, cacheEverything: true },
+      signal: AbortSignal.timeout(3000),
+    });
+    const text = res.ok ? await res.text() : '';
+    // garde-fou : un fichier anormalement court (page d'erreur…) n'est pas utilisé
+    if (text.length > 2000 && text.includes('## ')) {
+      kbCache = { text, at: Date.now() };
+      return text;
+    }
+    console.warn('Base de connaissances en ligne inutilisable', res.status, text.length);
+  } catch (e) {
+    console.warn('Base de connaissances en ligne injoignable', e);
+  }
+  kbCache = { text: kbCache.text || BUNDLED_KNOWLEDGE, at: Date.now() };
+  return kbCache.text;
+}
 
 // --------------------------------------------------------------------------
 // CORS
@@ -176,7 +206,7 @@ export default {
           max_completion_tokens: MAX_TOKENS,
           // les modèles « raisonnement » (o1, o3, gpt-5…) n'acceptent pas de température
           ...(/^(o\d|gpt-5)/.test(model) ? {} : { temperature: 0.3 }),
-          messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...history],
+          messages: [{ role: 'system', content: buildPrompt(await getKnowledge(env)) }, ...history],
         }),
         signal: request.signal,
       });

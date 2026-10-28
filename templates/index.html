@@ -1,0 +1,371 @@
+{#- ==================================================================
+    Modèle de la page d'accueil.
+    Le contenu vient de content/ (modifiable depuis /admin).
+    Ne modifiez pas index.html directement : il est régénéré par build.py.
+    ================================================================== -#}
+{%- macro t(fr, en, block=False) -%}
+  {%- set f = (fr | md) if block else (fr | mdi) -%}
+  {%- set e = ((en or fr) | md) if block else ((en or fr) | mdi) -%}
+  {%- if f == e -%}{{ f }}{%- else -%}
+    {%- if block -%}<div class="fr">{{ f }}</div><div class="en">{{ e }}</div>
+    {%- else -%}<span class="fr">{{ f }}</span><span class="en">{{ e }}</span>{%- endif -%}
+  {%- endif -%}
+{%- endmacro -%}
+{%- macro timeline_item(it) %}
+      <li>
+        <span class="when">{{ t(it.when_fr, it.when_en) }}</span>
+        <div class="what">
+          <h4>{{ t(it.title_fr, it.title_en) }}</h4>
+          {%- if it.place_fr %}
+          <span class="where">{{ t(it.place_fr, it.place_en) }}</span>
+          {%- endif %}
+          {%- if it.courses %}
+          {%- for code in ['fr', 'en'] %}
+          <ul class="{{ code }}">
+            {%- for c in it.courses %}
+            {%- set txt = c['text_' + code] or c.text_fr %}
+            {%- set tools = (c['tools_' + code] or c.tools_fr) if code == 'en' else c.tools_fr %}
+            <li>{% if c.code %}<span class="code">{{ c.code }}</span> {% endif %}{{ txt | mdi }}
+              {%- if tools %}
+              <span class="tools"><span class="tools-label">{{ 'Outils :' if code == 'fr' else 'Tools:' }}</span>{% for tl in tools %}<span class="chip">{{ tl }}</span>{% endfor %}</span>
+              {%- endif %}</li>
+            {%- endfor %}
+          </ul>
+          {%- endfor %}
+          {%- endif %}
+          {%- if it.text_fr %}
+          {%- set xf = it.text_fr | mdi %}{% set xe = (it.text_en or it.text_fr) | mdi %}
+          {%- if xf == xe %}
+          <p>{{ xf }}</p>
+          {%- else %}
+          <p class="fr">{{ xf }}</p>
+          <p class="en">{{ xe }}</p>
+          {%- endif %}
+          {%- endif %}
+        </div>
+      </li>
+{%- endmacro -%}
+<!DOCTYPE html>
+<html lang="fr" data-lang="fr">
+<head>
+  <!-- Fichier généré par build.py à partir de content/ (modifiable depuis /admin) : ne pas modifier à la main. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ p.name }}</title>
+  <meta name="author" content="{{ p.name }}">
+  <meta name="description" content="{{ p.name }}, {{ p.role_fr | plain }}. {{ research.lead_fr | plain }}">
+  <meta name="keywords" content="{{ p.name }}, {{ p.keywords_fr | plain | trim('.') }}">
+  <meta property="og:title" content="{{ p.name }}">
+  <meta property="og:description" content="{{ p.role_fr | plain }}">
+  <meta property="og:image" content="{{ site_url }}/{{ p.photo | rel }}">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="preload" href="assets/fonts/cmu-serif-700-roman.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/news.css">
+  <link rel="stylesheet" href="assets/css/liquid.css">
+  <script>
+    // Choix de langue appliqué avant l'affichage : ?lang=en, sinon dernier choix, sinon français
+    (function () {
+      var lang = 'fr';
+      try {
+        var q = new URLSearchParams(location.search).get('lang');
+        var saved = localStorage.getItem('lang');
+        lang = (q === 'en' || q === 'fr') ? q : (saved === 'en' ? 'en' : 'fr');
+      } catch (e) {}
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.lang = lang;
+    })();
+  </script>
+  <script>
+    // Animations d'ouverture (désactivées si « réduire les animations »)
+    (function () {
+      var h = document.documentElement;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      h.classList.add('js-anim');
+      // filet de sécurité : si le script ne se charge pas, on affiche tout
+      setTimeout(function () { if (!window.__revealReady) h.classList.remove('js-anim'); }, 3000);
+    })();
+  </script>
+</head>
+<body>
+<canvas id="data-bg" aria-hidden="true"></canvas>
+
+<!-- ============ En-tête ============ -->
+<header class="site-header" id="top">
+  <img class="photo" src="{{ p.photo | rel }}" alt="{{ p.name }}">
+  <h1>{{ p.name }}</h1>
+  <p class="role">{{ t(p.role_fr, p.role_en) }}</p>
+  <p class="affil">{{ p.affiliation }}</p>
+  <ul class="themes">
+    {%- for th in p.themes %}
+    <li>{{ t(th.fr, th.en) }}</li>
+    {%- endfor %}
+  </ul>
+  <ul class="icons">
+    {%- if p.cv %}
+    <li><a class="cv" href="{{ p.cv | rel }}" target="_blank"><i class="fa-solid fa-file-arrow-down"></i> CV</a></li>
+    {%- endif %}
+    {%- if p.email %}
+    <li><a href="mailto:{{ p.email }}"><i class="fa-solid fa-envelope"></i> Email</a></li>
+    {%- endif %}
+    {%- for key, icon, label in [('scholar', 'ai ai-google-scholar', 'Scholar'), ('orcid', 'ai ai-orcid', 'ORCID'), ('hal', 'ai ai-hal', 'HAL'), ('github', 'fa-brands fa-github', 'GitHub'), ('linkedin', 'fa-brands fa-linkedin-in', 'LinkedIn')] %}
+    {%- if p[key] %}
+    <li><a href="{{ p[key] }}" target="_blank"><i class="{{ icon }}"></i> {{ label }}</a></li>
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+</header>
+
+<!-- ============ Menu ============ -->
+<nav class="nav" aria-label="Sections">
+  <ul>
+    <li><a href="#bio"><span class="fr">Bio</span><span class="en">Bio</span></a></li>
+    {%- if news %}
+    <li><a href="#news"><span class="fr">Actualités</span><span class="en">News</span></a></li>
+    {%- endif %}
+    <li><a href="#research"><span class="fr">Recherche</span><span class="en">Research</span></a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#teaching"><span class="fr">Enseignement</span><span class="en">Teaching</span></a></li>
+    <li><a href="#experience"><span class="fr">Parcours</span><span class="en">Experience</span></a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><button type="button" class="lang-toggle" id="langToggle" aria-label="Changer de langue / Switch language">
+      <span class="fr">EN</span><span class="en">FR</span>
+    </button></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- ============ Bio ============ -->
+  <section id="bio">
+    <h2><span class="fr">Biographie</span><span class="en">Short bio</span></h2>
+    <div class="bio">
+      <div>
+        <div class="fr">
+          {{ p.bio_fr | md }}
+          {%- if p.keywords_fr %}
+          <p class="keywords"><b>Mots-clés :</b> {{ p.keywords_fr | mdi }}</p>
+          {%- endif %}
+        </div>
+        <div class="en">
+          {{ (p.bio_en or p.bio_fr) | md }}
+          {%- if p.keywords_en or p.keywords_fr %}
+          <p class="keywords"><b>Keywords:</b> {{ (p.keywords_en or p.keywords_fr) | mdi }}</p>
+          {%- endif %}
+        </div>
+      </div>
+      {%- if p.facts %}
+      <aside class="facts">
+        <dl class="fr">
+          {%- for f in p.facts %}
+          <dt>{{ f.title_fr | mdi }}</dt>
+          <dd>{{ f.text_fr | mdi }}</dd>
+          {%- endfor %}
+        </dl>
+        <dl class="en">
+          {%- for f in p.facts %}
+          <dt>{{ (f.title_en or f.title_fr) | mdi }}</dt>
+          <dd>{{ (f.text_en or f.text_fr) | mdi }}</dd>
+          {%- endfor %}
+        </dl>
+      </aside>
+      {%- endif %}
+    </div>
+  </section>
+{%- if news %}
+
+  <!-- ============ Actualités ============ -->
+  <section id="news">
+    <h2><span class="fr">Actualités</span><span class="en">News</span></h2>
+    <div class="news-grid">
+      {%- for n in news %}
+      <article class="news-item{% if n.image %} has-image{% endif %}{% if loop.index > news_visible %} news-extra{% endif %}">
+        {%- if n.image %}
+        <img class="news-img" src="{{ n.image | rel }}" alt="{{ (n.image_alt or n.title_fr) }}" loading="lazy">
+        {%- endif %}
+        <div class="news-body">
+          <time class="news-date" datetime="{{ n.date_iso }}">{{ t(n.date_fr, n.date_en) }}</time>
+          <h3 class="news-title">{{ t(n.title_fr, n.title_en) }}</h3>
+          <div class="news-text">{{ t(n.text_fr, n.text_en, block=True) }}</div>
+          {%- if n.link %}
+          <a class="news-link" href="{{ n.link | rel_or_url }}"{% if n.link.startswith('http') %} target="_blank" rel="noopener"{% endif %}><span class="fr">En savoir plus</span><span class="en">Read more</span> →</a>
+          {%- endif %}
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+    {%- if news | length > news_visible %}
+    <button type="button" class="news-more" onclick="this.closest('section').classList.add('news-open'); this.remove();">
+      <span class="fr">Voir toutes les actualités ({{ news | length }})</span><span class="en">See all news ({{ news | length }})</span>
+    </button>
+    {%- endif %}
+  </section>
+{%- endif %}
+
+  <!-- ============ Recherche ============ -->
+  <section id="research">
+    <h2><span class="fr">Recherche</span><span class="en">Research</span></h2>
+    <p class="lead">{{ t(research.lead_fr, research.lead_en) }}</p>
+    <div class="cards">
+      {%- for c in research.topics %}
+      <div class="card">
+        <h4>{{ t(c.title_fr, c.title_en) }}</h4>
+        {%- set cf = c.text_fr | mdi %}{% set ce = (c.text_en or c.text_fr) | mdi %}
+        {%- if cf == ce %}
+        <p>{{ cf }}</p>
+        {%- else %}
+        <p class="fr">{{ cf }}</p>
+        <p class="en">{{ ce }}</p>
+        {%- endif %}
+      </div>
+      {%- endfor %}
+    </div>
+  </section>
+
+  <!-- ============ Publications ============ -->
+  <section id="publications">
+    <h2>Publications</h2>
+    {%- for g in pub_groups %}
+
+    <details class="pub-group"{% if g.open %} open{% endif %}>
+      <summary><h3>{{ t(g.fr, g.en) }}</h3><span class="count">{{ g['items'] | length }}</span></summary>
+    <ul class="pubs">
+      {%- for pub in g['items'] %}
+      <li>
+        <span class="year">{{ pub.year }}</span>
+        <div>
+          <span class="title">{{ pub.title | mdi }}.</span><br>
+          {%- if pub.authors %}
+          <span class="authors">{{ pub.authors | authors }}</span>
+          {%- endif %}
+          <span class="venue">{{ t(pub.venue, pub.venue_en) }}</span>
+          {%- if pub.details or pub.details_en %}, {{ t(pub.details, pub.details_en) }}{% else %}.{% endif %}
+          {%- if pub.links %}
+          <div class="links">
+            {%- for l in pub.links %}
+            <a href="{{ l.url | rel_or_url }}" target="_blank">{{ l.label }}</a>
+            {%- endfor %}
+          </div>
+          {%- endif %}
+        </div>
+      </li>
+      {%- endfor %}
+    </ul>
+    </details>
+    {%- endfor %}
+    {%- if p.reviewing_fr %}
+
+    <h3><span class="fr">Expertise</span><span class="en">Reviewing</span></h3>
+    <p>{{ t(p.reviewing_fr, p.reviewing_en) }}</p>
+    {%- endif %}
+
+    <p class="note">
+      <span class="fr">La liste complète et à jour est disponible sur</span>
+      <span class="en">The complete, up-to-date list is on</span>
+      {%- if p.scholar %}
+      <a href="{{ p.scholar }}" target="_blank">Google Scholar</a>
+      {%- endif %}
+      {%- if p.scholar and p.hal %}
+      <span class="fr">et</span><span class="en">and</span>
+      {%- endif %}
+      {%- if p.hal %}
+      <a href="{{ p.hal }}" target="_blank">HAL</a>
+      {%- endif %}.
+    </p>
+  </section>
+
+  <!-- ============ Enseignement ============ -->
+  <section id="teaching">
+    <h2><span class="fr">Enseignement</span><span class="en">Teaching</span></h2>
+
+    <ul class="timeline" style="margin-top:24px">
+      {%- for it in teaching %}
+      {{ timeline_item(it) }}
+      {%- endfor %}
+    </ul>
+  </section>
+
+  <!-- ============ Parcours ============ -->
+  <section id="experience">
+    <h2><span class="fr">Parcours</span><span class="en">Experience</span></h2>
+    <ul class="timeline" style="margin-top:24px">
+      {%- for it in experience %}
+      {{ timeline_item(it) }}
+      {%- endfor %}
+    </ul>
+  </section>
+
+  <!-- ============ Contact ============ -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact">
+      {%- if p.email %}
+      <div><b>Email</b><a href="mailto:{{ p.email }}">{{ p.email }}</a></div>
+      {%- endif %}
+      {%- if p.address %}
+      <div><b>Affiliation</b>{{ p.address | lines }}</div>
+      {%- endif %}
+      {%- if p.profiles %}
+      <div><b><span class="fr">Profils</span><span class="en">Profiles</span></b>
+        {%- for pr in p.profiles %}
+        <a href="{{ pr.url }}" target="_blank">{{ pr.label }}</a>{% if not loop.last %} ·{% endif %}
+        {%- endfor %}
+      </div>
+      {%- endif %}
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © {{ year }} {{ p.name }} · <a href="#top"><span class="fr">Haut de page</span><span class="en">Back to top</span></a>
+</footer>
+
+<script>
+  // Bouton FR / EN
+  (function () {
+    var html = document.documentElement;
+    document.getElementById('langToggle').addEventListener('click', function () {
+      var lang = html.getAttribute('data-lang') === 'en' ? 'fr' : 'en';
+      html.setAttribute('data-lang', lang);
+      html.lang = lang;
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    });
+  })();
+
+  // Section courante surlignée dans le menu
+  (function () {
+    var links = document.querySelectorAll('.nav a');
+    var sections = Array.prototype.map.call(links, function (a) {
+      return document.querySelector(a.getAttribute('href'));
+    });
+    function update() {
+      var y = window.scrollY + 120, current = -1;
+      // position réelle dans la page (offsetTop serait relatif à <main>)
+      sections.forEach(function (s, i) { if (s && s.getBoundingClientRect().top + window.scrollY <= y) current = i; });
+      links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+      // Sur mobile, garder le lien actif visible dans le menu qui défile
+      var act = links[current], bar = document.querySelector('.nav ul');
+      if (act && bar.scrollWidth > bar.clientWidth) {
+        var l = act.offsetLeft - bar.clientWidth / 2 + act.offsetWidth / 2;
+        if (Math.abs(bar.scrollLeft - l) > 40) bar.scrollTo({ left: l, behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
+<script src="assets/js/liquid.js" defer></script>
+<script src="assets/js/data-bg.js" defer></script>
+<script src="assets/js/reveal.js" defer></script>
+<!-- Assistant IA : API sur Cloudflare Workers (voir chatbot/README.md) -->
+<script src="assets/js/profile-chat.js"
+        data-api="{{ chat_api }}" defer></script>
+</body>
+</html>
