@@ -31,3 +31,11 @@ erwanscornet.github.io-master/
 # Page générée par build.py à partir de content/ (voir ADMIN.md)
 /index.html
 __pycache__/
+
+# Fichiers locaux, hors GitHub
+.DS_Store
+.fuse_hidden*
+README.md
+LICENSE
+ADMIN.md
+chatbot/README.md
