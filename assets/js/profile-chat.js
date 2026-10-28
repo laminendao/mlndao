@@ -59,6 +59,7 @@
       send: 'Entrée',
       reset: 'Nouvelle conversation',
       close: 'Fermer l’assistant',
+      minimize: 'Réduire',
       openLabel: 'Ouvrir l’assistant de Lamine NDAO',
       typing: 'recherche dans le site',
       legal: 'réponses générées par IA à partir de ce site',
@@ -86,6 +87,7 @@
       send: 'Enter',
       reset: 'New conversation',
       close: 'Close the assistant',
+      minimize: 'Minimise',
       openLabel: 'Open Lamine NDAO’s assistant',
       typing: 'searching the website',
       legal: 'AI-generated answers based on this website',
@@ -157,21 +159,43 @@
   .teaser b { color: var(--blue); font-weight: 600; }
 
   /* ---------- panneau (ouvert) */
-  .drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 440px; max-width: 100vw; z-index: 2147483001;
-            background: var(--paper); border-left: 1px solid var(--line); box-shadow: -20px 0 60px rgba(0,10,50,.35);
+  /* fenêtre flottante, décollée des bords */
+  .drawer { position: fixed; right: 20px; bottom: 20px; width: 440px; max-width: calc(100vw - 40px);
+            height: min(720px, calc(100vh - 40px)); z-index: 2147483001;
+            background: var(--paper); border: 1px solid rgba(0,49,137,.12); border-radius: 20px; overflow: hidden;
+            box-shadow: 0 24px 70px rgba(0,10,50,.38), 0 0 0 1px rgba(255,255,255,.6) inset;
             display: flex; flex-direction: column;
-            transform: translateX(105%); visibility: hidden;
-            transition: transform .35s cubic-bezier(.2,.8,.2,1), visibility 0s linear .35s; }
-  .root.open .drawer { transform: none; visibility: visible; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+            transform-origin: bottom right; transform: translateY(16px) scale(.96); opacity: 0; visibility: hidden;
+            transition: transform .3s cubic-bezier(.2,.8,.2,1), opacity .2s ease, visibility 0s linear .3s; }
+  .root.open .drawer { transform: none; opacity: 1; visibility: visible;
+                       transition: transform .3s cubic-bezier(.2,.8,.2,1), opacity .2s ease; }
 
-  .head { position: relative; display: flex; gap: 14px; align-items: center; padding: 20px 20px 14px 24px;
+  /* barre réduite (bouton « Réduire ») : la conversation est conservée */
+  .minbar { position: fixed; right: 20px; bottom: 20px; z-index: 2147483000; display: flex; align-items: center; gap: 10px;
+            padding: 7px 14px 7px 7px; border: 1px solid rgba(0,49,137,.12); border-radius: 999px; background: #fff;
+            color: var(--navy); cursor: pointer; font: 600 14px/1.2 "Source Sans 3", system-ui, sans-serif;
+            box-shadow: 0 12px 34px rgba(0,10,50,.3);
+            transform: translateY(20px); opacity: 0; visibility: hidden; pointer-events: none;
+            transition: transform .3s cubic-bezier(.2,.8,.2,1), opacity .2s, visibility 0s linear .3s; }
+  .root.min .minbar { transform: none; opacity: 1; visibility: visible; pointer-events: auto;
+                      transition: transform .3s cubic-bezier(.2,.8,.2,1), opacity .2s; }
+  .minbar:hover { box-shadow: 0 14px 38px rgba(0,10,50,.38); }
+  .minbar:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .minbar .av { width: 34px; height: 34px; }
+  .minbar .up { width: 16px; height: 16px; color: var(--muted); }
+  .minbar .busy { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); display: none;
+                  animation: caret 1s steps(1) infinite; }
+  .root.busy .minbar .busy { display: inline-block; }
+  .root.min .tab { transform: translate(110%, -50%); }
+
+  .head { position: relative; display: flex; gap: 12px; align-items: center; padding: 18px 12px 14px 22px;
           border-bottom: 1px solid var(--line); }
-  .head .av { width: 54px; height: 54px; box-shadow: 0 0 0 3px #fff, 0 0 0 4px #c3d2ee, 0 6px 16px rgba(0,10,50,.2); }
+  .head .av { width: 48px; height: 48px; box-shadow: 0 0 0 3px #fff, 0 0 0 4px #c3d2ee, 0 6px 16px rgba(0,10,50,.2); }
   .head .txt { flex: 1; min-width: 0; }
   .kicker { font: 500 11px/1 var(--mono); letter-spacing: .1em; color: var(--muted); text-transform: uppercase;
             display: flex; align-items: center; gap: 6px; }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: #40c057; box-shadow: 0 0 0 2px rgba(64,192,87,.25); }
-  h2 { margin: 6px 0 2px; font: 700 23px/1.15 var(--serif); color: var(--navy); }
+  h2 { margin: 5px 0 2px; font: 700 19px/1.15 var(--serif); color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .tools { display: flex; gap: 2px; align-self: flex-start; }
   .hbtn { background: transparent; border: 0; color: var(--muted); cursor: pointer; width: 32px; height: 32px;
           border-radius: 8px; display: grid; place-items: center; }
@@ -226,7 +250,9 @@
   .legal { margin: 8px 0 0; font: 500 10.5px var(--mono); color: var(--muted); text-align: center; }
 
   @media (max-width: 560px) {
-    .drawer { width: 100vw; border-left: 0; }
+    .drawer { right: 10px; bottom: 10px; width: calc(100vw - 20px); max-width: none; height: calc(100% - 20px); border-radius: 18px; }
+    .minbar { right: 16px; bottom: 16px; }
+    .root.min .tab { transform: translateX(150%); }
     .tab { top: auto; bottom: 18px; transform: none; padding: 8px; border-radius: 50%; }
     .tab:hover { padding-right: 8px; }
     .tab .lbl { display: none; }
@@ -236,9 +262,9 @@
     .teaser { top: auto; bottom: 30px; right: 82px; transform: translateY(8px); }
     .teaser.show { transform: none; }
     .tab { right: 16px; }
-    .head { padding: 16px 14px 12px 18px; }
-    .head .av { width: 44px; height: 44px; }
-    h2 { font-size: 20px; }
+    .head { padding: 14px 8px 12px 14px; gap: 10px; }
+    .head .av { width: 36px; height: 36px; }
+    h2 { font-size: 16px; }
     .log { padding: 18px 18px 8px; }
   }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
@@ -246,6 +272,8 @@
 
   // ------------------------------------------------------------------ icônes
   var I = {
+    minus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 12h12"/></svg>',
+    up: '<svg class="up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>',
     close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
     reset: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>',
   };
@@ -265,6 +293,7 @@
     '      <span class="av"></span>' +
     '      <div class="txt"><span class="kicker"><span class="dot"></span><span class="k"></span></span><h2></h2></div>' +
     '      <div class="tools"><button class="hbtn" data-act="reset">' + I.reset + '</button>' +
+    '      <button class="hbtn" data-act="min">' + I.minus + '</button>' +
     '      <button class="hbtn" data-act="close">' + I.close + '</button></div>' +
     '    </header>' +
     '    <div class="log" aria-live="polite"></div>' +
@@ -276,12 +305,14 @@
     '      <p class="legal"></p>' +
     '    </footer>' +
     '  </aside>' +
+    '  <button class="minbar" type="button"><span class="av"></span><span class="mt"></span><span class="busy"></span>' + I.up + '</button>' +
     '</div>';
 
   var $ = function (s) { return shadow.querySelector(s); };
   var root = $('.root'), drawer = $('.drawer'), log = $('.log'), form = $('.composer'),
       input = $('textarea'), sendBtn = $('.send'), tab = $('.tab'), teaser = $('.teaser'),
-      btnReset = $('[data-act="reset"]'), btnClose = $('[data-act="close"]');
+      btnReset = $('[data-act="reset"]'), btnClose = $('[data-act="close"]'),
+      btnMin = $('[data-act="min"]'), minbar = $('.minbar');
 
   function paintAvatar(el) {
     if (CFG.avatar) el.style.backgroundImage = 'url("' + new URL(CFG.avatar, location.href).href + '")';
@@ -401,6 +432,9 @@
     sendBtn.textContent = t('send') + ' ↵';
     btnReset.title = t('reset'); btnReset.setAttribute('aria-label', t('reset'));
     btnClose.title = t('close'); btnClose.setAttribute('aria-label', t('close'));
+    btnMin.title = t('minimize'); btnMin.setAttribute('aria-label', t('minimize'));
+    $('.mt').textContent = t('title');
+    minbar.setAttribute('aria-label', t('openLabel'));
     $('.legal').textContent = t('legal');
     if (!busy) renderAll();
   }
@@ -456,7 +490,7 @@
   async function send(text) {
     text = (text || '').trim();
     if (!text || busy) return;
-    busy = true; updateSend();
+    busy = true; updateSend(); root.classList.add('busy');
     var chips = log.querySelector('.chips'); if (chips) chips.remove();
 
     history.push({ role: 'user', content: text });
@@ -501,7 +535,7 @@
         console.warn('[Assistant]', e.message);
       }
     } finally {
-      busy = false; aborter = null; updateSend();
+      busy = false; aborter = null; updateSend(); root.classList.remove('busy');
       if (!log.querySelector('.chips')) addChips();
       scroll();
       if (root.classList.contains('open')) input.focus();
@@ -518,6 +552,7 @@
     var isOpen = v === undefined ? !root.classList.contains('open') : v;
     if (isOpen && !root.classList.contains('open')) lastFocus = document.activeElement;
     root.classList.toggle('open', isOpen);
+    root.classList.remove('min');
     markSeen();
     teaser.classList.remove('show');
     tab.setAttribute('aria-expanded', String(isOpen));
@@ -527,7 +562,15 @@
   function autosize() { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; updateSend(); }
   function updateSend() { sendBtn.disabled = busy || !input.value.trim(); }
 
+  function minimize() {
+    open(false);
+    root.classList.add('min');
+    setTimeout(function () { minbar.focus(); }, 50);
+  }
+
   tab.addEventListener('click', function () { open(true); });
+  minbar.addEventListener('click', function () { open(true); });
+  btnMin.addEventListener('click', minimize);
   teaser.addEventListener('click', function () { open(true); });
   btnClose.addEventListener('click', function () { open(false); });
   btnReset.addEventListener('click', function () {
@@ -548,6 +591,7 @@
   window.ProfileChat = {
     open: function () { open(true); },
     close: function () { open(false); },
+    minimize: minimize,
     ask: function (q) { open(true); send(q); },
   };
 
