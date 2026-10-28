@@ -175,12 +175,21 @@ collections:
     sortable_fields:
       fields: [year, title, type]
       default: { field: year, direction: descending }
-    view_groups:
-      groups:
-        - { name: journal, label: Revues, field: type, pattern: "^journal$" }
+    # liste : filtre par type (bouton « Filtrer ») et regroupement par type
+    view_filters:
+      filters:
+        - { name: journal, label: Revues internationales, field: type, pattern: "^journal$" }
         - { name: international, label: Conférences internationales, field: type, pattern: "^international$" }
         - { name: national, label: Conférences nationales, field: type, pattern: "^national$" }
-        - { name: other, label: "Thèse, séminaires, autres", field: type, pattern: "^(thesis|seminar|chapter|other)$" }
+        - { name: chapter, label: Chapitres d'ouvrage, field: type, pattern: "^chapter$" }
+        - { name: thesis, label: Thèse, field: type, pattern: "^thesis$" }
+        - { name: seminar, label: Séminaires, field: type, pattern: "^seminar$" }
+        - { name: other, label: Autres, field: type, pattern: "^other$" }
+    view_groups:
+      groups:
+        - { name: by_type, label: Type, field: type }
+        - { name: by_year, label: Année, field: year }
+      default: by_type
     fields:
       - label: Type
         name: type

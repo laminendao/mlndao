@@ -203,6 +203,8 @@
   .a.err { border-left-color: #c92a2a; color: #a61e1e; }
   .a .typing { font: 500 12.5px var(--mono); color: var(--muted); }
   .a .typing::after { content: "▍"; color: var(--blue); animation: caret 1s steps(1) infinite; margin-left: 2px; }
+  .a .cursor { display: inline-block; width: .5em; height: 1.05em; margin-left: 2px; vertical-align: -.17em;
+               background: var(--blue); border-radius: 1px; animation: caret 1s steps(1) infinite; }
   @keyframes caret { 50% { opacity: 0 } }
 
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 18px; }
@@ -405,6 +407,51 @@
 
   function scroll() { log.scrollTop = log.scrollHeight; }
 
+  // ------------------------------------------------------------------ écriture progressive
+  // Le texte reçu est révélé à vitesse régulière, avec un curseur qui clignote,
+  // que le réseau le livre par petits morceaux ou d'un seul bloc.
+  var REDUCE_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function withCursor(html) {
+    var c = '<span class="cursor" aria-hidden="true"></span>';
+    var i = Math.max(html.lastIndexOf('</p>'), html.lastIndexOf('</li>'));
+    return i < 0 ? html + c : html.slice(0, i) + c + html.slice(i);
+  }
+  function typewriter(el) {
+    var target = '', shown = 0, finished = false, raf = null, last = 0, onEnd = null;
+    function render(final) {
+      var h = md(target.slice(0, shown));
+      el.innerHTML = final ? h : withCursor(h);
+      scroll();
+    }
+    function tick(ts) {
+      raf = null;
+      var dt = last ? Math.min(ts - last, 100) : 16;
+      last = ts;
+      var backlog = target.length - shown;
+      if (backlog > 0) {
+        // environ 60 caractères par seconde, plus vite s'il reste beaucoup de texte à afficher
+        // (une réponse de 500 caractères s'écrit en 2 secondes environ)
+        shown = Math.min(target.length, shown + Math.max(1, Math.round(dt * (0.06 + backlog / 1500))));
+        render(false);
+      }
+      if (shown < target.length || !finished) raf = requestAnimationFrame(tick);
+      else { render(true); if (onEnd) onEnd(); }
+    }
+    function start() { if (!raf) raf = requestAnimationFrame(tick); }
+    return {
+      push: function (txt) {
+        target = txt;
+        if (REDUCE_MOTION) { shown = target.length; render(false); } else start();
+      },
+      end: function () {
+        finished = true;
+        if (REDUCE_MOTION) { shown = target.length; render(true); return Promise.resolve(); }
+        return new Promise(function (resolve) { onEnd = resolve; start(); });
+      },
+      stop: function () { if (raf) cancelAnimationFrame(raf); raf = null; },
+    };
+  }
+
   // ------------------------------------------------------------------ envoi
   async function send(text) {
     text = (text || '').trim();
@@ -417,6 +464,7 @@
     input.value = ''; autosize();
     var body = addAnswer(null);
     var answer = '';
+    var tw = typewriter(body);
     aborter = new AbortController();
 
     try {
@@ -437,13 +485,14 @@
         var r = await reader.read();
         if (r.done) break;
         answer += dec.decode(r.value, { stream: true });
-        body.innerHTML = md(answer);
-        scroll();
+        tw.push(answer);
       }
       if (!answer.trim()) throw new Error('Réponse vide.');
+      await tw.end();
       history.push({ role: 'assistant', content: answer.trim() });
       save();
     } catch (e) {
+      tw.stop();
       if (e.name === 'AbortError') { history.pop(); }
       else {
         history.pop(); // on ne garde pas la question sans réponse
