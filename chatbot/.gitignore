@@ -1,0 +1,4 @@
+node_modules/
+.wrangler/
+# secrets locaux pour `wrangler dev` — ne jamais committer
+.dev.vars

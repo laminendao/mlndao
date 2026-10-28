@@ -244,7 +244,7 @@
   // clic sur le fond bleu (pas sur la carte, les liens, les boutons)
   window.addEventListener('click', function (e) {
     var el = e.target;
-    if (el && el.closest && el.closest('main, a, button, nav, input, label')) return;
+    if (el && el.closest && el.closest('main, a, button, nav, input, label, #profile-chat')) return;
     var k, s = 52, m = 24;
     for (k = 0; k < m; k++) {
       samples.push({

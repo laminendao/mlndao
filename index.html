@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="preload" href="assets/fonts/cmu-serif-700-roman.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/liquid.css">
   <script>
     // Choix de langue appliqué avant l'affichage : ?lang=en, sinon dernier choix, sinon français
     (function () {
@@ -569,7 +570,11 @@
     update();
   })();
 </script>
+<script src="assets/js/liquid.js" defer></script>
 <script src="assets/js/data-bg.js" defer></script>
 <script src="assets/js/reveal.js" defer></script>
+<!-- Assistant IA : API sur Cloudflare Workers (voir chatbot/README.md) -->
+<script src="assets/js/profile-chat.js"
+        data-api="https://lamine-chat.mlndao.workers.dev/chat" defer></script>
 </body>
 </html>

@@ -1,0 +1,217 @@
+/* ==================================================================
+   Thème « liquide » (assets/js/liquid.js)
+   Fond d'eau animé, verre liquide, reflets. Pour revenir au thème
+   précédent : retirer de index.html les lignes liquid.css et liquid.js.
+   ================================================================== */
+#liquid-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  display: block;
+}
+/* le graphe de points flotte à la surface de l'eau */
+html.liquid-gl #data-bg { opacity: .85; mix-blend-mode: screen; }
+
+@keyframes liquid-flow { to { background-position: -200% 0; } }
+@keyframes liquid-halo {
+  50% {
+    box-shadow:
+      0 0 0 10px rgba(255,255,255,.07),
+      0 0 0 11px rgba(255,255,255,.2),
+      0 18px 44px rgba(0,10,50,.45),
+      0 0 90px rgba(110,200,255,.55);
+  }
+}
+
+/* ---------- Photo : halo qui respire */
+html.liquid .site-header .photo {
+  border: 3px solid rgba(255,255,255,.75);
+  box-shadow:
+    0 0 0 6px rgba(255,255,255,.09),
+    0 0 0 7px rgba(255,255,255,.24),
+    0 18px 44px rgba(0,10,50,.45),
+    0 0 60px rgba(110,190,255,.35);
+  animation: liquid-halo 6s ease-in-out infinite;
+}
+
+/* ---------- Verre liquide : pastilles et boutons de l'en-tête */
+html.liquid .site-header .themes li,
+html.liquid .icons a {
+  background: linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -6px 14px rgba(255,255,255,.05),
+    0 6px 18px rgba(0,10,50,.18);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  backdrop-filter: blur(10px) saturate(160%);
+}
+html.liquid .icons a {
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s cubic-bezier(.3,1.4,.5,1), box-shadow .3s, background .3s;
+}
+/* reflet qui traverse le bouton au survol */
+html.liquid .icons a::before {
+  content: "";
+  position: absolute; top: 0; bottom: 0; left: -80%;
+  width: 55%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent);
+  transform: skewX(-20deg);
+  transition: left .7s ease;
+  pointer-events: none;
+}
+html.liquid .icons a:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(255,255,255,.34), rgba(255,255,255,.12));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65), 0 12px 26px rgba(0,10,50,.3);
+}
+html.liquid .icons a:hover::before { left: 130%; }
+html.liquid .icons a.cv {
+  background: linear-gradient(180deg, #fff, #dfe9ff);
+  color: var(--navy);
+  border-color: rgba(255,255,255,.9);
+}
+
+/* ---------- Menu : barre de verre + goutte qui glisse sous le lien actif */
+html.liquid .nav {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+html.liquid .nav ul {
+  position: relative;
+  background: linear-gradient(135deg, rgba(18,56,155,.84), rgba(4,22,80,.9));
+  border: 1px solid rgba(255,255,255,.32);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.4),
+    inset 0 -1px 0 rgba(255,255,255,.08),
+    0 12px 34px rgba(0,10,50,.38);
+}
+html.liquid .nav li { position: relative; z-index: 1; }
+html.liquid .nav a { color: rgba(255,255,255,.92); transition: color .3s; }
+html.liquid .nav a:hover { background: rgba(255,255,255,.14); }
+html.liquid .nav a.active { background: transparent; color: var(--navy); }
+.nav-blob {
+  position: absolute;
+  top: 6px; bottom: 6px; left: 0;
+  width: 0;
+  z-index: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff 0%, #e4ecff 100%);
+  box-shadow: inset 0 -2px 4px rgba(0,49,137,.08), 0 4px 14px rgba(0,10,50,.3);
+  opacity: 0;
+  pointer-events: none;
+  /* largeur et position n'arrivent pas en même temps : la goutte s'étire */
+  transition:
+    transform .55s cubic-bezier(.3,1.35,.5,1),
+    width .38s cubic-bezier(.3,1.35,.5,1),
+    opacity .3s;
+}
+html.liquid .lang-toggle {
+  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.38);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+}
+html.liquid .lang-toggle:hover { background: rgba(255,255,255,.28); }
+
+/* ---------- Carte principale : bord de verre et filet d'eau en haut */
+html.liquid main {
+  position: relative;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow:
+    0 0 0 6px rgba(255,255,255,.06),
+    0 30px 80px rgba(0,10,50,.45);
+}
+html.liquid main::before {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 0; height: 4px; z-index: 2;
+  background: linear-gradient(90deg, #1452c8, #6fd0ff, #ffffff, #6fd0ff, #1452c8);
+  background-size: 200% 100%;
+  animation: liquid-flow 9s linear infinite;
+}
+
+/* titres : trait qui ondule de lumière */
+html.liquid h2::after {
+  width: 64px; height: 4px;
+  background: linear-gradient(90deg, var(--blue), #6fd0ff, var(--blue));
+  background-size: 200% 100%;
+  animation: liquid-flow 5s linear infinite;
+}
+
+/* liens du contenu : soulignement en vague */
+html.liquid main a:hover {
+  text-decoration: underline wavy;
+  text-decoration-color: rgba(20,82,200,.55);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+/* ---------- Cartes, encadrés : gouttes de verre */
+html.liquid .card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #dfe7f6;
+  border-top: 1px solid #dfe7f6;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f5f9ff 0%, #fff 70%);
+  box-shadow: inset 0 1px 0 #fff, 0 6px 20px rgba(0,30,90,.06);
+  transition: transform .35s cubic-bezier(.3,1.3,.5,1), box-shadow .35s;
+}
+html.liquid .card::after {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 0; height: 3px;
+  background: linear-gradient(90deg, var(--blue), #6fd0ff, var(--blue));
+  background-size: 200% 100%;
+  animation: liquid-flow 8s linear infinite;
+}
+html.liquid .card:hover { transform: translateY(-4px); box-shadow: inset 0 1px 0 #fff, 0 16px 36px rgba(0,30,90,.14); }
+
+html.liquid .facts,
+html.liquid .contact > div {
+  background: linear-gradient(160deg, #f0f5ff 0%, #e3ecfc 100%);
+  border: 1px solid #d5e1f7;
+  border-radius: 16px;
+  box-shadow: inset 0 1px 0 #fff, 0 6px 20px rgba(0,30,90,.05);
+}
+/* reflet qui suit la souris (position fournie par liquid.js) */
+html.liquid .sheen { position: relative; }
+html.liquid .sheen::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(220px circle at var(--mx, -999px) var(--my, -999px), rgba(111,208,255,.22), transparent 60%);
+  opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+html.liquid .sheen:hover::before { opacity: 1; }
+html.liquid .sheen > * { position: relative; }
+
+/* pastilles de liens des publications */
+html.liquid .pubs .links a,
+html.liquid .chip,
+html.liquid .pub-group > summary .count {
+  background: linear-gradient(180deg, #f1f6ff, #e1eafb);
+  box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(0,30,90,.08);
+}
+html.liquid .pubs .links a:hover { background: var(--navy); color: #fff; }
+html.liquid .pub-group > summary { border-bottom-color: #dbe5f8; }
+
+@media (max-width: 820px) {
+  html.liquid .nav li:last-child { background: rgba(5,25,85,.85); }
+  html.liquid main { border-radius: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.liquid .site-header .photo,
+  html.liquid main::before,
+  html.liquid h2::after,
+  html.liquid .card::after { animation: none; }
+  .nav-blob { transition: none; }
+}

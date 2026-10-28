@@ -1,0 +1,13 @@
+{
+  "name": "lamine-chat",
+  "private": true,
+  "description": "Assistant du site lamine.mlndao.fr (Cloudflare Worker)",
+  "scripts": {
+    "knowledge": "python3 build_knowledge.py",
+    "dev": "wrangler dev",
+    "deploy": "python3 build_knowledge.py && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

@@ -12,6 +12,14 @@
   font-display: swap;
   src: url("../fonts/cmu-serif-700-roman.woff2") format("woff2");
 }
+/* italique, utilisée par l'assistant (chargée seulement à l'ouverture du carnet) */
+@font-face {
+  font-family: "CMU Serif";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/cmu-serif-500-italic.woff2") format("woff2");
+}
 
 :root {
   --serif: "CMU Serif", "Latin Modern Roman", Georgia, serif;
