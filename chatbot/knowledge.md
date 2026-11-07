@@ -46,16 +46,16 @@ J'ai soutenu ma thèse de doctorat en mathématiques appliquées au CNAM : Vers 
 ## Recherche
 Apprentissage automatique pour les données multivariées et multi-capteurs issues de systèmes industriels, avec l'objectif de rendre les modèles interprétables et robustes.
 
-#### Évaluation des méthodes d'XAI
+### Évaluation des méthodes d'XAI
 Évaluation quantitative des explications post-hoc (SHAP, LIME, L2X) et de l'effet du prétraitement et de la complexité des modèles.
 
-#### Réduction de dimension interprétable
+### Réduction de dimension interprétable
 Clustering divisif de variables et clustering autour de composantes latentes, pour construire des entrées lisibles pour les modèles de RUL.
 
-#### Maintenance prédictive
+### Maintenance prédictive
 Prédiction de la RUL à partir de séries temporelles multi-capteurs (turboréacteurs C-MAPSS, roulements PRONOSTIA / FEMTO-ST) avec des modèles profonds (LSTM).
 
-#### Données hétérogènes
+### Données hétérogènes
 Clustering multi-blocs et multi-vues, consensus de partitions et données manquantes.
 
 ## Publications
@@ -105,7 +105,9 @@ Consensus de partitions en NLP pour une revue systématique de la littérature a
 - 2025
 Vers une intelligence artificielle explicable en maintenance prédictive : prise en compte des étapes de pré-, in- et post-traitement pour améliorer la qualité des explications des méthodes XAI post-hoc. Ndao, M. L. Thèse de doctorat, Conservatoire National des Arts et Métiers (CNAM), Paris.
 
-### Séminaires (1)
+### Séminaires (2)
+- 2026
+SegSHAP : SHAP adaptée à l’explicabilité des séries temporelles pour des explications plus stables. Mouhamadou Lamine NDAO Séminaire MSDMA, CNAM, Paris, le 03 avril 2026
 - 2021
 Gestion des données manquantes en clustering. Séminaire, CNAM, Paris, 29 octobre 2021.
 [PDF](https://maths.cnam.fr/IMG/pdf/seminaire_fadela.pdf)
@@ -117,7 +119,7 @@ La liste complète et à jour est disponible sur [Google Scholar](https://schola
 ## Enseignement
 - Depuis 2025
 
-#### ATER, Attaché Temporaire d'Enseignement et de Recherche
+### ATER, Attaché Temporaire d'Enseignement et de Recherche
 CNAM, EPN 5 & EPN 6, Paris · CNAM Nouvelle-Aquitaine
 - STA101 Analyse des données : méthodes descriptives (ACP, AFC, ACM, AFDM, classification)
 - MVA113 Méthodes mathématiques pour la finance et l'économie
@@ -127,7 +129,7 @@ CNAM, EPN 5 & EPN 6, Paris · CNAM Nouvelle-Aquitaine
 - NFE212 Informatique décisionnelle : visualisation et valorisation des données
 - 2026 – 2027
 
-#### Intervenant extérieur
+### Intervenant extérieur
 Établissements d'enseignement supérieur privés, niveau Master
 - Visualisation de données (M1 Big Data & IA) : architectures data lake / lakehouse, préparation à l'échelle, web sémantique, perception visuelle, storytelling, BI décisionnelle et tableaux de bord temps réel. Outils : PySpark, PostgreSQL, RDF / OWL / SPARQL (Apache Jena Fuseki, Protégé), Plotly, Altair, Streamlit, Apache Superset, Grafana, Docker, JupyterLab
 - IA générative & LLMs (M2) : fondamentaux (tokens, embeddings, Transformers), prompt engineering, RAG, agents et function calling, fine-tuning, mise en production et automatisation. Outils : Hugging Face, Ollama, LangChain, LlamaIndex, MCP, bases vectorielles (Chroma, FAISS, Qdrant, pgvector), LoRA / QLoRA (PEFT), n8n
@@ -135,46 +137,46 @@ CNAM, EPN 5 & EPN 6, Paris · CNAM Nouvelle-Aquitaine
 - Formation pratique à Docker : conteneurisation d'une application frontend + backend. Outils : Docker, Docker Compose, Nginx, React, FastAPI
 - 2023 – 2025
 
-#### Chargé de TD (vacataire)
+### Chargé de TD (vacataire)
 CNAM, CEDRIC
 - STA101 Analyse des données, statistique exploratoire multivariée (35 h/an)
 - STA211 Entreposage et fouille de données : encadrement de projets de data mining (FOAD)
 - NFE212 Apprentissage supervisé (FOAD)
 - 2022 – 2025
 
-#### Ateliers de deep learning
+### Ateliers de deep learning
 CESI, formation d'ingénieurs en alternance (FISA)
 Ateliers et projets tutorés : CNN, RNN, autoencodeurs, transfer learning.
 - 2025
 
-#### Encadrement d'un stage de recherche de M2 (6 mois)
+### Encadrement d'un stage de recherche de M2 (6 mois)
 CESI LINEACT, Nanterre
 Optimisation des hyperparamètres pour la prédiction de la RUL à partir de séries temporelles multivariées (LSTM, optimisation bayésienne, bootstrap par blocs).
 
 ## Parcours
 - Depuis oct. 2025
 
-#### ATER, enseignement et recherche
+### ATER, enseignement et recherche
 CNAM, EPN 6, Paris
 Recherche en réduction de dimension, sélection robuste de variables et IA explicable pour les séries temporelles multivariées.
 - Oct. 2022 – oct. 2025
 
-#### Doctorant, data scientist
+### Doctorant, data scientist
 CESI LINEACT, Nanterre
 Prédiction de la RUL à partir de données multi-capteurs (C-MAPSS, PRONOSTIA) avec des LSTM ; explicabilité avec LIME, SHAP et L2X ; sélection non supervisée de variables par clustering divisif ; analyse bibliométrique de la littérature XAI (web scraping, LDA).
 - Oct. 2021 – oct. 2022
 
-#### Ingénieur de recherche, projet e-Privacy
+### Ingénieur de recherche, projet e-Privacy
 CNAM, équipe ROC, Paris
 Apprentissage distribué préservant la confidentialité sur données IoT (PySpark, Google Cloud Platform).
 - Avr. – sept. 2021
 
-#### Stagiaire de recherche, data scientist
+### Stagiaire de recherche, data scientist
 CNAM, CEDRIC, Paris
 Clustering multi-blocs de données hétérogènes incomplètes : clustering ensembliste et consensus de partitions avec imputation multiple ; packages R et Python.
 - 2018 – 2020
 
-#### Statisticien, data analyst
+### Statisticien, data analyst
 STATINFO · IRD UMR VITROME · ANSD, Dakar, Sénégal
 Analyse de données d'enquêtes et tableaux de bord, données Afrobarometer (scores composites par ACM, modèles multiniveaux), indices des prix à la production.
 

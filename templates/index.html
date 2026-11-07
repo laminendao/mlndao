@@ -15,7 +15,7 @@
       <li>
         <span class="when">{{ t(it.when_fr, it.when_en) }}</span>
         <div class="what">
-          <h4>{{ t(it.title_fr, it.title_en) }}</h4>
+          <h3>{{ t(it.title_fr, it.title_en) }}</h3>
           {%- if it.place_fr %}
           <span class="where">{{ t(it.place_fr, it.place_en) }}</span>
           {%- endif %}
@@ -215,7 +215,7 @@
     <div class="cards">
       {%- for c in research.topics %}
       <div class="card">
-        <h4>{{ t(c.title_fr, c.title_en) }}</h4>
+        <h3>{{ t(c.title_fr, c.title_en) }}</h3>
         {%- set cf = c.text_fr | mdi %}{% set ce = (c.text_en or c.text_fr) | mdi %}
         {%- if cf == ce %}
         <p>{{ cf }}</p>
