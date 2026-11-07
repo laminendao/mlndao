@@ -23,8 +23,8 @@ TestResults.xml
 .DS_Store
 
 # News management files (sensitive data and tokens)
-news
-news.json
+/news/
+/news.json
 # Site de référence (ne pas publier)
 erwanscornet.github.io-master/
 
