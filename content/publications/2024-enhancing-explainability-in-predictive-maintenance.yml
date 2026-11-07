@@ -9,4 +9,8 @@ details_en: ''
 links:
 - label: Paper
   url: https://journals.flvc.org/FLAIRS/article/view/135526
+- label: DOI
+  url: https://doi.org/10.32473/flairs.37.1.135526
+- label: HAL
+  url: https://hal.science/hal-04579205
 rank: 1

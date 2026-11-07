@@ -6,5 +6,7 @@ venue: 5<sup>e</sup> Colloque international statistique et économétrie (CISEM 
 venue_en: ''
 details: ''
 details_en: ''
-links: []
+links:
+- label: HAL
+  url: https://cnam.hal.science/hal-05624543
 rank: 5

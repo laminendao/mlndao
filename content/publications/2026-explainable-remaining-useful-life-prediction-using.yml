@@ -9,4 +9,6 @@ details_en: ''
 links:
 - label: DOI
   url: https://doi.org/10.1002/asmb.70084
+- label: HAL
+  url: https://hal.science/hal-05592197
 rank: 2

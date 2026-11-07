@@ -39,3 +39,7 @@ README.md
 LICENSE
 ADMIN.md
 chatbot/README.md
+
+# Générés par build.py / scripts locaux, hors GitHub
+/publications.bib
+scripts/

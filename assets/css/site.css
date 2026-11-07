@@ -232,7 +232,8 @@ h3 {
 .pubs .authors { color: var(--muted); }
 .pubs .authors b { color: var(--ink); font-weight: 600; }
 .pubs .venue { font-style: italic; }
-.pubs .links a {
+.pubs .links a,
+.pubs .links .bib-btn {
   display: inline-block;
   font-size: .8rem; font-weight: 600;
   padding: 1px 9px; margin: 4px 6px 0 0;
@@ -240,7 +241,24 @@ h3 {
   background: var(--blue-soft);
   color: var(--navy);
 }
-.pubs .links a:hover { background: var(--navy); color: #fff; text-decoration: none; }
+.pubs .links a:hover,
+.pubs .links .bib-btn:hover { background: var(--navy); color: #fff; text-decoration: none; }
+/* bouton BibTeX : même pastille que les liens, avec un retour « Copié » */
+.pubs .links .bib-btn {
+  position: relative;
+  border: 1px dashed #b9c7e4;
+  background: transparent;
+  font-family: inherit; line-height: inherit;
+  cursor: pointer;
+}
+.pubs .links .bib-btn.done::after {
+  content: attr(data-msg);
+  position: absolute; left: calc(100% + 8px); top: 50%;
+  translate: 0 -50%;
+  white-space: nowrap;
+  font-weight: 600;
+  color: #2f7d32;
+}
 .badge {
   font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
   color: #fff; background: var(--blue);
@@ -373,7 +391,14 @@ html[data-lang="en"] .fr { display: none !important; }
   }
   .nav ul::-webkit-scrollbar { display: none; }
   .nav li { flex: 0 0 auto; }
-  .nav li:last-child { position: sticky; right: 0; background: rgba(255,255,255,.96); padding-left: 4px; border-radius: 999px; }
+  /* bouton de langue toujours visible au bout du menu : un fondu masque les liens qui passent dessous */
+  .nav li:last-child {
+    position: sticky; right: 0;
+    padding-left: 6px;
+    background: var(--card);
+    border-radius: 999px;
+    box-shadow: -16px 0 12px -4px var(--card), 8px 0 0 var(--card);
+  }
   html { scroll-padding-top: 64px; }
 }
 
@@ -413,3 +438,26 @@ html.js-anim .rv-sec h2::after {
   transition: transform .9s cubic-bezier(.2, .7, .2, 1) .3s;
 }
 html.js-anim .rv-sec.in h2::after { transform: scaleX(1); }
+
+/* ---------- Projet de recherche ---------- */
+.project { margin-top: 44px; }
+.project h3 { margin-top: 0; }
+.project .lead { margin-top: 0; }
+.axes { margin: 18px 0 0; padding: 0; list-style: none; counter-reset: axe; }
+.axes li {
+  counter-increment: axe;
+  position: relative;
+  padding: 0 0 0 46px;
+  margin: 0 0 16px;
+}
+.axes li::before {
+  content: counter(axe);
+  position: absolute; left: 0; top: -2px;
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  font-family: var(--serif); font-weight: 700;
+  color: var(--navy);
+  border: 1.5px solid var(--navy);
+  border-radius: 50%;
+}
+.axes b { color: var(--navy); }

@@ -47,13 +47,13 @@
         'Bonjour et bienvenue. Je suis l’assistant virtuel de **Lamine NDAO** : je peux vous présenter ses ' +
         'recherches, ses publications, ses enseignements et son parcours, ou vous indiquer comment le contacter.',
       suggestions: [
-        ['ses recherches', 'Sur quoi portent ses recherches ?'],
-        ['publications', 'Quelles sont ses publications récentes ?'],
-        ['sa thèse', 'Sur quoi porte sa thèse ?'],
-        ['ses cours', 'Quels cours enseigne-t-il ?'],
-        ['contact', 'Comment le contacter ?'],
+        ['ses recherches', 'Sur quoi portent ses recherches\u00a0?'],
+        ['publications', 'Quelles sont ses publications récentes\u00a0?'],
+        ['sa thèse', 'Sur quoi porte sa thèse\u00a0?'],
+        ['ses cours', 'Quels cours enseigne-t-il\u00a0?'],
+        ['contact', 'Comment le contacter\u00a0?'],
       ],
-      teaser: 'Une question sur mes travaux ? <b>Mon assistant vous répond.</b>',
+      teaser: 'Une question sur mes travaux\u00a0? <b>Mon assistant vous répond.</b>',
       placeholder: 'Votre question…',
       input: 'Votre question',
       send: 'Entrée',
@@ -65,7 +65,7 @@
       legal: 'réponses générées par IA à partir de ce site',
       error:
         'Désolé, je ne parviens pas à répondre pour le moment. Vous pouvez réessayer dans un instant ' +
-        'ou écrire directement à Lamine : ',
+        'ou écrire directement à Lamine\u00a0: ',
     },
     en: {
       kicker: 'Online',

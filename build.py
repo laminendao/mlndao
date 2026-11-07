@@ -7,6 +7,7 @@ Construit le site à partir du contenu (dossier content/, modifiable depuis /adm
 Génère :
   - index.html            la page d'accueil (à partir de templates/index.html)
   - chatbot/knowledge.md  ce que sait l'assistant IA (lu en ligne par le Worker)
+  - publications.bib      toutes les références BibTeX (lien sous les publications)
 
 Sur GitHub, ce script est lancé automatiquement à chaque modification
 (.github/workflows/pages.yml). En local, lancez-le avant d'ouvrir index.html.
@@ -141,6 +142,95 @@ def f_lines(text):
     return Markup('<br>'.join(html.escape(x.strip()) for x in str(text).strip().splitlines()))
 
 
+# ------------------------------------------------------------------ BibTeX
+# Généré à partir des champs de chaque publication ; un champ « bibtex » rempli
+# dans le fichier (ou dans /admin) remplace la version générée.
+BIB_TYPES = {'journal': 'article', 'international': 'inproceedings', 'national': 'inproceedings',
+             'chapter': 'incollection', 'thesis': 'phdthesis'}
+_bib_keys = set()
+BIB_STOP = {'a', 'an', 'the', 'de', 'des', 'du', 'la', 'le', 'les', 'l', 'une', 'un', 'on', 'for', 'of', 'vers'}
+
+
+def _ascii(s):
+    import unicodedata
+    return ''.join(c for c in unicodedata.normalize('NFKD', s) if c.isascii() and c.isalnum())
+
+
+def _bib_authors(text):
+    """« Ndao, M. L., Youness, G., & Saporta, G. » -> « Ndao, M. L. and Youness, G. and Saporta, G. »"""
+    t = re.sub(r'\s*&\s*', ' ', f_plain(text)).strip()
+    parts = [x.strip() for x in t.split(',') if x.strip()]
+    if len(parts) >= 2 and len(parts) % 2 == 0 and all(re.fullmatch(r'(?:[A-Z]\.\s*-?\s*)+', x) for x in parts[1::2]):
+        names = [f'{parts[i]}, {parts[i + 1]}' for i in range(0, len(parts), 2)]
+        return ' and '.join(names), parts[0]
+    return t, (t.split()[-1] if t else 'Ndao')
+
+
+def _bib_protect(title):
+    # garde la casse des sigles (XAI, LSTM, RUL…) et des mots à majuscule interne
+    return re.sub(r'\b([A-Za-z]*[A-Z][A-Za-z]*[A-Z][\w-]*)\b', r'{\1}', title)
+
+
+def _bib_escape(s):
+    return s.replace('&', r'\&').replace('%', r'\%').replace('#', r'\#')
+
+
+def make_bibtex(pub):
+    if pub.bibtex:
+        return str(pub.bibtex).strip()
+    kind = BIB_TYPES.get(pub.type)
+    if not kind or not pub.title:
+        return ''
+    title = f_plain(pub.title).rstrip('.')
+    authors, first = _bib_authors(pub.authors or 'Ndao, M. L.')
+    word = next((w for w in re.findall(r"[\w’']+", title) if _ascii(w).lower() not in BIB_STOP and len(_ascii(w)) > 2), 'pub')
+    key = f'{_ascii(first).capitalize()}{pub.year}{_ascii(word).capitalize()}'
+    base, n = key, 0
+    while key in _bib_keys:  # clés uniques : Ndao2025Enhancing, Ndao2025Enhancinga…
+        key = base + 'abcdefghij'[n]
+        n += 1
+    _bib_keys.add(key)
+    venue = f_plain(pub.venue)
+    details = f_plain(pub.details).strip().rstrip('.')
+    f = [('author', authors), ('title', _bib_protect(title)), ('year', str(pub.year))]
+    pages = re.search(r'pp\.\s*([\w]+)\s*[–-]\s*([\w]+)', details)
+    publisher = re.search(r'\b(Wiley|Elsevier|Springer|IEEE|ACM)\b', details)
+    if kind == 'article':
+        f.append(('journal', venue))
+        m = re.match(r'(\d+)(?:\((\d+)\))?,\s*([\w-]+)', details)
+        if m:
+            f.append(('volume', m.group(1)))
+            if m.group(2):
+                f.append(('number', m.group(2)))
+            f.append(('pages', m.group(3)))
+    elif kind == 'phdthesis':
+        school = re.sub(r'^Thèse de doctorat,\s*', '', venue)
+        f.append(('school', school))
+        if details:
+            f.append(('address', details))
+    else:
+        f.append(('booktitle', venue))
+        place = re.sub(r',?\s*pp\..*$', '', details)
+        place = re.sub(r'\b(Wiley|Elsevier|Springer|IEEE|ACM)\b\.?', '', place).strip(' ,.')
+        if place:
+            f.append(('address', place))
+    if pages:
+        f.append(('pages', f'{pages.group(1)}--{pages.group(2)}'))
+    if publisher:
+        f.append(('publisher', publisher.group(1)))
+    for link in pub.links or []:
+        url = str(link.url)
+        doi = re.search(r'(10\.\d{4,9}/[^\s?#]+)', url)
+        if doi and ('doi.org' in url or 'springer.com' in url):
+            f.append(('doi', doi.group(1)))
+            break
+    else:
+        if pub.links:
+            f.append(('url', str(pub.links[0].url)))
+    body = ',\n'.join(f'  {k:<9} = {{{_bib_escape(v)}}}' for k, v in f)
+    return f'@{kind}{{{key},\n{body}\n}}'
+
+
 # ------------------------------------------------------------------ préparation
 def to_date(v, where):
     if isinstance(v, dt.datetime):
@@ -189,6 +279,8 @@ def prepare():
         items = [x for x in pubs if x.type == key]
         # à année égale : « rank » le plus grand d'abord ; sans rank, en tête (ajout récent)
         items.sort(key=lambda x: (-x.year, -(x.rank if isinstance(x.rank, (int, float)) else 1e6)))
+        for x in items:
+            x['bib'] = make_bibtex(x)
         if items:
             groups.append({'key': key, 'fr': fr, 'en': en, 'open': open_, 'items': items})
 
@@ -220,6 +312,8 @@ def main():
     (ROOT / 'index.html').write_text(out, encoding='utf-8')
 
     n_pubs = sum(len(g['items']) for g in ctx['pub_groups'])
+    bibs = [x.bib for g in ctx['pub_groups'] for x in g['items'] if x.bib]
+    (ROOT / 'publications.bib').write_text('\n\n'.join(bibs) + '\n', encoding='utf-8')
     print(f"index.html : {len(ctx['news'])} actualité(s), {n_pubs} publication(s), "
           f"{len(ctx['teaching'])} enseignement(s), {len(ctx['experience'])} expérience(s)")
 

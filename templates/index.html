@@ -57,7 +57,10 @@
   <meta name="keywords" content="{{ p.name }}, {{ p.keywords_fr | plain | trim('.') }}">
   <meta property="og:title" content="{{ p.name }}">
   <meta property="og:description" content="{{ p.role_fr | plain }}">
-  <meta property="og:image" content="{{ site_url }}/{{ p.photo | rel }}">
+  <meta property="og:image" content="{{ site_url }}/images/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,7 +71,6 @@
   <link rel="preload" href="assets/fonts/cmu-serif-700-roman.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/news.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <link rel="stylesheet" href="assets/css/paper.css">
   <script>
     // Choix de langue appliqué avant l'affichage : ?lang=en, sinon dernier choix, sinon français
@@ -227,6 +229,24 @@
       </div>
       {%- endfor %}
     </div>
+    {%- if research.project_show and research.project_axes %}
+
+    <div class="project">
+      <h3><span class="fr">Projet de recherche</span><span class="en">Research plan</span></h3>
+      {%- if research.project_lead_fr %}
+      <p class="lead">{{ t(research.project_lead_fr, research.project_lead_en) }}</p>
+      {%- endif %}
+      <ol class="axes">
+        {%- for a in research.project_axes %}
+        <li>
+          <b>{{ t(a.title_fr, a.title_en) }}.</b>
+          {%- set af = a.text_fr | mdi %}{% set ae = (a.text_en or a.text_fr) | mdi %}
+          {%- if af == ae %} {{ af }}{% else %} <span class="fr">{{ af }}</span><span class="en">{{ ae }}</span>{% endif %}
+        </li>
+        {%- endfor %}
+      </ol>
+    </div>
+    {%- endif %}
   </section>
 
   <!-- ============ Publications ============ -->
@@ -247,11 +267,14 @@
           {%- endif %}
           <span class="venue">{{ t(pub.venue, pub.venue_en) }}</span>
           {%- if pub.details or pub.details_en %}, {{ t(pub.details, pub.details_en) }}{% else %}.{% endif %}
-          {%- if pub.links %}
+          {%- if pub.links or pub.bib %}
           <div class="links">
             {%- for l in pub.links %}
             <a href="{{ l.url | rel_or_url }}" target="_blank">{{ l.label }}</a>
             {%- endfor %}
+            {%- if pub.bib %}
+            <button type="button" class="bib-btn" data-bib="{{ pub.bib }}" title="Copier la référence BibTeX"><span class="fr">BibTeX</span><span class="en">BibTeX</span></button>
+            {%- endif %}
           </div>
           {%- endif %}
         </div>
@@ -267,6 +290,7 @@
     {%- endif %}
 
     <p class="note">
+      <a href="publications.bib" download><span class="fr">Toutes les références au format BibTeX (.bib)</span><span class="en">All references as BibTeX (.bib)</span></a>.
       <span class="fr">La liste complète et à jour est disponible sur</span>
       <span class="en">The complete, up-to-date list is on</span>
       {%- if p.scholar %}
@@ -341,6 +365,34 @@
     });
   })();
 
+  // Bouton BibTeX : copie la référence dans le presse-papiers
+  (function () {
+    function copy(text) {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+      return new Promise(function (ok, ko) {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy') ? ok() : ko(); } catch (e) { ko(e); }
+        document.body.removeChild(ta);
+      });
+    }
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('.bib-btn');
+      if (!b) return;
+      var en = document.documentElement.getAttribute('data-lang') === 'en';
+      copy(b.getAttribute('data-bib')).then(function () {
+        b.classList.add('done');
+        b.setAttribute('data-msg', en ? 'Copied' : 'Copié');
+      }, function () {
+        b.classList.add('done');
+        b.setAttribute('data-msg', en ? 'Copy failed' : 'Échec de la copie');
+      });
+      clearTimeout(b._t);
+      b._t = setTimeout(function () { b.classList.remove('done'); }, 1800);
+    });
+  })();
+
   // Section courante surlignée dans le menu
   (function () {
     var links = document.querySelectorAll('.nav a');
@@ -363,7 +415,7 @@
     update();
   })();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
+<script src="assets/js/formulas.js" defer></script>
 <script src="assets/js/paper.js" defer></script>
 <script src="assets/js/reveal.js" defer></script>
 <!-- Assistant IA : API sur Cloudflare Workers (voir chatbot/README.md) -->

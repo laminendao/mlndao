@@ -6,5 +6,7 @@ venue: 9th Conference of Data Science, Statistics, and Visualisation (DSSV 2025)
 venue_en: ''
 details: ''
 details_en: ''
-links: []
+links:
+- label: HAL
+  url: https://hal.science/hal-05146046
 rank: 3

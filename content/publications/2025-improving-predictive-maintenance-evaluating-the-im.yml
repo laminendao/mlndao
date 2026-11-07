@@ -11,4 +11,6 @@ links:
   url: https://doi.org/10.1016/j.engappai.2025.110144
 - label: ScienceDirect
   url: https://www.sciencedirect.com/science/article/pii/S0952197625001447
+- label: HAL
+  url: https://hal.science/hal-04929200
 rank: 1

@@ -6,5 +6,7 @@ venue: Thèse de doctorat, Conservatoire National des Arts et Métiers (CNAM)
 venue_en: PhD thesis, Conservatoire National des Arts et Métiers (CNAM)
 details: Paris.
 details_en: ''
-links: []
+links:
+- label: HAL
+  url: https://theses.hal.science/tel-05652311
 rank: 1

@@ -58,34 +58,44 @@ Prédiction de la RUL à partir de séries temporelles multi-capteurs (turboréa
 ### Données hétérogènes
 Clustering multi-blocs et multi-vues, consensus de partitions et données manquantes.
 
+### Projet de recherche
+Pour les prochaines années, je souhaite rendre les modèles d'apprentissage sur séries temporelles industrielles à la fois lisibles et dignes de confiance, de la donnée brute jusqu'à la décision.
+- Des explications stables pour les séries temporelles. Concevoir des méthodes d'attribution adaptées à la structure temporelle (dans la lignée de SegSHAP) et des critères pour évaluer leur stabilité et leur fidélité sans vérité terrain.
+- Réduction de dimension interprétable et robuste. Étendre le clustering de variables (divisif, autour de composantes latentes) aux données multi-vues, bruitées ou incomplètes, et le relier à l'apprentissage de représentations auto-supervisé.
+- De la prédiction de la RUL à la décision. Associer prédiction, incertitude et explication pour fournir aux équipes de maintenance des indicateurs qu'elles peuvent vérifier et utiliser.
+
 ## Publications
 
 ### Revues internationales (2)
 - 2026
 Explainable Remaining Useful Life Prediction Using Interpretable Divisive Feature Clustering. Ndao, M. L., Youness, G., Niang, N., & Saporta, G. Applied Stochastic Models in Business and Industry, 42(2), e70084. Wiley.
-[DOI](https://doi.org/10.1002/asmb.70084)
+[DOI](https://doi.org/10.1002/asmb.70084) [HAL](https://hal.science/hal-05592197)
 - 2025
 Improving predictive maintenance: Evaluating the impact of preprocessing and model complexity on the effectiveness of eXplainable Artificial Intelligence methods. Ndao, M. L., Youness, G., Niang, N., & Saporta, G. Engineering Applications of Artificial Intelligence, 144, 110144. Elsevier.
-[DOI](https://doi.org/10.1016/j.engappai.2025.110144) [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0952197625001447)
+[DOI](https://doi.org/10.1016/j.engappai.2025.110144) [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0952197625001447) [HAL](https://hal.science/hal-04929200)
 
 ### Conférences internationales (7)
 - 2026
 Interpretable Feature Clustering for Dimensionality Reduction. An application to Explainable Remaining Useful Life Prediction. Ndao, M. L., Youness, G., Niang, N., & Saporta, G. 19th Conference of the International Federation of Classification Societies (IFCS 2026), Milan, Italy.
+[HAL](https://cnam.hal.science/hal-05706575)
 - 2026
 Robust Feature Clustering around Latent Components. Ndao, M. L., Niang, N., Sarre, T., & Saporta, G. International Conference on Robust Statistics (ICORS 2026).
+[HAL](https://hal.science/hal-05725137)
 - 2026
 Clustering variables: current status and recent applications. Ndao, M. L., Niang, N., Ouattara, M., Saporta, G., & Youness, G. 5 e Colloque international statistique et économétrie (CISEM 2026).
+[HAL](https://cnam.hal.science/hal-05624543)
 - 2025
 A Divisive Unsupervised Feature Selection Approach for Explainable Remaining Useful Life Prediction. Ndao, M. L., Youness, G., Niang, N., & Saporta, G. 36th International Conference on Database and Expert Systems Applications (DEXA 2025), Bangkok, Thailand, pp. 270–286. Springer.
-[Springer](https://link.springer.com/chapter/10.1007/978-3-032-02088-8_19)
+[Springer](https://link.springer.com/chapter/10.1007/978-3-032-02088-8_19) [HAL](https://hal.science/hal-05229009)
 - 2025
 Sparse Weighted Multi-View Clustering. Niang, N., Ouattara, M., & Ndao, M. L. 9th Conference of Data Science, Statistics, and Visualisation (DSSV 2025).
+[HAL](https://hal.science/hal-05146046)
 - 2025
 Enhancing Fuzzy Forests with Consensus Clustering for Unbiased and Robust Feature Selection. Ndao, M. L., Niang, N., Youness, G., & Saporta, G. JOCLAD 2025, pp. 85–86.
 [PDF](https://hal.science/hal-05024554v1/file/JOCLAD2025.pdf)
 - 2024
 Enhancing Explainability in Predictive Maintenance: Investigating the Impact of Data Preprocessing Techniques on XAI Effectiveness. Ndao, M. L., Youness, G., Niang, N., & Saporta, G. 37th International Conference of the Florida Artificial Intelligence Research Society (FLAIRS-37), Florida, USA.
-[Paper](https://journals.flvc.org/FLAIRS/article/view/135526)
+[Paper](https://journals.flvc.org/FLAIRS/article/view/135526) [DOI](https://doi.org/10.32473/flairs.37.1.135526) [HAL](https://hal.science/hal-04579205)
 
 ### Conférences nationales (4)
 - 2025
@@ -104,6 +114,7 @@ Consensus de partitions en NLP pour une revue systématique de la littérature a
 ### Thèse (1)
 - 2025
 Vers une intelligence artificielle explicable en maintenance prédictive : prise en compte des étapes de pré-, in- et post-traitement pour améliorer la qualité des explications des méthodes XAI post-hoc. Ndao, M. L. Thèse de doctorat, Conservatoire National des Arts et Métiers (CNAM), Paris.
+[HAL](https://theses.hal.science/tel-05652311)
 
 ### Séminaires (2)
 - 2026
@@ -114,7 +125,7 @@ Gestion des données manquantes en clustering. Séminaire, CNAM, Paris, 29 octob
 
 ### Expertise
 Relecteur pour la revue Reliability Engineering & System Safety (Elsevier).
-La liste complète et à jour est disponible sur [Google Scholar](https://scholar.google.com/citations?user=hPwY_dUAAAAJ) et [HAL](https://hal.science/search/index/?q=ndao+mouhamadou+lamine).
+Toutes les références au format BibTeX (.bib). La liste complète et à jour est disponible sur [Google Scholar](https://scholar.google.com/citations?user=hPwY_dUAAAAJ) et [HAL](https://hal.science/search/index/?q=ndao+mouhamadou+lamine).
 
 ## Enseignement
 - Depuis 2025

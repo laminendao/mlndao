@@ -6,5 +6,7 @@ venue: 19th Conference of the International Federation of Classification Societi
 venue_en: ''
 details: Milan, Italy.
 details_en: ''
-links: []
+links:
+- label: HAL
+  url: https://cnam.hal.science/hal-05706575
 rank: 7

@@ -6,5 +6,7 @@ venue: International Conference on Robust Statistics (ICORS 2026)
 venue_en: ''
 details: ''
 details_en: ''
-links: []
+links:
+- label: HAL
+  url: https://hal.science/hal-05725137
 rank: 6

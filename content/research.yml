@@ -17,3 +17,19 @@ topics:
   title_en: Heterogeneous data
   text_fr: Clustering multi-blocs et multi-vues, consensus de partitions et données manquantes.
   text_en: Multi-block and multi-view clustering, consensus clustering and missing data.
+project_show: true
+project_lead_fr: Pour les prochaines années, je souhaite rendre les modèles d'apprentissage sur séries temporelles industrielles à la fois lisibles et dignes de confiance, de la donnée brute jusqu'à la décision.
+project_lead_en: Over the coming years, I aim to make machine learning models for industrial time series both readable and trustworthy, from raw data to decision.
+project_axes:
+- title_fr: Des explications stables pour les séries temporelles
+  title_en: Stable explanations for time series
+  text_fr: Concevoir des méthodes d'attribution adaptées à la structure temporelle (dans la lignée de SegSHAP) et des critères pour évaluer leur stabilité et leur fidélité sans vérité terrain.
+  text_en: Designing attribution methods that respect temporal structure (following SegSHAP) and criteria to assess their stability and faithfulness without ground truth.
+- title_fr: Réduction de dimension interprétable et robuste
+  title_en: Robust, interpretable dimension reduction
+  text_fr: Étendre le clustering de variables (divisif, autour de composantes latentes) aux données multi-vues, bruitées ou incomplètes, et le relier à l'apprentissage de représentations auto-supervisé.
+  text_en: Extending feature clustering (divisive, around latent components) to multi-view, noisy or incomplete data, and connecting it to self-supervised representation learning.
+- title_fr: De la prédiction de la RUL à la décision
+  title_en: From RUL prediction to decision
+  text_fr: Associer prédiction, incertitude et explication pour fournir aux équipes de maintenance des indicateurs qu'elles peuvent vérifier et utiliser.
+  text_en: Combining prediction, uncertainty and explanation to give maintenance teams indicators they can check and act on.

@@ -1,23 +1,11 @@
 /* Formules de recherche écrites en fond de page (thème « papier »).
-   Rendu KaTeX ; une formule se précise quand la souris passe à côté.
-   Pour changer les formules : modifier la liste ci-dessous. */
+   Les formules sont déjà converties en SVG dans assets/js/formulas.js
+   (généré par scripts/formules.mjs : c'est là qu'on les modifie).
+   Une formule se précise quand la souris passe à côté. */
 (function () {
-  // x, y : position en % de la fenêtre (x = bord gauche si < 50, bord droit sinon) ; r : rotation ; s : taille ; desk : masquée sur mobile
-  var F = [
-    { tex: '\\phi_i=\\sum_{S\\subseteq F\\setminus\\{i\\}}\\frac{|S|!\\,(|F|-|S|-1)!}{|F|!}\\,\\big[f(S\\cup\\{i\\})-f(S)\\big]',
-      x: 4, y: 13, r: -3, s: '1.05rem', desk: true },
-    { tex: '\\Sigma=\\begin{pmatrix}\\sigma_1^2 & \\cdots & \\sigma_{1p}\\\\ \\vdots & \\ddots & \\vdots\\\\ \\sigma_{p1} & \\cdots & \\sigma_p^2\\end{pmatrix}',
-      x: 95, y: 13, r: 2, s: '1.05rem', desk: true },
-    { tex: '\\hat\\beta=(X^{\\top}X)^{-1}X^{\\top}y', x: 96, y: 41, r: -2, s: '1.3rem', desk: true },
-    { tex: 'f(x)=\\phi_0+\\sum_{i=1}^{M}\\phi_i', x: 3, y: 42, r: 2, s: '1.25rem', desk: true },
-    { tex: '\\hat\\Sigma=\\frac{1}{n-1}\\sum_{i=1}^{n}(x_i-\\bar x)(x_i-\\bar x)^{\\top}', x: 3, y: 70, r: -3, s: '1.05rem', desk: true },
-    { tex: '\\min_{\\beta}\\ \\lVert y-X\\beta\\rVert_2^2', x: 97, y: 68, r: 1.5, s: '1.25rem', desk: true },
-    { tex: '\\mathrm{RMSE}=\\sqrt{\\tfrac1n\\textstyle\\sum_i(\\hat y_i-y_i)^2}', x: 4, y: 91, r: 3, s: '1.1rem' },
-    { tex: '\\operatorname{Var}(\\hat\\beta)=\\sigma^2(X^{\\top}X)^{-1}', x: 96, y: 91, r: -2, s: '1.15rem' }
-  ];
-
   function render() {
-    if (!window.katex) return;
+    var F = window.PAPER_FORMULAS;
+    if (!F || !F.length) return;
     var box = document.createElement('div');
     box.id = 'formulas';
     box.setAttribute('aria-hidden', 'true');
@@ -29,7 +17,7 @@
       el.style.top = f.y + '%';
       el.style.setProperty('--r', f.r + 'deg');
       el.style.setProperty('--s', f.s);
-      try { katex.render(f.tex, el, { throwOnError: false, displayMode: false }); } catch (e) { return; }
+      el.innerHTML = f.svg;
       box.appendChild(el);
     });
     document.body.insertBefore(box, document.body.firstChild);

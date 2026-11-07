@@ -45,7 +45,8 @@ body,
   user-select: none;
 }
 #formulas .f.end { transform-origin: right center; }
-#formulas .f .katex { font-size: var(--s, 1.25rem); }
+#formulas .f { font-size: var(--s, 1.25rem); }
+#formulas .f svg { display: block; overflow: visible; }
 #formulas .f.near { opacity: .34; }
 
 /* ---------- En-tête : encre sur papier ---------- */
@@ -142,7 +143,7 @@ main::after {
 h2::after { background: var(--navy); border-radius: 0; height: 2px; }
 
 @media (max-width: 700px) {
-  #formulas .f .katex { font-size: calc(var(--s, 1.25rem) * .8); }
+  #formulas .f { font-size: calc(var(--s, 1.25rem) * .8); }
   #formulas .f.desk { display: none; }
   main { --fold: 40px; }
   .stack { margin: 8px 12px 0; }

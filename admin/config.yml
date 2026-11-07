@@ -123,6 +123,21 @@ singletons:
           - { label: Titre (EN), name: title_en, widget: string, required: false }
           - { label: Texte (FR), name: text_fr, widget: text }
           - { label: Texte (EN), name: text_en, widget: text, required: false }
+      - { label: Afficher le projet de recherche, name: project_show, widget: boolean, required: false, default: true }
+      - { label: Projet de recherche — introduction (FR), name: project_lead_fr, widget: text, required: false }
+      - { label: Projet de recherche — introduction (EN), name: project_lead_en, widget: text, required: false }
+      - label: Projet de recherche — axes
+        name: project_axes
+        widget: list
+        required: false
+        label_singular: axe
+        summary: "{{title_fr}}"
+        collapsed: true
+        fields:
+          - { label: Titre (FR), name: title_fr, widget: string }
+          - { label: Titre (EN), name: title_en, widget: string, required: false }
+          - { label: Texte (FR), name: text_fr, widget: text }
+          - { label: Texte (EN), name: text_en, widget: text, required: false }
 
 # ------------------------------------------------------------------ listes
 collections:
@@ -220,6 +235,7 @@ collections:
           - { label: Libellé, name: label, widget: string, hint: "DOI, PDF, HAL, Slides…" }
           - { label: Adresse, name: url, widget: string }
       - { label: Ordre dans l'année, name: rank, widget: number, value_type: int, required: false, hint: "Facultatif. Plus le nombre est grand, plus la publication est haute parmi celles de la même année. Vide = tout en haut." }
+      - { label: BibTeX (facultatif), name: bibtex, widget: text, required: false, hint: "Laisser vide : la référence est générée automatiquement à partir des champs ci-dessus. À remplir seulement pour imposer une version précise." }
 
   - name: teaching
     label: Enseignement
