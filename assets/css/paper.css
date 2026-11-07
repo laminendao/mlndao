@@ -1,0 +1,310 @@
+/* ------------------------------------------------------------------
+   Thème « papier » : feuille millimétrée crème, formules de recherche
+   écrites à l'encre pâle derrière le contenu (assets/js/paper.js).
+   Remplace liquid.css ; se charge après site.css.
+------------------------------------------------------------------- */
+:root {
+  --paper: #f5f0e4;
+  --paper-2: #efe8d8;
+  --grid: rgba(40, 70, 120, .055);
+  --grid-major: rgba(40, 70, 120, .09);
+  --pencil: 30, 60, 120;          /* rgb de l'encre des formules */
+  --card: #fffdf8;
+  --line: #e6e0d2;
+}
+
+body,
+.nav {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+  background-position: -1px -1px;
+  background-attachment: fixed;
+}
+
+/* ---------- Formules en fond ---------- */
+#formulas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+#formulas .f {
+  position: absolute;
+  color: rgb(var(--pencil));
+  opacity: var(--o, .15);
+  transform: translateY(-50%) rotate(var(--r, 0deg));
+  transform-origin: left center;
+  transition: opacity .6s ease-out;
+  white-space: nowrap;
+  user-select: none;
+}
+#formulas .f.end { transform-origin: right center; }
+#formulas .f .katex { font-size: var(--s, 1.25rem); }
+#formulas .f.near { opacity: .34; }
+
+/* ---------- En-tête : encre sur papier ---------- */
+.site-header { color: var(--ink); }
+.site-header h1 { color: var(--navy); }
+.site-header h1 .sym { color: var(--blue); opacity: .7; }
+.site-header .role { color: var(--ink); }
+.site-header .affil { color: var(--muted); opacity: 1; }
+.site-header .photo {
+  border: 1px solid #cfc6b2;
+  padding: 5px;
+  background: var(--card);
+  box-shadow: 0 6px 18px rgba(60, 45, 20, .12);
+}
+.site-header .themes li {
+  border-color: #cdd6e6;
+  background: rgba(255, 253, 248, .75);
+  color: var(--navy);
+}
+.icons a {
+  color: var(--navy);
+  background: var(--card);
+  border: 1px solid #d5dcea;
+  transition: background .2s, border-color .2s;
+}
+.icons a:hover { background: var(--blue-soft); border-color: #b7c6e6; }
+.icons a.cv { background: var(--navy); color: #fff; border-color: var(--navy); }
+.icons a.cv:hover { background: #0a3fa3; }
+
+/* ---------- Menu ---------- */
+.nav {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.nav ul {
+  background: var(--card);
+  border: 1px solid #ddd5c3;
+  box-shadow: 0 2px 10px rgba(60, 45, 20, .07);
+}
+
+/* ---------- Pile de feuilles : deux feuilles légèrement de travers sous le contenu ---------- */
+:root { --sheet-1: #f7f3e8; --sheet-2: #f1ecdf; }
+.stack {
+  position: relative;
+  isolation: isolate;
+  max-width: var(--maxw);
+  margin: 22px auto 0;
+}
+.stack > main { margin: 0; }
+.stack::before,
+.stack::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(60, 45, 20, .10), 0 10px 30px rgba(60, 45, 20, .08);
+  pointer-events: none;
+}
+.stack::before { background: var(--sheet-2); rotate: -.45deg; translate: -3px 4px; }
+.stack::after  { background: var(--sheet-1); rotate: .3deg;   translate: 4px 2px; }
+
+/* ---------- Feuille de contenu ---------- */
+main {
+  position: relative;
+  --fold: 64px;
+  background: var(--card);
+  border: 0;
+  border-radius: 2px;
+  box-shadow:
+    0 1px 3px rgba(60, 45, 20, .10),
+    0 14px 40px rgba(60, 45, 20, .10);
+}
+/* coin haut droit replié : la découpe laisse voir le papier millimétré… */
+main::before,
+main::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: var(--fold); height: var(--fold);
+  pointer-events: none;
+}
+main::before {
+  z-index: 3;
+  background: var(--sheet-1);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+/* …et le rabat (le dos de la feuille) : plus sombre le long de la pliure, avec son ombre */
+main::after {
+  z-index: 4;
+  background: linear-gradient(225deg, transparent 50%, #dcd1b8 50%, #ece5d3 68%, #faf7ef 100%);
+  filter: drop-shadow(-2px 3px 3px rgba(60, 45, 20, .18));
+}
+h2::after { background: var(--navy); border-radius: 0; height: 2px; }
+
+@media (max-width: 700px) {
+  #formulas .f .katex { font-size: calc(var(--s, 1.25rem) * .8); }
+  #formulas .f.desk { display: none; }
+  main { --fold: 40px; }
+  .stack { margin: 8px 12px 0; }
+  .stack::before { rotate: -.8deg; }
+  .stack::after { rotate: .6deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #formulas .f { transition: none; }
+}
+
+/* ---------- Post-it : encadré « Poste actuel » et cartes Recherche ---------- */
+:root {
+  --pi-yellow: #fff3a6;
+  --pi-blue:   #d9ecff;
+  --pi-pink:   #ffdbe4;
+  --pi-green:  #dff4d0;
+}
+.facts,
+.card,
+.contact > div {
+  position: relative;
+  background: var(--pi, var(--pi-yellow));
+  border: 0;
+  border-radius: 2px;
+  box-shadow:
+    0 1px 1px rgba(60, 45, 20, .08),
+    0 10px 18px -8px rgba(60, 45, 20, .28);
+  /* propriété « rotate » séparée : n'entre pas en conflit avec les animations d'apparition */
+  rotate: var(--tilt, -1deg);
+  transition: rotate .3s ease-out, translate .3s ease-out, box-shadow .3s ease-out;
+}
+/* coin bas droit légèrement décollé */
+.facts::after,
+.card::after,
+.contact > div::after {
+  content: "";
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 26px; height: 26px;
+  background: linear-gradient(135deg, transparent 50%, rgba(0, 0, 0, .07) 50%, rgba(255, 255, 255, .55) 100%);
+  pointer-events: none;
+}
+/* bande adhésive en haut */
+.facts::before,
+.card::before,
+.contact > div::before {
+  content: "";
+  position: absolute;
+  top: -11px; left: 50%;
+  width: 84px; height: 22px;
+  transform: translateX(-50%) rotate(-2deg);
+  background: rgba(255, 255, 255, .55);
+  border: 1px solid rgba(0, 0, 0, .05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+}
+.facts { --tilt: 1.2deg; padding: 26px 26px 24px; }
+.card { padding: 22px 22px 24px; }
+.card:nth-child(4n+1) { --pi: var(--pi-yellow); --tilt: -1.2deg; }
+.card:nth-child(4n+2) { --pi: var(--pi-blue);   --tilt: .8deg; }
+.card:nth-child(4n+3) { --pi: var(--pi-pink);   --tilt: -.6deg; }
+.card:nth-child(4n+4) { --pi: var(--pi-green);  --tilt: 1.1deg; }
+.cards { gap: 26px; padding-top: 6px; }
+.contact { gap: 26px; padding-top: 6px; }
+.contact > div { padding: 24px 22px 22px; font-size: 1.05rem; }
+.contact > div:nth-child(3n+1) { --pi: var(--pi-blue);   --tilt: -1deg; }
+.contact > div:nth-child(3n+2) { --pi: var(--pi-yellow); --tilt: .7deg; }
+.contact > div:nth-child(3n+3) { --pi: var(--pi-green);  --tilt: -.5deg; }
+.facts:hover,
+.card:hover,
+.contact > div:hover {
+  rotate: 0deg;
+  translate: 0 -2px;
+  box-shadow:
+    0 1px 1px rgba(60, 45, 20, .08),
+    0 16px 24px -10px rgba(60, 45, 20, .32);
+}
+.facts dt, .card h3, .contact b { color: #1d2b4f; }
+@media (prefers-reduced-motion: reduce) {
+  .facts, .card, .contact > div, .news-item { transition: none; }
+}
+
+/* ---------- Pied de page : encre sur papier ---------- */
+.site-footer, footer { color: var(--muted); }
+.site-footer a, footer a { color: var(--navy); }
+
+/* ---------- Écriture manuscrite sur les post-it (Kalam, licence SIL OFL) ---------- */
+@font-face {
+  font-family: "Kalam";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/kalam-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Kalam";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/kalam-700.woff2") format("woff2");
+}
+:root { --hand: "Kalam", "Segoe Print", "Bradley Hand", cursive; }
+.facts,
+.card,
+.contact > div {
+  font-family: var(--hand);
+  line-height: 1.45;
+}
+.facts { font-size: 1.05rem; }
+.card p { font-size: 1.04rem; }
+.facts dt,
+.card h3,
+.contact b {
+  font-family: var(--hand);
+  font-weight: 700;
+  font-size: 1.18rem;
+  letter-spacing: 0;
+}
+
+/* ---------- Actualités : coupures de papier scotchées ---------- */
+.news-grid { gap: 30px; padding-top: 8px; }
+.news-item {
+  overflow: visible;
+  border: 0;
+  border-radius: 1px;
+  background: #fffefa;
+  box-shadow:
+    0 0 0 1px rgba(60, 45, 20, .06),
+    0 1px 2px rgba(60, 45, 20, .08),
+    0 10px 20px -10px rgba(60, 45, 20, .30);
+  rotate: -.7deg;
+  transition: rotate .3s ease-out, translate .3s ease-out, box-shadow .3s ease-out;
+}
+.news-item:nth-child(even) { rotate: .6deg; }
+.news-item:hover {
+  transform: none;
+  rotate: 0deg;
+  translate: 0 -2px;
+  box-shadow:
+    0 0 0 1px rgba(60, 45, 20, .06),
+    0 1px 2px rgba(60, 45, 20, .08),
+    0 16px 26px -12px rgba(60, 45, 20, .34);
+}
+/* deux bouts de scotch en travers des coins */
+.news-item::before,
+.news-item::after,
+.news-item:not(.has-image)::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  width: 70px; height: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, .6);
+  border: 1px solid rgba(0, 0, 0, .05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+  animation: none;
+  z-index: 2;
+  pointer-events: none;
+}
+.news-item::before { left: -18px; rotate: -38deg; }
+.news-item::after,
+.news-item:not(.has-image)::after { left: auto; right: -18px; rotate: 38deg; }
+.news-img { border-radius: 0; }
+.news-date { font-family: var(--hand); font-size: .95rem; letter-spacing: 0; text-transform: none; color: var(--muted); }
+h3.news-title { font-family: var(--hand); font-weight: 700; font-size: 1.3rem; color: #1d2b4f; }
+.news-item:first-child.has-image h3.news-title { font-size: 1.5rem; }

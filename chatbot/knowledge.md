@@ -130,7 +130,7 @@ CNAM, EPN 5 & EPN 6, Paris · CNAM Nouvelle-Aquitaine
 - 2026 – 2027
 
 ### Intervenant extérieur
-Établissements d'enseignement supérieur privés, niveau Master
+Autres établissements d'enseignement supérieur, niveau Master
 - Visualisation de données (M1 Big Data & IA) : architectures data lake / lakehouse, préparation à l'échelle, web sémantique, perception visuelle, storytelling, BI décisionnelle et tableaux de bord temps réel. Outils : PySpark, PostgreSQL, RDF / OWL / SPARQL (Apache Jena Fuseki, Protégé), Plotly, Altair, Streamlit, Apache Superset, Grafana, Docker, JupyterLab
 - IA générative & LLMs (M2) : fondamentaux (tokens, embeddings, Transformers), prompt engineering, RAG, agents et function calling, fine-tuning, mise en production et automatisation. Outils : Hugging Face, Ollama, LangChain, LlamaIndex, MCP, bases vectorielles (Chroma, FAISS, Qdrant, pgvector), LoRA / QLoRA (PEFT), n8n
 - Projet technique Big Data & IA (M2 Big Data) : valorisation et lancement d'un projet IA/Data sur le marché. Outils : étude de marché, SWOT, Business Model Canvas, pitch deck

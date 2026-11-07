@@ -68,7 +68,8 @@
   <link rel="preload" href="assets/fonts/cmu-serif-700-roman.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/site.css">
   <link rel="stylesheet" href="assets/css/news.css">
-  <link rel="stylesheet" href="assets/css/liquid.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="assets/css/paper.css">
   <script>
     // Choix de langue appliqué avant l'affichage : ?lang=en, sinon dernier choix, sinon français
     (function () {
@@ -94,7 +95,6 @@
   </script>
 </head>
 <body>
-<canvas id="data-bg" aria-hidden="true"></canvas>
 
 <!-- ============ En-tête ============ -->
 <header class="site-header" id="top">
@@ -140,6 +140,7 @@
   </ul>
 </nav>
 
+<div class="stack">
 <main>
 
   <!-- ============ Bio ============ -->
@@ -322,6 +323,7 @@
   </section>
 
 </main>
+</div>
 
 <footer>
   © {{ year }} {{ p.name }} · <a href="#top"><span class="fr">Haut de page</span><span class="en">Back to top</span></a>
@@ -361,8 +363,8 @@
     update();
   })();
 </script>
-<script src="assets/js/liquid.js" defer></script>
-<script src="assets/js/data-bg.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" defer></script>
+<script src="assets/js/paper.js" defer></script>
 <script src="assets/js/reveal.js" defer></script>
 <!-- Assistant IA : API sur Cloudflare Workers (voir chatbot/README.md) -->
 <script src="assets/js/profile-chat.js"
