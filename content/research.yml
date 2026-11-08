@@ -1,35 +1,35 @@
 lead_fr: Apprentissage automatique pour les données multivariées et multi-capteurs issues de systèmes industriels, avec l'objectif de rendre les modèles interprétables et robustes.
 lead_en: Machine learning for multivariate, multi-sensor data from industrial systems, with a focus on making models interpretable and robust.
 topics:
-- title_fr: Évaluation des méthodes d'XAI
-  title_en: Evaluating XAI methods
-  text_fr: Évaluation quantitative des explications post-hoc (SHAP, LIME, L2X) et de l'effet du prétraitement et de la complexité des modèles.
-  text_en: Quantitative evaluation of post-hoc explanations (SHAP, LIME, L2X) and of how preprocessing and model complexity change them.
-- title_fr: Réduction de dimension interprétable
-  title_en: Interpretable dimension reduction
-  text_fr: Clustering divisif de variables et clustering autour de composantes latentes, pour construire des entrées lisibles pour les modèles de RUL.
-  text_en: Divisive feature clustering and clustering of variables around latent components, used to build readable inputs for RUL models.
-- title_fr: Maintenance prédictive
-  title_en: Predictive maintenance
-  text_fr: Prédiction de la RUL à partir de séries temporelles multi-capteurs (turboréacteurs C-MAPSS, roulements PRONOSTIA / FEMTO-ST) avec des modèles profonds (LSTM).
-  text_en: RUL prediction from multi-sensor time series (C-MAPSS turbofans, PRONOSTIA / FEMTO-ST bearings) with deep models such as LSTMs.
-- title_fr: Données hétérogènes
-  title_en: Heterogeneous data
-  text_fr: Clustering multi-blocs et multi-vues, consensus de partitions et données manquantes.
-  text_en: Multi-block and multi-view clustering, consensus clustering and missing data.
+  - title_fr: Évaluation des méthodes d'XAI
+    title_en: Evaluating XAI methods
+    text_fr: Évaluation quantitative des explications post-hoc (SHAP, LIME, L2X) et de l'effet du prétraitement et de la complexité des modèles.
+    text_en: Quantitative evaluation of post-hoc explanations (SHAP, LIME, L2X) and of how preprocessing and model complexity change them.
+  - title_fr: Réduction de dimension interprétable
+    title_en: Interpretable dimension reduction
+    text_fr: Clustering divisif de variables et clustering autour de composantes latentes, pour construire des entrées lisibles pour les modèles de RUL.
+    text_en: Divisive feature clustering and clustering of variables around latent components, used to build readable inputs for RUL models.
+  - title_fr: Maintenance prédictive
+    title_en: Predictive maintenance
+    text_fr: Prédiction de la RUL à partir de séries temporelles multi-capteurs (turboréacteurs C-MAPSS, roulements PRONOSTIA / FEMTO-ST) avec des modèles profonds (LSTM).
+    text_en: RUL prediction from multi-sensor time series (C-MAPSS turbofans, PRONOSTIA / FEMTO-ST bearings) with deep models such as LSTMs.
+  - title_fr: Données hétérogènes
+    title_en: Heterogeneous data
+    text_fr: Clustering multi-blocs et multi-vues, consensus de partitions et données manquantes.
+    text_en: Multi-block and multi-view clustering, consensus clustering and missing data.
 project_show: true
-project_lead_fr: Pour les prochaines années, je souhaite rendre les modèles d'apprentissage sur séries temporelles industrielles à la fois lisibles et dignes de confiance, de la donnée brute jusqu'à la décision.
+project_lead_fr: Rendons les modèles d'apprentissage sur séries temporelles industrielles à la fois lisibles et dignes de confiance, de la donnée brute jusqu'à la décision.
 project_lead_en: Over the coming years, I aim to make machine learning models for industrial time series both readable and trustworthy, from raw data to decision.
 project_axes:
-- title_fr: Des explications stables pour les séries temporelles
-  title_en: Stable explanations for time series
-  text_fr: Concevoir des méthodes d'attribution adaptées à la structure temporelle (dans la lignée de SegSHAP) et des critères pour évaluer leur stabilité et leur fidélité sans vérité terrain.
-  text_en: Designing attribution methods that respect temporal structure (following SegSHAP) and criteria to assess their stability and faithfulness without ground truth.
-- title_fr: Réduction de dimension interprétable et robuste
-  title_en: Robust, interpretable dimension reduction
-  text_fr: Étendre le clustering de variables (divisif, autour de composantes latentes) aux données multi-vues, bruitées ou incomplètes, et le relier à l'apprentissage de représentations auto-supervisé.
-  text_en: Extending feature clustering (divisive, around latent components) to multi-view, noisy or incomplete data, and connecting it to self-supervised representation learning.
-- title_fr: De la prédiction de la RUL à la décision
-  title_en: From RUL prediction to decision
-  text_fr: Associer prédiction, incertitude et explication pour fournir aux équipes de maintenance des indicateurs qu'elles peuvent vérifier et utiliser.
-  text_en: Combining prediction, uncertainty and explanation to give maintenance teams indicators they can check and act on.
+  - title_fr: Des explications stables pour les séries temporelles
+    title_en: Stable explanations for time series
+    text_fr: Concevoir des méthodes d'attribution adaptées à la structure temporelle (dans la lignée de SegSHAP) et des critères pour évaluer leur stabilité et leur fidélité sans vérité terrain.
+    text_en: Designing attribution methods that respect temporal structure (following SegSHAP) and criteria to assess their stability and faithfulness without ground truth.
+  - title_fr: Réduction de dimension interprétable et robuste
+    title_en: Robust, interpretable dimension reduction
+    text_fr: Étendre le clustering de variables (divisif, autour de composantes latentes) aux données multi-vues, bruitées ou incomplètes, et le relier à l'apprentissage de représentations auto-supervisé.
+    text_en: Extending feature clustering (divisive, around latent components) to multi-view, noisy or incomplete data, and connecting it to self-supervised representation learning.
+  - title_fr: De la prédiction de la RUL à la décision
+    title_en: From RUL prediction to decision
+    text_fr: Associer prédiction, incertitude et explication pour fournir aux équipes de maintenance des indicateurs qu'elles peuvent vérifier et utiliser.
+    text_en: Combining prediction, uncertainty and explanation to give maintenance teams indicators they can check and act on.
