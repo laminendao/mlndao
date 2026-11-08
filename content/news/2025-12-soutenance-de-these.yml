@@ -1,7 +1,9 @@
-date: '2025-12-01'
+date: 2025-12-01
 title_fr: Soutenance de thèse
 title_en: PhD defence
-text_fr: 'J''ai soutenu ma thèse de doctorat en mathématiques appliquées au CNAM : *Vers une intelligence artificielle explicable en maintenance prédictive*.'
+text_fr: "J'ai soutenu ma thèse de doctorat en mathématiques appliquées au CNAM : *Vers une intelligence artificielle explicable en maintenance prédictive*."
 text_en: 'I defended my PhD thesis in Applied Mathematics at CNAM: *Towards explainable artificial intelligence in predictive maintenance*.'
-image: ''
+image: /images/uploads/6d4c2505-7ca8-4003-aa9e-0c9424ac4f35.jpeg
+image_alt: ''
 link: ''
+draft: false
