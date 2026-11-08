@@ -19,7 +19,7 @@ topics:
     text_en: Multi-block and multi-view clustering, consensus clustering and missing data.
 project_show: true
 project_lead_fr: Rendons les modèles d'apprentissage sur séries temporelles industrielles à la fois lisibles et dignes de confiance, de la donnée brute jusqu'à la décision.
-project_lead_en: Over the coming years, I aim to make machine learning models for industrial time series both readable and trustworthy, from raw data to decision.
+project_lead_en: Let's make machine learning models for industrial time series both readable and trustworthy, from raw data to decision.
 project_axes:
   - title_fr: Des explications stables pour les séries temporelles
     title_en: Stable explanations for time series
